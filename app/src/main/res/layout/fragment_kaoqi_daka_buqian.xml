@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TODO: Update blank fragment layout -->
+
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="net.syxsoft.ldyhapplication.ui.IndexActivity">
+
+<LinearLayout
+    android:layout_marginTop="56dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        >
+        <ImageView
+            android:id="@+id/imghead"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@mipmap/headxi"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:width="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="4dp"
+
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="张某某"
+            android:layout_toRightOf="@+id/imghead"
+            android:layout_centerVertical="true"/>
+
+        <ImageView
+            android:id="@+id/arr01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/kqdk0106arrbo"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"/>
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/colornavblue"
+            android:text="2018-02-06"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/arr01"
+            android:layout_marginRight="4dp"
+            />
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#ccc"
+
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@color/white"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="20dp"
+            >
+            <TextView
+                android:id="@+id/bia"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:text="1"
+                android:layout_centerVertical="true"
+                android:paddingLeft="5dp"
+                android:background="@mipmap/linbg"
+                />
+            <TextView
+                android:id="@+id/dakasb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="上午上班时间12：00"
+                android:textColor="#888888"
+                android:textSize="14sp"
+                android:layout_toRightOf="@+id/bia"
+                android:layout_marginLeft="10dp"
+                />
+            <TextView
+                android:id="@+id/dasjd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="打卡时间11：00"
+                android:textColor="#333"
+                android:textSize="16sp"
+                android:layout_below="@+id/dakasb"
+                android:layout_alignLeft="@+id/dakasb"
+                android:layout_marginTop="15dp"
+                />
+            <TextView
+                android:id="@+id/dasj"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="申请补卡"
+                android:textColor="@color/colornavblue"
+                android:textSize="14sp"
+                android:layout_toRightOf="@+id/dasjd"
+                android:layout_alignBottom="@+id/dasjd"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/view_kqbd"
+                android:padding="5dp"
+                />
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@color/white"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="20dp"
+            >
+            <TextView
+                android:id="@+id/bia1"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:text="2"
+                android:layout_centerVertical="true"
+                android:paddingLeft="5dp"
+                android:background="@mipmap/linbg"
+                />
+            <TextView
+                android:id="@+id/dakasb1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="上午上班时间12：00"
+                android:textColor="#888888"
+                android:textSize="14sp"
+                android:layout_toRightOf="@+id/bia1"
+                android:layout_marginLeft="10dp"
+                />
+            <TextView
+                android:id="@+id/dasjd1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="打卡时间11：00"
+                android:textColor="#333"
+                android:textSize="16sp"
+                android:layout_below="@+id/dakasb1"
+                android:layout_alignLeft="@+id/dakasb1"
+                android:layout_marginTop="15dp"
+                />
+            <TextView
+                android:id="@+id/dasj1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="申请补卡"
+                android:textColor="@color/colornavblue"
+                android:textSize="14sp"
+                android:layout_toRightOf="@+id/dasjd1"
+                android:layout_alignBottom="@+id/dasjd1"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/view_kqbd"
+                android:padding="5dp"
+                />
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#ccc"
+
+        />
+
+</LinearLayout>
+
+</LinearLayout>
+
+</FrameLayout>
+

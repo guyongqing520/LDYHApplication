@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:andriod="http://schemas.android.com/apk/res/android"
+    andriod:orientation="vertical"
+    andriod:layout_width="wrap_content"
+    andriod:layout_marginBottom="20dp"
+    andriod:layout_height="wrap_content">
+<ImageView
+    andriod:id="@+id/gnImage"
+    andriod:layout_gravity="center_horizontal"
+    andriod:layout_width="wrap_content"
+    andriod:layout_height="60dp" />
+
+ <TextView
+     andriod:id="@+id/gnName"
+     andriod:layout_marginTop="5dp"
+     andriod:layout_gravity="center_horizontal"
+     andriod:layout_width="wrap_content"
+     andriod:layout_height="wrap_content" />
+</LinearLayout>

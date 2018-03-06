@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@mipmap/kqgl_btnav01"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_message"
+        android:icon="@mipmap/kqgl_btnav02"
+        android:title="@string/title_message" />
+
+    <item
+        android:id="@+id/navigation_myaddress"
+        android:icon="@mipmap/kqgl_btnav03"
+        android:title="@string/title_phone" />
+
+    <item
+        android:id="@+id/navigation_my"
+        android:icon="@mipmap/kqgl_btnav04"
+        android:title="我" />
+
+</menu>

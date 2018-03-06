@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorWord33">#333333</color>
+    <color name="white">#ffffff</color>
+    <color name="lgrey">#fcfbfb</color>
+    <color name="grey">#efefef</color>
+    <color name="blue">#21a3ff</color>
+    <color name="colorWord66">#666666</color>
+    <color name="colorWord99">#999999</color>
+    <color name="colornavgrey">#bfc0c1</color>
+    <color name="colornavblue">#38adff</color>
+    <color name="colornavblack">#000000</color>
+    <color name="colorWordbbb">#bbb</color>
+    <color name="colorWord2018">#576a95</color>
+    <color name="colorWordY">#95d3ff</color>
+    <color name="colorbgWQ">#e6f3ff</color>
+    <color name="colorWordTJblue">#4b8dfa</color>
+    <color name="colorWordclblue">#1c8adc</color>
+    <color name="colorbgnom">#5fbdd9</color>
+    <color name="colorbgzc">#badbfc</color>
+    <color name="colorbgzcc">#e8f0f9</color>
+    <color name="colorbggreen">#a5fee0</color>
+    <color name="colorbgyellow">#fed5a2</color>
+    <color name="colorbgpink">#feacac</color>
+</resources>
