@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- TODO: Update blank fragment layout -->
 
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="net.syxsoft.ldyhapplication.ui.IndexActivity">
+
 <LinearLayout android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="70dp"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
@@ -274,6 +280,34 @@
 
     </LinearLayout>
 
+    <LinearLayout
+    android:background="@color/white"
+    android:layout_marginTop="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView android:text="同意"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/colornavblue"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <TextView
+        android:layout_width="1dp"
+        android:gravity="center"
+        android:background="@color/grey"
+        android:layout_height="30dp" />
+
+    <TextView android:text="拒绝"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/colornavblue"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
 
 </LinearLayout>
-
+</LinearLayout>
+</FrameLayout>
