@@ -33,6 +33,22 @@ public class KaoqiguanliFragment extends BaseFragment {
         startActivity(intent);
     }
 
+    @OnClick(R.id.kaoqinlist)
+    public void onKaoqinlistBtnClicked(){
+        getHoldingActivity().pushFragment(new KaoqiguanlillistFragment());
+    }
+
+    @OnClick(R.id.qinjashengpi)
+    public void onQinjashengpiBtnClicked(){
+        getHoldingActivity().pushFragment(new KaoqinQinjiashenpiFragment());
+    }
+
+    @OnClick(R.id.qinjashenqi)
+    public void onQinjashenqiBtnClicked(){
+        getHoldingActivity().pushFragment(new KaoqiqingjiaMyqingjiaFragment ());
+    }
+
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_kaoqi_daka_kaoqiguli;

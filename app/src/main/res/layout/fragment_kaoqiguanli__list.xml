@@ -125,6 +125,7 @@
 
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/qinjadetail"
         android:background="@color/white"
         android:layout_marginTop="10dp"
         android:padding="15dp"

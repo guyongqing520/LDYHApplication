@@ -7,13 +7,20 @@ package net.syxsoft.ldyhapplication.bean;
 public class MainPanel {
     private String name;
 
-    private String imageId;
+    private int imageId;
+
+    public MainPanel(int imageId,String name){
+        this.imageId=imageId;
+        this.name=name;
+    }
 
     public String getName() {
         return name;
     }
 
-    public String getImageId() {
+    public int getImageId() {
         return imageId;
     }
+
+
 }

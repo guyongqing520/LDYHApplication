@@ -1,7 +1,6 @@
 package net.syxsoft.ldyhapplication.ui;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -14,22 +13,19 @@ import android.widget.TextView;
 
 import net.syxsoft.ldyhapplication.R;
 
-import butterknife.OnClick;
-
 /**
  * A simple {@link Fragment} subclass.
  */
-public class KaoqiguanlillistFragment extends BaseFragment {
+public class KaoqiqingjiaMyqingjiaFragment extends BaseFragment {
 
 
-    //@OnClick(R.id.qinjashengpi)
-    //public void onQinjashengpiBtnClicked(){
-     //   getHoldingActivity().pushFragment(new KaoqinQinjiashenpiFragment());
-    //}
+    //@BindView(R.id.user_password)
+    //TextInputEditText mUserPsw;
+
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_kaoqiguanli__list;
+        return R.layout.fragment_qinjiashengpi_qinjia;
     }
 
     @Override
@@ -38,7 +34,7 @@ public class KaoqiguanlillistFragment extends BaseFragment {
 
         //设置标题
         TextView textView = actionBar.findViewById(R.id.toolbar_title);
-        textView.setText("考勤列表");
+        textView.setText("请假");
 
         //启用返回导航
         actionBar.setNavigationIcon(R.mipmap.title_bar_back);

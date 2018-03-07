@@ -19,17 +19,17 @@ import butterknife.OnClick;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class KaoqiguanlillistFragment extends BaseFragment {
+public class KaoqinQinjiashenpiFragment extends BaseFragment {
 
 
-    //@OnClick(R.id.qinjashengpi)
-    //public void onQinjashengpiBtnClicked(){
-     //   getHoldingActivity().pushFragment(new KaoqinQinjiashenpiFragment());
-    //}
+    @OnClick(R.id.detail)
+    public void onQinjashengpiBtnClicked(){
+        getHoldingActivity().pushFragment(new KaoqiqingjiaDetailFragment());
+    }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_kaoqiguanli__list;
+        return R.layout.fragment_qinjiashengpi_list;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class KaoqiguanlillistFragment extends BaseFragment {
 
         //设置标题
         TextView textView = actionBar.findViewById(R.id.toolbar_title);
-        textView.setText("考勤列表");
+        textView.setText("审批列表");
 
         //启用返回导航
         actionBar.setNavigationIcon(R.mipmap.title_bar_back);

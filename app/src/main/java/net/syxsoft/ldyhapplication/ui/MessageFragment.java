@@ -5,26 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.daimajia.slider.library.SliderLayout;
-
-import net.syxsoft.ldyhapplication.Adapter.MainAdapter;
 import net.syxsoft.ldyhapplication.R;
-import net.syxsoft.ldyhapplication.bean.MainPanel;
-import net.syxsoft.ldyhapplication.callback.BeanCallback;
-import net.syxsoft.ldyhapplication.model.RequestBase;
-import net.syxsoft.ldyhapplication.utils.GsonUtil;
-import net.syxsoft.ldyhapplication.utils.SliderLayoutHelper;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.

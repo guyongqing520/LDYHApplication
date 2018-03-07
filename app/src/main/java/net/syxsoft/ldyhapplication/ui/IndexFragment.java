@@ -8,28 +8,16 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
 
 import net.syxsoft.ldyhapplication.Adapter.MainAdapter;
 import net.syxsoft.ldyhapplication.R;
-import net.syxsoft.ldyhapplication.bean.BeanBase;
 import net.syxsoft.ldyhapplication.bean.MainPanel;
-import net.syxsoft.ldyhapplication.callback.BeanCallback;
-import net.syxsoft.ldyhapplication.model.RequestBase;
-import net.syxsoft.ldyhapplication.utils.GsonUtil;
 import net.syxsoft.ldyhapplication.utils.SliderLayoutHelper;
 
 import java.util.ArrayList;
@@ -87,34 +75,56 @@ public class IndexFragment extends BaseFragment {
         GridLayoutManager layoutManager= new GridLayoutManager(container.getContext(),3);
         recyclerView.setLayoutManager(layoutManager);
 
-        RequestBase requestBase=new RequestBase();
+        //RequestBase requestBase=new RequestBase();
 
-        requestBase.doRequest(null,"http://192.168.1.109/mian.json","GET",new BeanCallback(){
+        //requestBase.doRequest(null,"http://192.168.1.109/mian.json","GET",new BeanCallback(){
 
-            @Override
-            public void onSuccess(final String json) {
-                getHoldingActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //Log.d("成功",json);
+        //    @Override
+       //     public void onSuccess(final String json) {
+        //        getHoldingActivity().runOnUiThread(new Runnable() {
+        //            @Override
+        //            public void run() {
+        //                //Log.d("成功",json);
 
-                        mainPanelList=GsonUtil.GsonToList(json,MainPanel.class);
-                        recyclerView.setAdapter(new MainAdapter(mainPanelList));
-                    }
+      //                  mainPanelList=GsonUtil.GsonToList(json,MainPanel.class);
 
-                });
-            }
+       //                 mainPanelList.add(new MainPanel(R.mipmap.kqgl01,"考勤管理"));
+       //                 mainPanelList.add(new MainPanel(R.mipmap.kqgl02,"日志上报"));
+       //                 mainPanelList.add(new MainPanel(R.mipmap.kqgl03,"任务管理"));
+        //                mainPanelList.add(new MainPanel(R.mipmap.kqgl04,"学习培训"));
+        //                mainPanelList.add(new MainPanel(R.mipmap.kqgl05,"绩效考核"));
+         //               mainPanelList.add(new MainPanel(R.mipmap.kqgl06,"投诉举报"));
+        //                mainPanelList.add(new MainPanel(R.mipmap.kqgl07,"督查督办"));
 
-            @Override
-            public void onError(String msg) {
-                getHoldingActivity().runOnUiThread(new Runnable() {
-                   @Override
-                    public void run() {
+         //               recyclerView.setAdapter(new MainAdapter(mainPanelList));
+        //            }
+
+       //         });
+       //     }
+
+        //    @Override
+        //    public void onError(String msg) {
+        //        getHoldingActivity().runOnUiThread(new Runnable() {
+         //          @Override
+         //           public void run() {
+//
                        //Log.d("失败","失败");
-                    }
-                });
-            }
-        });
+
+         //
+         //           }
+       // //        });
+         //   }
+     //   });
+        mainPanelList.clear();
+        mainPanelList.add(new MainPanel(R.mipmap.kqgl01,"考勤管理"));
+        mainPanelList.add(new MainPanel(R.mipmap.kqgl02,"日志上报"));
+        mainPanelList.add(new MainPanel(R.mipmap.kqgl03,"任务管理"));
+        mainPanelList.add(new MainPanel(R.mipmap.kqgl04,"学习培训"));
+        mainPanelList.add(new MainPanel(R.mipmap.kqgl05,"绩效考核"));
+        mainPanelList.add(new MainPanel(R.mipmap.kqgl06,"投诉举报"));
+        mainPanelList.add(new MainPanel(R.mipmap.kqgl07,"督查督办"));
+
+        recyclerView.setAdapter(new MainAdapter(mainPanelList));
 
         return view;
     }

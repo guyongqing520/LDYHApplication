@@ -1,7 +1,6 @@
 package net.syxsoft.ldyhapplication.ui;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -19,17 +18,27 @@ import butterknife.OnClick;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class KaoqiguanlillistFragment extends BaseFragment {
+public class KaoqiRZSBFragment extends BaseFragment {
 
 
-    //@OnClick(R.id.qinjashengpi)
-    //public void onQinjashengpiBtnClicked(){
-     //   getHoldingActivity().pushFragment(new KaoqinQinjiashenpiFragment());
-    //}
+    @OnClick(R.id.tianbao)
+    public void onQinjashengpiBtnClicked(){
+        getHoldingActivity().pushFragment(new KaoqiRZSBtbFragment());
+    }
+
+    @OnClick(R.id.rzlist)
+    public void onRzspBtnClicked(){
+        getHoldingActivity().pushFragment(new KaoqiRZSBlistFragment());
+    }
+
+    @OnClick(R.id.zrbq)
+    public void onRzbqBtnClicked(){
+        getHoldingActivity().pushFragment(new KaoqiRZSBLBFragment());
+    }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_kaoqiguanli__list;
+        return R.layout.fragment_rzsb;
     }
 
     @Override
@@ -38,7 +47,7 @@ public class KaoqiguanlillistFragment extends BaseFragment {
 
         //设置标题
         TextView textView = actionBar.findViewById(R.id.toolbar_title);
-        textView.setText("考勤列表");
+        textView.setText("日志上报");
 
         //启用返回导航
         actionBar.setNavigationIcon(R.mipmap.title_bar_back);

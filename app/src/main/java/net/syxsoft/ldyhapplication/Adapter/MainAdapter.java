@@ -11,6 +11,7 @@ import android.widget.TextView;
 import net.syxsoft.ldyhapplication.R;
 import net.syxsoft.ldyhapplication.bean.MainPanel;
 import net.syxsoft.ldyhapplication.ui.AppActivity;
+import net.syxsoft.ldyhapplication.ui.KaoqiRZSBFragment;
 import net.syxsoft.ldyhapplication.ui.KaoqiguanliFragment;
 
 import java.util.List;
@@ -70,6 +71,12 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                     appActivity.pushFragment(new KaoqiguanliFragment());
 
                 }
+                else if (mainPanelText != null && mainPanelText.equals("日志上报")) {
+
+                    AppActivity appActivity=  (AppActivity)parent.getContext();
+                    appActivity.pushFragment(new KaoqiRZSBFragment());
+
+                }
 
 
             }
@@ -83,7 +90,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         MainPanel mainPanel = mainPanelList.get(position);
         holder.gnName.setText(mainPanel.getName());
-        holder.gnImage.setImageResource(R.mipmap.kqgl01);
+        holder.gnImage.setImageResource(mainPanel.getImageId());
     }
 
     @Override
