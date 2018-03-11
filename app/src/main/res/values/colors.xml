@@ -5,28 +5,33 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorWord33">#333333</color>
     <color name="white">#ffffff</color>
-    <color name="lgrey">#fcfbfb</color>
-    <color name="grey">#efefef</color>
-    <color name="blue">#21a3ff</color>
+    <color name="lgrey">#ececed</color>
+    <color name="grey">#f4f4f4</color>
+    <color name="blue">#38adff</color>
     <color name="colorWord66">#666666</color>
-    <color name="colorWord99">#999999</color>
+    <color name="colorWord99">#b1b3b7</color>
     <color name="colornavgrey">#bfc0c1</color>
     <color name="colornavblue">#38adff</color>
     <color name="colornavblack">#000000</color>
     <color name="colorWordbbb">#bbb</color>
-    <color name="colorWord2018">#576a95</color>
+    <color name="colorWord2018">#7b89aa</color>
     <color name="colorWordY">#95d3ff</color>
-    <color name="colorbgWQ">#e6f3ff</color>
-    <color name="colorWordTJblue">#4b8dfa</color>
-    <color name="colorWordclblue">#1c8adc</color>
+    <color name="colorbgWQ">#e5f2fe</color>
+    <color name="colorWordTJblue">#38adff</color>
+    <color name="colorWordclblue">#38adff</color>
     <color name="colorbgnom">#5fbdd9</color>
     <color name="colorbgzc">#badbfc</color>
-    <color name="colorbgzcc">#e8f0f9</color>
+    <color name="colorbgzcc">#d0d6dc</color>
     <color name="colorbggreen">#a5fee0</color>
     <color name="colorbgyellow">#fed5a2</color>
-    <color name="colorbgpink">#feacac</color>
-
-
+    <color name="colorbgpink">#ebbb79</color>
+    <color name="colorbgpink1">#b9db86</color>
+    <color name="colorbgpink2">#fd9e9e</color>
+    <color name="colorbgzcqd">#b9dafb</color>
+    <color name="colorbgwqqd">#a4fcdf</color>
+    <color name="colorbgfqq">#fcd4a1</color>
+    <color name="colorbgqj">#fcabab</color>
+    <color name="colorbgtoday">#38adff</color>
 
 
 

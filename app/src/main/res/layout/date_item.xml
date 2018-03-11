@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?><!-- TODO: Update blank fragment layout -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center"
+    android:background="@color/white"
+    android:layout_width="35dp"
+    android:layout_height="35dp"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/date_yl"
+        android:text="1"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorWord66"
+        android:textSize="16sp">
+    </TextView>
+    <TextView
+        android:id="@+id/date_nl"
+        android:text="正月"
+        android:textSize="10sp"
+        android:textColor="@color/colorWord66"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/date_yl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

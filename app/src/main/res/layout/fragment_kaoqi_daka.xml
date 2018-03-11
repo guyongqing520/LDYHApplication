@@ -5,12 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:LinearLayoutxmlns="http://schemas.android.com/apk/res-auto"
     tools:context="net.syxsoft.ldyhapplication.ui.IndexActivity">
 
 
 <LinearLayout android:layout_marginBottom="10dp"
-    android:layout_marginTop="66dp"
+    android:layout_marginTop="56dp"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -45,7 +44,7 @@
         <TextView
             android:text="职务：财务科长"
             android:textSize="13sp"
-
+            android:textColor="@color/colorWord99"
             android:layout_toRightOf="@+id/image2"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
@@ -54,7 +53,7 @@
         <TextView
             android:text="2018-02-06 11:40(星期五)"
             android:textSize="13sp"
-            android:layout_marginTop="10dp"
+            android:textColor="@color/colorWord2018"
             android:layout_marginRight="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -77,8 +76,9 @@
             android:id="@+id/sq_daka"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="18dp"
             android:background="@drawable/btn_oval"
             android:text="外勤打卡？请申请>"
             android:textColor="@color/blue"
@@ -98,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="115dp"
             android:text="上班打卡"
             android:textSize="18sp"
             android:textColor="@color/white" />
@@ -109,15 +109,16 @@
             android:layout_below="@id/dakatext"
             android:layout_centerHorizontal="true"
             android:text="8:30-14:00"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:layout_marginTop="4dp"
-            android:textColor="@color/grey" />
+            android:textColor="@color/colorbgzcc" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/img1"
             android:layout_centerHorizontal="true"
+            android:textColor="@color/colorWord66"
             android:layout_marginTop="30dp"
             android:textSize="14sp"
             android:text="位置：上海市XX区XX号高新2号1118" />
@@ -130,6 +131,7 @@
         android:layout_marginLeft="20dp"
             android:text="请上传相关的图片"
         android:textSize="12sp"
+        android:textColor="@color/colorWord99"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

@@ -36,16 +36,16 @@
 
             android:layout_toRightOf="@+id/image2"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:text="职务：财务科长"
             android:textSize="14sp"
-
+            android:textColor="@color/colorWord66"
             android:layout_toRightOf="@+id/image2"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="24dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
@@ -53,10 +53,11 @@
             android:drawableLeft="@mipmap/boy"
             android:textSize="14sp"
             android:drawablePadding="4dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorWord99"
             android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
@@ -102,7 +103,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:padding="5dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="2dp"
         android:layout_height="wrap_content">
 
         <ImageView
@@ -135,7 +136,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:padding="5dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="2dp"
         android:layout_height="wrap_content">
 
         <ImageView

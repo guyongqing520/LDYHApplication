@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TODO: Update blank fragment layout -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="net.syxsoft.ldyhapplication.ui.IndexActivity">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="56dp"
+    android:scrollbars="none">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/record_gridiew" />
+
+        <LinearLayout
+            android:background="@color/white"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/view_circle_zcqd"
+                android:layout_width="10dp"
+                android:layout_height="10dp" />
+
+            <TextView
+                android:text="正常签到"
+                android:layout_marginLeft="5dp"
+                android:textSize="10sp"
+                android:textColor="@color/colorWord66"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/view_circle_wqqd"
+                android:layout_width="10dp"
+                android:layout_height="10dp" />
+            <TextView
+                android:text="外勤签到"
+                android:layout_marginLeft="5dp"
+                android:textSize="10sp"
+                android:textColor="@color/colorWord66"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/view_circle_fqq"
+                android:layout_width="10dp"
+                android:layout_height="10dp" />
+            <TextView
+                android:text="非全勤"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:textSize="10sp"
+                android:textColor="@color/colorWord66"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/view_circle_qj"
+                android:layout_width="10dp"
+                android:layout_height="10dp" />
+            <TextView
+                android:text="请假"
+                android:layout_marginLeft="5dp"
+                android:textSize="10sp"
+                android:textColor="@color/colorWord66"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/colorWord33"
+                android:text="2018年12月22日（星期五）"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+        </LinearLayout>
+        <TextView
+            android:gravity="center_horizontal"
+            android:background="@color/grey"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp" />
+        <RelativeLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <ImageView
+                android:id="@+id/img1"
+                android:layout_marginTop="10dp"
+                android:src="@mipmap/kqdk0105nav2"
+                android:layout_width="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="20dp" />
+            <TextView
+                android:id="@+id/qdsj"
+                android:textColor="@color/colorWord33"
+                android:text="正常签到 09：28"
+                android:layout_toRightOf="@+id/img1"
+                android:layout_width="wrap_content"
+                android:layout_alignTop="@+id/img1"
+                android:textSize="16sp"
+                android:layout_marginLeft="4dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="正常"
+                android:background="@drawable/btn_oval_zcqd_btn"
+                android:layout_toRightOf="@+id/qdsj"
+                android:layout_alignBaseline="@+id/qdsj"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/adressimg"
+                android:layout_alignLeft="@+id/qdsj"
+                android:layout_below="@+id/qdsj"
+                android:layout_marginTop="4dp"
+                android:src="@mipmap/kqdk0105navg1"
+                android:layout_width="15dp"
+                android:layout_height="15dp" />
+            <TextView
+                android:id="@+id/adress_text"
+                android:text="遵义市22号"
+                android:textColor="@color/colorWord66"
+                android:layout_toRightOf="@+id/adressimg"
+                android:layout_width="wrap_content"
+                android:layout_alignTop="@+id/adressimg"
+                android:textSize="12sp"
+                android:layout_marginLeft="4dp"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <ImageView
+                android:id="@+id/img1"
+                android:layout_marginTop="10dp"
+                android:src="@mipmap/kqdk0105nav2"
+                android:layout_width="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="20dp" />
+            <TextView
+                android:id="@+id/qdsj"
+                android:textColor="@color/colorWord33"
+                android:text="正常签到 09：28"
+                android:layout_toRightOf="@+id/img1"
+                android:layout_width="wrap_content"
+                android:layout_alignTop="@+id/img1"
+                android:textSize="16sp"
+                android:layout_marginLeft="4dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="正常"
+                android:background="@drawable/btn_oval_zcqd_btn"
+                android:layout_toRightOf="@+id/qdsj"
+                android:layout_alignBaseline="@+id/qdsj"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/adressimg"
+                android:layout_alignLeft="@+id/qdsj"
+                android:layout_below="@+id/qdsj"
+                android:layout_marginTop="4dp"
+                android:src="@mipmap/kqdk0105navg1"
+                android:layout_width="15dp"
+                android:layout_height="15dp" />
+            <TextView
+                android:id="@+id/adress_text"
+                android:text="遵义市22号"
+                android:textColor="@color/colorWord66"
+                android:layout_toRightOf="@+id/adressimg"
+                android:layout_width="wrap_content"
+                android:layout_alignTop="@+id/adressimg"
+                android:textSize="12sp"
+                android:layout_marginLeft="4dp"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <ImageView
+                android:id="@+id/img1"
+                android:layout_marginTop="10dp"
+                android:src="@mipmap/kqdk0105nav2"
+                android:layout_width="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="20dp" />
+            <TextView
+                android:id="@+id/qdsj"
+                android:textColor="@color/colorWord33"
+                android:text="正常签到 09：28"
+                android:layout_toRightOf="@+id/img1"
+                android:layout_width="wrap_content"
+                android:layout_alignTop="@+id/img1"
+                android:textSize="16sp"
+                android:layout_marginLeft="4dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="正常"
+                android:background="@drawable/btn_oval_zcqd_btn"
+                android:layout_toRightOf="@+id/qdsj"
+                android:layout_alignBaseline="@+id/qdsj"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/adressimg"
+                android:layout_alignLeft="@+id/qdsj"
+                android:layout_below="@+id/qdsj"
+                android:layout_marginTop="4dp"
+                android:src="@mipmap/kqdk0105navg1"
+                android:layout_width="15dp"
+                android:layout_height="15dp" />
+            <TextView
+                android:id="@+id/adress_text"
+                android:text="遵义市22号"
+                android:layout_toRightOf="@+id/adressimg"
+                android:layout_width="wrap_content"
+                android:layout_alignTop="@+id/adressimg"
+                android:textSize="12sp"
+                android:layout_marginLeft="4dp"
+                android:textColor="@color/colorWord66"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <ImageView
+                android:id="@+id/img1"
+                android:layout_marginTop="10dp"
+                android:src="@mipmap/kqdk0105nav2"
+                android:layout_width="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="20dp" />
+            <TextView
+                android:id="@+id/qdsj"
+                android:textColor="@color/colorWord33"
+                android:text="正常签到 09：28"
+                android:layout_toRightOf="@+id/img1"
+                android:layout_width="wrap_content"
+                android:layout_alignTop="@+id/img1"
+                android:textSize="16sp"
+                android:layout_marginLeft="4dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="正常"
+                android:background="@drawable/btn_oval_zcqd_btn"
+                android:layout_toRightOf="@+id/qdsj"
+                android:layout_alignBaseline="@+id/qdsj"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/adressimg"
+                android:layout_alignLeft="@+id/qdsj"
+                android:layout_below="@+id/qdsj"
+                android:layout_marginTop="4dp"
+                android:src="@mipmap/kqdk0105navg1"
+                android:layout_width="15dp"
+                android:layout_height="15dp" />
+            <TextView
+                android:id="@+id/adress_text"
+                android:text="遵义市22号"
+                android:layout_toRightOf="@+id/adressimg"
+                android:layout_width="wrap_content"
+                android:layout_alignTop="@+id/adressimg"
+                android:textSize="12sp"
+                android:layout_marginLeft="4dp"
+                android:textColor="@color/colorWord66"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</ScrollView>
+
+</FrameLayout>
+
+

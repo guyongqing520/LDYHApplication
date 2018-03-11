@@ -18,7 +18,8 @@ public abstract class AppFragment extends Fragment {
     protected abstract void initView(View view, Bundle savedInstanceState);
     protected void releaseView(){
 
-    };
+    }
+
     protected abstract void initActionBar(Toolbar actionBar);
 
     protected BaseActivity getHoldingActivity(){
@@ -65,5 +66,4 @@ public abstract class AppFragment extends Fragment {
         super.onDestroyView();
         releaseView();
     }
-
 }

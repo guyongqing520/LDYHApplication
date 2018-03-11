@@ -9,12 +9,11 @@
 
 <LinearLayout android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginTop="70dp"
+    android:layout_marginTop="66dp"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <LinearLayout android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:background="@color/white"
         android:padding="15dp"
@@ -42,6 +41,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/xihao"
                 android:text="请假类型："
+                android:textColor="@color/colorWord66"
                 android:textSize="16sp" />
 
             <TextView
@@ -87,6 +87,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/xihao1"
                 android:text="开始时间："
+                android:textColor="@color/colorWord66"
                 android:textSize="16sp" />
 
             <TextView
@@ -132,6 +133,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/xihao2"
                 android:text="结束时间："
+                android:textColor="@color/colorWord66"
                 android:textSize="16sp" />
 
             <TextView
@@ -177,6 +179,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/xihao3"
                 android:text="时长（h）："
+                android:textColor="@color/colorWord66"
                 android:textSize="16sp" />
 
             <TextView
@@ -220,6 +223,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/xihao6"
                 android:text="请假事由："
+                android:textColor="@color/colorWord66"
                 android:textSize="16sp" />
 
             <TextView
@@ -270,8 +274,11 @@
                 android:layout_alignLeft="@id/bkbs_text5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lines="3"
-                android:hint="请输入您的缺卡原因"
+                android:lines="6"
+                android:background="@null"
+                android:gravity="top"
+                android:textSize="15sp"
+                android:hint="请输入您的审批意见"
 
                 />
 
@@ -282,7 +289,7 @@
 
     <LinearLayout
     android:background="@color/white"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="8dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -297,7 +304,7 @@
     <TextView
         android:layout_width="1dp"
         android:gravity="center"
-        android:background="@color/grey"
+        android:background="@color/colorbgzcc"
         android:layout_height="30dp" />
 
     <TextView android:text="拒绝"

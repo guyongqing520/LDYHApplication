@@ -35,7 +35,7 @@ public class KaoqiguanliFragment extends BaseFragment {
 
     @OnClick(R.id.kaoqinlist)
     public void onKaoqinlistBtnClicked(){
-        getHoldingActivity().pushFragment(new KaoqiguanlillistFragment());
+        getHoldingActivity().pushFragment(new KaoqiguanlillistdateFragment());
     }
 
     @OnClick(R.id.qinjashengpi)

@@ -4,7 +4,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- 填充 -->
     <solid
-        android:color="@color/grey"/><!-- 填充的颜色 -->
+        android:color="@color/lgrey"/><!-- 填充的颜色 -->
     <corners
         android:radius="4dp"
         android:topLeftRadius="4dp"

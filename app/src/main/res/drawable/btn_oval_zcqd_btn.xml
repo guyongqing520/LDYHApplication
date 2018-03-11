@@ -7,8 +7,8 @@
     <!-- 矩形的圆角弧度 -->
     <corners android:radius="5dp" />
     <!-- 矩形的填充色 -->
-    <solid android:color="@color/colorbgWQ" />
-    <padding android:bottom="4dp" android:left="16dp" android:right="16dp" android:top="4dp"></padding>
+    <solid android:color="@color/colorbgzcqd" />
+    <padding android:bottom="1dp" android:left="10dp" android:right="10dp" android:top="1dp"></padding>
 
 </shape>
 

@@ -28,7 +28,7 @@ public class KaoqiRZSBFragment extends BaseFragment {
 
     @OnClick(R.id.rzlist)
     public void onRzspBtnClicked(){
-        getHoldingActivity().pushFragment(new KaoqiRZSBlistFragment());
+        getHoldingActivity().pushFragment(new KaoqiRZSBlistdateFragment());
     }
 
     @OnClick(R.id.zrbq)
