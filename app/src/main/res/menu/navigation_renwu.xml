@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" >
+    <item
+        android:id="@+id/navigation_renwu_submit"
+        android:icon="@mipmap/kqdk0105nav1"
+        app:showAsAction="ifRoom"
+        android:title="提交" />
+    <item
+        android:id="@+id/navigation_renwu_qs"
+        android:icon="@mipmap/kqdk0105nav1"
+        android:title="请示" />
+
+    <item
+        android:id="@+id/navigation_renwu_yj"
+        android:icon="@mipmap/kqdk0105nav2"
+        android:title="移交" />
+
+    <item
+        android:id="@+id/navigation_renwu_rwfj"
+        android:icon="@mipmap/kqglnac04"
+        android:title="任务分解" />
+    <item
+        android:id="@+id/navigation_renwu_qy"
+        android:icon="@mipmap/kqdk0105nav1"
+        android:title="启用" />
+    <item
+        android:id="@+id/navigation_renwu_glrz"
+        android:icon="@mipmap/kqglnac04"
+        android:title="关联日志" />
+
+    <item
+        android:id="@+id/navigation_renwu_djbd"
+        android:icon="@mipmap/kqglnac04"
+        android:title="登记绑定" />
+
+</menu>

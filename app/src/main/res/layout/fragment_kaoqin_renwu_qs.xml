@@ -1,0 +1,67 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    tools:context="net.syxsoft.ldyhapplication.ui.KaoqinRenwuNewFragment">
+    <ScrollView
+
+        android:id="@+id/scrollView"
+        android:layout_marginTop="60dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            xmlns:android="http://schemas.android.com/apk/res/android" >
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView android:id="@+id/xihao5"
+
+                    android:text="*"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/bkbs_text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/xihao5"
+                    android:text="事件描述（请示）"
+                    android:textColor="@color/colornavblack"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:layout_below="@+id/bkbs_text1"
+                    android:layout_alignLeft="@id/bkbs_text1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="6"
+                    android:hint="请输入您请示内容"
+
+                    />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    </ScrollView>
+</FrameLayout>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TODO: Update blank fragment layout -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="net.syxsoft.ldyhapplication.ui.IndexActivity">
+
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="56dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+   <LinearLayout
+       android:padding="20dp"
+       android:background="@color/white"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+       <EditText
+           android:layout_weight="9"
+           android:hint="请输入关键字"
+           android:drawablePadding="8dp"
+           android:paddingLeft="10dp"
+           android:textSize="16dp"
+           android:height="40dp"
+           android:drawableLeft="@mipmap/searchico"
+           android:background="@drawable/view_kqbd1"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content" />
+       <TextView
+           android:layout_weight="1"
+           android:layout_marginLeft="10dp"
+           android:text="取消"
+           android:textSize="16dp"
+           android:textColor="@color/colornavblue"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content" />
+   </LinearLayout>
+
+   <LinearLayout
+       android:background="@color/white"
+       android:padding="15dp"
+       android:layout_marginTop="10dp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+       <RelativeLayout android:id="@+id/renwu_cy_detail_show"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content">
+           <ImageView
+               android:id="@+id/img1"
+               android:src="@mipmap/zzico"
+               android:layout_width="40dp"
+               android:layout_height="40dp" />
+
+           <TextView
+               android:id="@+id/type1"
+               android:text="完成年底测评工作"
+               android:textColor="@color/colornavblack"
+               android:layout_alignTop="@+id/img1"
+               android:textSize="16sp"
+               android:layout_toRightOf="@+id/img1"
+               android:layout_marginLeft="10sp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" />
+           <TextView
+               android:id="@+id/gz1"
+               android:text="工种：经济工作"
+               android:layout_marginTop="10dp"
+               android:textSize="14sp"
+               android:layout_below="@+id/type1"
+               android:layout_alignLeft="@+id/type1"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" />
+           <TextView
+               android:id="@+id/time1"
+               android:text="开始时间：2012-10-22"
+               android:textSize="14sp"
+               android:layout_marginTop="6dp"
+               android:layout_below="@+id/gz1"
+               android:layout_alignLeft="@+id/gz1"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" />
+           <TextView
+               android:id="@+id/time2"
+               android:text="结束时间：2012-10-22"
+               android:textSize="14sp"
+               android:layout_marginTop="6dp"
+               android:layout_below="@+id/time1"
+               android:layout_alignLeft="@+id/time1"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" />
+           <TextView
+               android:id="@+id/cd"
+               android:text="紧急程度（紧急） 重要程度（一般）"
+               android:textSize="14sp"
+               android:layout_marginTop="10dp"
+               android:layout_below="@+id/time2"
+               android:textColor="@color/colorbgyellow"
+               android:layout_alignLeft="@+id/time2"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" />
+
+           <ImageView
+               android:id="@+id/img21"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:maxHeight="10sp"
+               android:maxWidth="10sp"
+               android:layout_marginTop="40dp"
+               android:layout_alignParentRight="true"
+               android:src="@mipmap/kqdk0107" />
+           <TextView
+               android:text="关注"
+               android:textColor="@color/colornavgrey"
+               android:layout_below="@+id/img21"
+               android:layout_marginTop="4dp"
+               android:layout_alignParentRight="true"
+               android:textSize="14sp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" />
+       </RelativeLayout>
+   </LinearLayout>
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView android:text="进度报告"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/colornavblue"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+        <TextView android:text="任务终止"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/colornavblue"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+        <TextView
+            android:layout_width="1dp"
+            android:gravity="center"
+            android:background="@color/grey"
+            android:layout_height="30dp" />
+
+        <TextView android:text="任务完成"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/colornavblue"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+    </LinearLayout>
+</LinearLayout>
+
+</FrameLayout>
+
