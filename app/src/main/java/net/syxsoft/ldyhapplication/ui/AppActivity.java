@@ -11,12 +11,13 @@ import android.view.KeyEvent;
 
 import net.syxsoft.ldyhapplication.R;
 import net.syxsoft.ldyhapplication.utils.BottomNavigationViewHelper;
+import net.syxsoft.ldyhapplication.utils.NetWorkUtils;
 
 public abstract class AppActivity extends AppCompatActivity{
 
     //由于有些跳转无需参数,所以这里无需抽象方法
-    protected void handleIntent(Intent intent){
-    };
+    protected void handleIntent(Intent intent){}
+
     protected abstract int getContentViewId();
     protected abstract BaseFragment getFirstFragment();
     protected abstract int getFragmentContainerId();
@@ -71,6 +72,10 @@ public abstract class AppActivity extends AppCompatActivity{
         }
     }
 
+    public boolean isNetWorkAvailable(){
+        return NetWorkUtils.isNetWorkAvailable(this);
+    }
+
     //弹出碎片
     public void popFragment(){
         if (getSupportFragmentManager().getBackStackEntryCount() > 1){
@@ -79,7 +84,6 @@ public abstract class AppActivity extends AppCompatActivity{
             finish();
         }
     }
-
 
     @Override
     public boolean onSupportNavigateUp() {

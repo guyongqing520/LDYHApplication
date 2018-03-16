@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- 按钮正常的时候的背景 -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="oval"
-    android:useLevel="false"
-    >
-    <solid android:color="@color/colorbgfqq"/>
-    <stroke
-        android:width="1dp"
-        android:color="@color/colorbgtoday" />
-    <size android:width="5dp"
-        android:height="5dp" />
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
-</shape>
+    <item >
+        <shape android:shape="oval" >
+            <solid android:color="@color/colorbgtoday"/>
+        </shape>
+    </item>
+
+    <item android:bottom="1dp" android:top="1dp" android:left="1dp" android:right="1dp">
+        <shape android:shape="oval" >
+            <solid android:color="@color/white" />
+        </shape>
+    </item>
+
+    <item android:bottom="2dp" android:top="2dp" android:left="2dp" android:right="2dp">
+        <shape android:shape="oval" >
+            <solid android:color="@color/colorbgfqq" />
+        </shape>
+    </item>
+</layer-list>

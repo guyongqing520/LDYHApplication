@@ -90,7 +90,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         MainPanel mainPanel = mainPanelList.get(position);
         holder.gnName.setText(mainPanel.getName());
-        holder.gnImage.setImageResource(mainPanel.getImageId());
+        //holder.gnImage.setImageResource(mainPanel.getImageId());
+        holder.gnImage.setImageResource(R.mipmap.kqgl01);
     }
 
     @Override
