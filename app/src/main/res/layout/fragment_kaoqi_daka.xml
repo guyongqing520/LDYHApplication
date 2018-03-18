@@ -33,6 +33,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp" />
         <TextView
+            android:id="@+id/username"
             android:text="张某某"
             android:textSize="16sp"
             android:textColor="@color/colornavblack"
@@ -42,6 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/position"
             android:text="职务：财务科长"
             android:textSize="13sp"
             android:textColor="@color/colorWord99"
@@ -51,6 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/today"
             android:text="2018-02-06 11:40(星期五)"
             android:textSize="13sp"
             android:textColor="@color/colorWord2018"
@@ -85,7 +88,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/img1"
+            android:id="@+id/daka_btn"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_centerHorizontal="true"
@@ -104,6 +107,7 @@
             android:textColor="@color/white" />
 
         <TextView
+            android:id="@+id/dakadate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/dakatext"
@@ -114,14 +118,21 @@
             android:textColor="@color/colorbgzcc" />
 
         <TextView
+            android:id="@+id/address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/img1"
+            android:layout_below="@id/daka_btn"
             android:layout_centerHorizontal="true"
             android:textColor="@color/colorWord66"
             android:layout_marginTop="30dp"
             android:textSize="14sp"
             android:text="位置：上海市XX区XX号高新2号1118" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/attrid"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
 
     </RelativeLayout>
 </LinearLayout>
@@ -182,7 +193,7 @@ android:layout_marginLeft="10dp"
             android:textColor="@color/colornavblack"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="添加附件"
+            android:text="添加图片附件"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>

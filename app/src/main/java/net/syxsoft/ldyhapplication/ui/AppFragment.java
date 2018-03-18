@@ -14,6 +14,7 @@ public abstract class AppFragment extends Fragment {
 
     protected abstract int getLayoutId();
     protected abstract Toolbar getToolbar();
+    protected abstract String getRootApiUrl();
 
     protected abstract void initView(View view, Bundle savedInstanceState);
     protected void releaseView(){

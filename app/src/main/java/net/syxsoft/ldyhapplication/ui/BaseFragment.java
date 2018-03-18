@@ -15,6 +15,11 @@ import butterknife.ButterKnife;
 public abstract class BaseFragment extends AppFragment {
 
     @Override
+    protected String getRootApiUrl() {
+        return "http://ldyh.webapi.syxsoft.net:8801";
+    }
+
+    @Override
     protected void initView(View view, Bundle savedInstanceState) {
         ButterKnife.bind(this, view);
     }

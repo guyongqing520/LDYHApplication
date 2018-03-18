@@ -11,6 +11,7 @@ import android.view.KeyEvent;
 
 import net.syxsoft.ldyhapplication.R;
 import net.syxsoft.ldyhapplication.utils.BottomNavigationViewHelper;
+import net.syxsoft.ldyhapplication.utils.MyApp;
 import net.syxsoft.ldyhapplication.utils.NetWorkUtils;
 
 public abstract class AppActivity extends AppCompatActivity{
@@ -42,6 +43,9 @@ public abstract class AppActivity extends AppCompatActivity{
             BottomNavigationViewHelper.disableShiftMode(navigation);
             navigation.setOnNavigationItemSelectedListener(getNavigationItemSelectedListener());
         }catch(Exception ex) {}
+
+        //添加Activity
+        MyApp.addActivity(this);
 
         //添加栈底的第一个fragment
         if (getSupportFragmentManager().getBackStackEntryCount() == 0){
@@ -112,5 +116,11 @@ public abstract class AppActivity extends AppCompatActivity{
         if (getSupportFragmentManager().getBackStackEntryCount() == 0){
             finish();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MyApp.removeActivity(this);
     }
 }
