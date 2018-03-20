@@ -30,7 +30,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 
