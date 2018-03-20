@@ -182,4 +182,12 @@ public class DateUtils {
             w = 0;
         return weekDays[w];
     }
+
+    public static String getSimpleDateFormat(Date date,String formatString) {
+        if (formatString == null || formatString.length() == 0) {
+            formatString = "yyyy-MM-dd";
+        }
+        SimpleDateFormat format = new SimpleDateFormat(formatString);
+        return format.format(date.getTime());
+    }
 }

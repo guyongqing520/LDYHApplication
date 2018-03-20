@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:LinearLayoutxmlns="http://schemas.android.com/apk/res-auto"
     tools:context="net.syxsoft.ldyhapplication.ui.IndexActivity">
 
 
@@ -47,6 +46,7 @@
                 android:textColor="@color/colornavblack"
                 android:textSize="16sp" />
             <TextView
+                android:id="@+id/starttime_select"
                 android:text="请选择"
                 android:layout_alignBottom="@+id/bkbs_text1"
                 android:drawableRight="@mipmap/kqglz_ar02"
@@ -92,6 +92,7 @@
                 android:textColor="@color/colornavblack"
                 android:textSize="16sp" />
             <TextView
+                android:id="@+id/endtime_select"
                 android:text="请选择"
                 android:drawableRight="@mipmap/kqglz_ar02"
                 android:drawablePadding="4dp"
@@ -136,6 +137,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/remark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -149,13 +151,8 @@
                 android:lines="10"
                 android:padding="10dp"
                 android:textSize="15sp" />
-
         </RelativeLayout>
-
-
     </LinearLayout>
-
-
 
 </LinearLayout>
 
