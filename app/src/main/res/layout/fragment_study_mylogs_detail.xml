@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TODO: Update blank fragment layout -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="net.syxsoft.ldyhapplication.ui.IndexActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
+        android:scrollbars="none">
+<LinearLayout android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView android:id="@+id/xihao"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:text="*"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/bkbs_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/xihao"
+                android:text="班次名称："
+                android:textColor="@color/colorWord66"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/bkbs_text"
+                android:layout_alignBottom="@+id/bkbs_text"
+                android:layout_width="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colornavblack"
+                android:text="2017年报表" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView android:id="@+id/xihao1"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:text="*"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/bkbs_text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/xihao1"
+                android:text="启动时间："
+                android:textColor="@color/colorWord66"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/bkbs_text1"
+                android:layout_alignBottom="@+id/bkbs_text1"
+                android:layout_width="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colornavblack"
+                android:text="2018-10-23" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView android:id="@+id/xihao2"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:text="*"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/bkbs_text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/xihao2"
+                android:text="培训天数："
+                android:textColor="@color/colorWord66"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/bkbs_text2"
+                android:layout_alignBottom="@+id/bkbs_text2"
+                android:layout_width="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colornavblack"
+                android:text="23" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView android:id="@+id/xihao3"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:text="*"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/bkbs_text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/xihao3"
+                android:text="培训方式："
+                android:textColor="@color/colorWord66"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/bkbs_text3"
+                android:layout_alignBottom="@+id/bkbs_text3"
+                android:layout_width="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colornavblack"
+                android:text="授课方式" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView android:id="@+id/xihao4"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:text="*"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/bkbs_text4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/xihao3"
+                android:text="培训地点："
+                android:textColor="@color/colorWord66"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/bkbs_text4"
+                android:layout_alignBottom="@+id/bkbs_text4"
+                android:layout_width="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colornavblack"
+                android:text="武汉" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView android:id="@+id/xihao6"
+                android:visibility="gone"
+                android:text="*"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/bkbs_text6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="培训描述："
+                android:textColor="@color/colorWord66"
+                android:textSize="16sp" />
+
+            <TextView
+
+                android:text="这是一段培训描述，我if描述类口头上来搜我问答 呵呵呵呵"
+                android:layout_toRightOf="@+id/bkbs_text6"
+                android:layout_alignTop="@id/bkbs_text6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="3"
+                />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView android:id="@+id/xihao11"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:text="*"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/bkbs_text11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/xihao11"
+                android:text="开始时间："
+                android:textColor="@color/colorWord66"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/bkbs_text11"
+                android:layout_alignBottom="@+id/bkbs_text11"
+                android:layout_width="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colornavblack"
+                android:text="2012-12-23" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <TextView
+        android:text="课程"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView android:id="@+id/xihao14"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:text="*"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/bkbs_text14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/xihao14"
+                android:text="开始时间："
+                android:textColor="@color/colorWord66"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/bkbs_text14"
+                android:layout_alignBottom="@+id/bkbs_text14"
+                android:layout_width="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colornavblack"
+                android:text="2018-10-23" />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent">
+
+            <TextView android:id="@+id/xihao13"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:text="*"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/bkbs_text13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/xihao13"
+                android:text="结束时间："
+                android:textColor="@color/colorWord66"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/bkbs_text13"
+                android:layout_alignBottom="@+id/bkbs_text13"
+                android:layout_width="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colornavblack"
+                android:text="2018-10-23" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent">
+
+            <TextView android:id="@+id/xihao15"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:text="*"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/bkbs_text15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/xihao15"
+                android:text="软件技术"
+                android:textColor="@color/colorWord66"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/timeleng2"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colornavblack"
+                android:text="23分钟" />
+            <TextView
+
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/timeleng2"
+                android:layout_width="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colornavblack"
+                android:text="课时:" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent">
+
+            <TextView android:id="@+id/xihao15"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:text="*"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/bkbs_text15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/xihao15"
+                android:text="软件技术"
+                android:textColor="@color/colorWord66"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/timeleng2"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colornavblack"
+                android:text="23分钟" />
+            <TextView
+
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/timeleng2"
+                android:layout_width="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colornavblack"
+                android:text="课时:" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
+</ScrollView>
+</FrameLayout>

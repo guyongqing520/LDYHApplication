@@ -2,13 +2,11 @@ package net.syxsoft.ldyhapplication.ui;
 
 
 import android.Manifest;
-import android.app.AlertDialog;
+import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,8 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,28 +26,29 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.model.inner.GeoPoint;
-import com.baidu.mapapi.utils.DistanceUtil;
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.bean.ImageItem;
+import com.lzy.imagepicker.loader.ImageLoader;
+import com.lzy.imagepicker.ui.ImageGridActivity;
+import com.lzy.imagepicker.view.CropImageView;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.Picasso;
 
 import net.syxsoft.ldyhapplication.R;
 import net.syxsoft.ldyhapplication.bean.AttendenceBean;
-import net.syxsoft.ldyhapplication.bean.LoginBean;
-import net.syxsoft.ldyhapplication.bean.MainPanel;
-import net.syxsoft.ldyhapplication.bean.Personinfo;
+import net.syxsoft.ldyhapplication.bean.PersoninfoBean;
 import net.syxsoft.ldyhapplication.bean.UserAccountBean;
 import net.syxsoft.ldyhapplication.callback.GsonObjectCallback;
 import net.syxsoft.ldyhapplication.model.UserModel;
 import net.syxsoft.ldyhapplication.utils.DateUtils;
-import net.syxsoft.ldyhapplication.utils.GeoLocationUtils;
 import net.syxsoft.ldyhapplication.utils.OkHttp3Utils;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -91,6 +89,7 @@ public class KaoqiDakaFragment extends BaseFragment {
     TextView address;
 
 
+    //打卡
     @OnClick(R.id.daka_btn)
     public void OnDakaBtnClicked() {
 
@@ -101,6 +100,15 @@ public class KaoqiDakaFragment extends BaseFragment {
         //double s=currentlon;
 
        // else if (GeoLocationUtils.GetShortDistance())
+
+    }
+
+    //上传图片
+    @OnClick(R.id.upimg_btn)
+    public void OnUpimgBtnClicked() {
+
+        Intent intent = new Intent(getContext(), ImageGridActivity.class);
+        startActivityForResult(intent, 2);
 
     }
 
@@ -127,6 +135,19 @@ public class KaoqiDakaFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = super.onCreateView(inflater, container, savedInstanceState);
+
+        //上传图片初始化
+        ImagePicker imagePicker = ImagePicker.getInstance();
+        imagePicker.setImageLoader(new PicassoImageLoader());   //设置图片加载器
+        imagePicker.setShowCamera(true);  //显示拍照按钮
+        imagePicker.setCrop(true);        //允许裁剪（单选才有效）
+        imagePicker.setSaveRectangle(true); //是否按矩形区域保存
+        imagePicker.setSelectLimit(9);    //选中数量限制
+        imagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
+        imagePicker.setFocusWidth(800);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setFocusHeight(800);  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setOutPutX(1000);//保存文件的宽度。单位像素
+        imagePicker.setOutPutY(1000);//保存文件的高度。单位像素
 
         //启用底部导航
         BottomNavigationView navigation = getHoldingActivity().findViewById(R.id.navigation);
@@ -167,10 +188,10 @@ public class KaoqiDakaFragment extends BaseFragment {
         try {
 
             OkHttp3Utils.getInstance().doGet(getRootApiUrl() + "/api/user/getpersoninfo/" + userAccountBean.getUserid(),
-                    new GsonObjectCallback<Personinfo>() {
+                    new GsonObjectCallback<PersoninfoBean>() {
 
                         @Override
-                        public void onSuccess(Personinfo personinfo) {
+                        public void onSuccess(PersoninfoBean personinfo) {
                             progressDialog.dismiss();
 
                             if (personinfo.getRequestCode() != 200) {
@@ -300,6 +321,22 @@ public class KaoqiDakaFragment extends BaseFragment {
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+            if (data != null && requestCode == 2) {
+                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                ImageItem a= images.get(0);
+                String s=a.path;
+               // MyAdapter adapter = new MyAdapter(images);
+               // gridView.setAdapter(adapter);
+            } else {
+                Toast.makeText(getContext(), "没有数据", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
     private void requestLocation() {
         mlocaltionClient.start();
     }
@@ -324,6 +361,26 @@ public class KaoqiDakaFragment extends BaseFragment {
             address.setText("位置：" + location.getAddrStr());
             currentlat=location.getLatitude();
             currentlon=location.getLongitude();
+        }
+    }
+
+    private class PicassoImageLoader implements ImageLoader {
+
+        @Override
+        public void displayImage(Activity activity, String path, ImageView imageView, int width, int height) {
+            Picasso.with(activity)//
+                    .load(Uri.fromFile(new File(path)))//
+                    .placeholder(R.mipmap.default_image)//
+                    .error(R.mipmap.default_image)//
+                    .resize(width, height)//
+                    .centerInside()//
+                    .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)//
+                    .into(imageView);
+        }
+
+        @Override
+        public void clearMemoryCache() {
+            //这里是清除缓存的方法,根据需要自己实现
         }
     }
 

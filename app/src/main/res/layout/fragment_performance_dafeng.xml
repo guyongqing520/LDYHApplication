@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?><!-- TODO: Update blank fragment layout -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="net.syxsoft.ldyhapplication.ui.IndexActivity">
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
+        android:orientation="vertical">
+
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            xmlns:android="http://schemas.android.com/apk/res/android" >
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/bkbs_text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/xihao1"
+                    android:text="社会刚"
+                    android:textColor="@color/colorWord33"
+                    android:textSize="18sp" />
+                <TextView
+                    android:text="评分"
+                    android:textColor="@color/white"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/btn_oval_dafeng"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/timetxt"
+                    android:text="中共习书委员会组织部"
+                    android:layout_marginTop="5dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorWord66"
+                    android:layout_below="@+id/bkbs_text1"
+                    android:layout_alignLeft="@+id/bkbs_text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</FrameLayout>
+

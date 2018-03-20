@@ -172,6 +172,7 @@ android:layout_marginLeft="10dp"
 </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/upimg_btn"
         android:padding="10dp"
 
         android:orientation="horizontal"

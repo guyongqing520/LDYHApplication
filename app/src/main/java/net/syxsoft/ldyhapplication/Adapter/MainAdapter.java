@@ -13,6 +13,7 @@ import net.syxsoft.ldyhapplication.bean.MainPanel;
 import net.syxsoft.ldyhapplication.ui.AppActivity;
 import net.syxsoft.ldyhapplication.ui.KaoqiRZSBFragment;
 import net.syxsoft.ldyhapplication.ui.KaoqiguanliFragment;
+import net.syxsoft.ldyhapplication.ui.KaoqinRenwuFragment;
 
 import java.util.List;
 
@@ -62,23 +63,17 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 String mainPanelText = mainPanel.getName();
 
                 if (mainPanelText != null && mainPanelText.equals("考勤管理")) {
-                    // Toast.makeText(parent.getContext(), "kqgl", Toast.LENGTH_SHORT).show();
-
-                    //Intent intent = new Intent(parent.getContext(), KaoqiDakaActivity.class);
-                    //parent.getContext().startActivity(intent);
-
                     AppActivity appActivity=  (AppActivity)parent.getContext();
                     appActivity.pushFragment(new KaoqiguanliFragment());
-
                 }
                 else if (mainPanelText != null && mainPanelText.equals("日志上报")) {
-
                     AppActivity appActivity=  (AppActivity)parent.getContext();
                     appActivity.pushFragment(new KaoqiRZSBFragment());
-
                 }
-
-
+                else if (mainPanelText != null && mainPanelText.equals("任务管理")) {
+                    AppActivity appActivity=  (AppActivity)parent.getContext();
+                    appActivity.pushFragment(new KaoqinRenwuFragment());
+                }
             }
         });
 

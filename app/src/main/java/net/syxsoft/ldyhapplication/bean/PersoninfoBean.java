@@ -4,7 +4,7 @@ package net.syxsoft.ldyhapplication.bean;
  * Created by 谷永庆 on 2018/3/17.
  */
 
-public class Personinfo {
+public class PersoninfoBean {
 
     /**
      * RequestCode : 200

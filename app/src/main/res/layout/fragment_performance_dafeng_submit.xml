@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TODO: Update blank fragment layout -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="net.syxsoft.ldyhapplication.ui.IndexActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
+        android:scrollbars="none">
+<LinearLayout android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <TextView
+        android:text="考勤小结"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent">
+
+            <TextView android:id="@+id/xihao15"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:text="*"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/bkbs_text15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/xihao15"
+                android:text="全勤天数"
+                android:textColor="@color/colorWord66"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/timeleng2"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colornavblack"
+                android:text="20" />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent">
+
+            <TextView android:id="@+id/xihao"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:text="*"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/bkbs_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/xihao"
+                android:text="缺勤天数"
+                android:textColor="@color/colorWord66"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/timeleng"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colornavblack"
+                android:text="30" />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent">
+
+            <TextView android:id="@+id/xihao2"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:text="*"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/bkbs_text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/xihao2"
+                android:text="请假天数"
+                android:textColor="@color/colorWord66"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/timeleng1"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colornavblack"
+                android:text="30" />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent">
+
+            <TextView android:id="@+id/xihao4"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:text="*"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/bkbs_text4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/xihao4"
+                android:text="非工作日天数"
+                android:textColor="@color/colorWord66"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/timeleng4"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colornavblack"
+                android:text="30" />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent">
+
+            <TextView android:id="@+id/xihao5"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:text="*"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/bkbs_text5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/xihao5"
+                android:text="补签次数"
+                android:textColor="@color/colorWord66"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/timeleng5"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colornavblack"
+                android:text="30" />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <TextView
+        android:text="任务小结"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:padding="10dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:paddingBottom="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/dafengimg"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/kh_df" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/dafengimg"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="6dp"
+                android:layout_toRightOf="@+id/dafengimg"
+                android:text="打分情况" />
+
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/dafengimg"
+                android:layout_below="@+id/dafengimg"
+                android:gravity="left"
+                android:layout_marginTop="5dp"
+                android:padding="6dp"
+                android:text="任务进度（20%）"
+                android:textColor="@color/colorWord99"
+                android:textSize="16dp" />
+
+            <SeekBar
+                android:id="@+id/progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/text1"
+                android:layout_below="@+id/text1"
+                android:max="200"
+                android:layout_marginTop="2dp"
+                android:maxHeight="2dp"
+                android:minHeight="2dp"
+                android:paddingBottom="3dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="10dp"
+                android:progressDrawable="@drawable/layer_progress"
+                android:thumb="@drawable/shape_circle" />
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:padding="14dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/dafengimg2"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/kh_star" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/dafengimg2"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@+id/dafengimg2"
+                android:text="等级评定情况" />
+
+
+            <LinearLayout
+                android:layout_marginLeft="-4dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="20dp"
+                    android:text="很好" />
+                <CheckBox
+                    android:id="@+id/checkBox2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="20dp"
+                    android:text="较好" />
+                <CheckBox
+                    android:id="@+id/checkBox3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="20dp"
+                    android:text="一般" />
+                <CheckBox
+                    android:id="@+id/checkBox4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="差" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_margin="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/view_kqbdblue"
+        android:text="评分"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        />
+
+</LinearLayout>
+</ScrollView>
+</FrameLayout>

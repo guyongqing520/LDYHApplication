@@ -39,6 +39,7 @@
         <activity android:name=".ui.KaoqiDakaActivity" />
         <activity android:name=".ui.IndexActivity" />
 
+
         <activity android:name=".ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -47,6 +48,9 @@
         </activity>
 
         <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote" />
+        <activity
+            android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
+            android:theme="@style/ImagePickerThemeFullScreen"/>
 
     </application>
 

@@ -1,0 +1,78 @@
+<LinearLayout android:layout_marginBottom="10dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include layout="@layout/actionbar_base_layout"></include>
+
+    <RelativeLayout
+        android:id="@+id/renwu_new"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+
+            android:id="@+id/image1"
+            android:layout_width="33dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/xx_zl" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/image1"
+            android:text="个人学习"
+            android:textSize="18sp" />
+        <ImageView
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/kqglz_ar02"
+            android:layout_marginTop="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/renwu_fz_list"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image2"
+            android:layout_width="33dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/xx_boo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/image2"
+            android:text="资料列表"
+            android:textSize="18sp" />
+        <ImageView
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/kqglz_ar02"
+            android:layout_marginTop="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
+    </RelativeLayout>
+
+
+</LinearLayout>
