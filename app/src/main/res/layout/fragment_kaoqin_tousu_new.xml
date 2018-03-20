@@ -1,0 +1,578 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    tools:context="net.syxsoft.ldyhapplication.ui.KaoqinRenwuNewFragment">
+    <ScrollView
+
+        android:id="@+id/scrollView"
+        android:layout_marginTop="60dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            xmlns:android="http://schemas.android.com/apk/res/android" >
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView android:id="@+id/xihao"
+                    android:layout_centerVertical="true"
+                    android:text="*"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/bkbs_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/xihao"
+                    android:text="目标任务"
+                    android:textColor="@color/colornavblack"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/bkbs_text"
+                    android:layout_marginLeft="30sp"
+                    android:lines="1"
+                    android:hint="请输入"
+                    />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            xmlns:android="http://schemas.android.com/apk/res/android" >
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView android:id="@+id/xihao2"
+                    android:layout_centerVertical="true"
+                    android:text="*"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/bkbs_text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/xihao2"
+                    android:text="任务分类"
+                    android:textColor="@color/colornavblack"
+                    android:textSize="16sp" />
+
+                <Spinner android:id="@+id/renwu_spinner_zycd"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+                </Spinner>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            xmlns:android="http://schemas.android.com/apk/res/android" >
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView android:id="@+id/xihao3"
+                    android:layout_centerVertical="true"
+                    android:text="*"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/bkbs_text3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/xihao3"
+                    android:text="任务标题"
+                    android:textColor="@color/colornavblack"
+                    android:textSize="16sp" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/bkbs_text3"
+                    android:layout_marginLeft="30sp"
+                    android:lines="1"
+                    android:hint="请输入"
+                    />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            xmlns:android="http://schemas.android.com/apk/res/android" >
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView android:id="@+id/xihao4"
+                    android:layout_centerVertical="true"
+                    android:text="*"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/bkbs_text4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/xihao4"
+                    android:text="紧急程度"
+                    android:textColor="@color/colornavblack"
+                    android:textSize="16sp" />
+                <TextView
+                    android:text="请选择"
+                    android:drawableRight="@mipmap/kqglz_ar02"
+                    android:layout_alignBottom="@+id/bkbs_text4"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            xmlns:android="http://schemas.android.com/apk/res/android" >
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView android:id="@+id/xihao55"
+                    android:layout_centerVertical="true"
+                    android:text="*"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/bkbs_text66"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/xihao55"
+                    android:text="重要程度"
+                    android:textColor="@color/colornavblack"
+                    android:textSize="16sp" />
+                <TextView
+                    android:text="请选择"
+                    android:drawableRight="@mipmap/kqglz_ar02"
+                    android:layout_alignBottom="@+id/bkbs_text66"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            xmlns:android="http://schemas.android.com/apk/res/android" >
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView android:id="@+id/xihao5"
+
+                    android:text="*"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/bkbs_text5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/xihao5"
+                    android:text="任务描述"
+                    android:textColor="@color/colornavblack"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:layout_below="@+id/bkbs_text5"
+                    android:layout_alignLeft="@id/bkbs_text5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="3"
+                    android:hint="请输入任务描述内容"
+
+                    />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:text="任务来源即任务是由哪一个科室创建"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            xmlns:android="http://schemas.android.com/apk/res/android" >
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView android:id="@+id/tast_text_s1"
+                    android:layout_centerVertical="true"
+                    android:text="*"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/task_source_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tast_text_s1"
+                    android:text="任务来源"
+                    android:textColor="@color/colornavblack"
+                    android:textSize="16sp" />
+                <TextView
+                    android:text="请选择"
+                    android:drawableRight="@mipmap/kqglz_ar02"
+                    android:layout_alignBottom="@+id/task_source_text"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            xmlns:android="http://schemas.android.com/apk/res/android" >
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView android:id="@+id/task_text2"
+                    android:layout_centerVertical="true"
+                    android:text="*"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/task_source_starttime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/task_text2"
+                    android:text="任务开始时间"
+                    android:textColor="@color/colornavblack"
+                    android:textSize="16sp" />
+                <TextView
+                    android:text="请选择"
+                    android:drawableRight="@mipmap/kqglz_ar02"
+                    android:layout_alignBottom="@+id/task_source_starttime"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            xmlns:android="http://schemas.android.com/apk/res/android" >
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView android:id="@+id/task_text3"
+                    android:layout_centerVertical="true"
+                    android:text="*"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/task_source_endtime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/task_text3"
+                    android:text="任务结束时间"
+                    android:textColor="@color/colornavblack"
+                    android:textSize="16sp" />
+                <TextView
+                    android:text="请选择"
+                    android:drawableRight="@mipmap/kqglz_ar02"
+                    android:layout_alignBottom="@+id/task_source_endtime"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            xmlns:android="http://schemas.android.com/apk/res/android" >
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView android:id="@+id/task_text4"
+                    android:layout_centerVertical="true"
+                    android:text="*"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/task_source_cjz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/task_text4"
+                    android:text="创建者"
+                    android:textColor="@color/colornavblack"
+                    android:textSize="16sp" />
+                <TextView
+                    android:text="请选择"
+                    android:drawableRight="@mipmap/kqglz_ar02"
+                    android:layout_alignBottom="@+id/task_source_cjz"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            xmlns:android="http://schemas.android.com/apk/res/android" >
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView android:id="@+id/task_text5"
+                    android:layout_centerVertical="true"
+                    android:text="*"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/task_source_zxz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/task_text5"
+                    android:text="执行者"
+                    android:textColor="@color/colornavblack"
+                    android:textSize="16sp" />
+                <TextView
+                    android:text="请选择"
+                    android:drawableRight="@mipmap/kqglz_ar02"
+                    android:layout_alignBottom="@+id/task_source_zxz"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            xmlns:android="http://schemas.android.com/apk/res/android" >
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView android:id="@+id/task_text6"
+                    android:layout_centerVertical="true"
+                    android:text="*"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/task_source_cyz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/task_text6"
+                    android:text="参与者"
+                    android:textColor="@color/colornavblack"
+                    android:textSize="16sp" />
+                <TextView
+                    android:text="请选择"
+                    android:drawableRight="@mipmap/kqglz_ar02"
+                    android:layout_alignBottom="@+id/task_source_cyz"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            xmlns:android="http://schemas.android.com/apk/res/android" >
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView android:id="@+id/task_text7"
+                    android:layout_centerVertical="true"
+                    android:text="*"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/task_source_sfcs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/task_text7"
+                    android:text="是否抄送"
+                    android:textColor="@color/colornavblack"
+                    android:textSize="16sp" />
+                <TextView
+                    android:text="请选择"
+                    android:drawableRight="@mipmap/kqglz_ar02"
+                    android:layout_alignBottom="@+id/task_source_sfcs"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+    </ScrollView>
+</FrameLayout>
