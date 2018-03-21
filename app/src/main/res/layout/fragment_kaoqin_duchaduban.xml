@@ -32,20 +32,30 @@
                 <TableRow>
                     <TextView
                         android:padding="10dp"
-                        android:id="@+id/tousu_type_gr"
+                        android:id="@+id/duchaduban_rtj"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="投诉个人"
+                        android:text="日统计"
                         android:textColor="@color/colornavblue"
                         android:textSize="15sp"
                         android:gravity="center"
                         />
                     <TextView
                         android:padding="10dp"
-                        android:id="@+id/tousu_type_dw"
+                        android:id="@+id/duchaduban_ztj"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="投诉单位"
+                        android:text="周统计"
+                        android:textSize="15sp"
+                        android:gravity="center"
+                        android:textColor="@color/colorWord99"
+                        />
+                    <TextView
+                        android:padding="10dp"
+                        android:id="@+id/duchaduban_ytj"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="月统计"
                         android:textSize="15sp"
                         android:gravity="center"
                         android:textColor="@color/colorWord99"
@@ -53,15 +63,24 @@
                 </TableRow>
                 <TableRow>
                     <TextView
+                        android:id="@+id/duchaduban_rtj_bt"
                         android:layout_width="wrap_content"
                         android:layout_height="2dp"
                         android:text=""
                         android:background="@color/colornavblue"
                         />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="2dp"
+                        android:id="@+id/duchaduban_ztj_bt"
+                        android:text=""
+                        android:background="@color/grey"
+                        />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="2dp"
+                        android:id="@+id/duchaduban_ytj_bt"
                         android:text=""
                         android:background="@color/grey"
                         />
@@ -71,243 +90,241 @@
             </TableLayout>
 
         </LinearLayout>
-
-        <LinearLayout android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:background="@color/white"
-            android:padding="15dp"
-            android:orientation="horizontal"
-            xmlns:android="http://schemas.android.com/apk/res/android" >
-
-            <RelativeLayout
-                android:gravity="center_vertical"
-                android:layout_gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView android:id="@+id/xihao"
-                    android:layout_centerVertical="true"
-                    android:text="*"
-                    android:textColor="@color/colorAccent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:id="@+id/tousu_btsr"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/xihao"
-                    android:text="被投诉人"
-                    android:textColor="@color/colornavblack"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/tousu_btsr"
-                    android:layout_marginLeft="30sp"
-                    android:lines="1"
-                    android:hint="请输入"
-                    />
-            </RelativeLayout>
-
-
-        </LinearLayout>
-        <LinearLayout android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:background="@color/white"
-            android:padding="15dp"
-            android:orientation="horizontal"
-            xmlns:android="http://schemas.android.com/apk/res/android" >
-
-            <RelativeLayout
-                android:gravity="center_vertical"
-                android:layout_gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView android:id="@+id/xihao2"
-                    android:layout_centerVertical="true"
-                    android:text="*"
-                    android:textColor="@color/colorAccent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:id="@+id/tousu_gbwt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/xihao2"
-                    android:text="干部问题"
-                    android:textColor="@color/colornavblack"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/tousu_gbwt"
-                    android:layout_marginLeft="30sp"
-                    android:lines="1"
-                    android:hint="请输入"
-                    />
-            </RelativeLayout>
-
-
-        </LinearLayout>
-        <LinearLayout android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:background="@color/white"
-            android:padding="15dp"
-            android:orientation="horizontal"
-            xmlns:android="http://schemas.android.com/apk/res/android" >
-
-            <RelativeLayout
-                android:gravity="center_vertical"
-                android:layout_gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView android:id="@+id/xihao3"
-                    android:layout_centerVertical="true"
-                    android:text="*"
-                    android:textColor="@color/colorAccent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:id="@+id/tousu_nmts"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/xihao3"
-                    android:text="匿名投诉"
-                    android:textColor="@color/colornavblack"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/tousu_nmts"
-                    android:layout_marginLeft="30sp"
-                    android:lines="1"
-                    android:hint="请输入"
-                    />
-            </RelativeLayout>
-
-
-        </LinearLayout>
-        <LinearLayout android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:background="@color/white"
-            android:padding="15dp"
-            android:orientation="horizontal"
-            xmlns:android="http://schemas.android.com/apk/res/android" >
-
-            <RelativeLayout
-                android:gravity="center_vertical"
-                android:layout_gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView android:id="@+id/xihao5"
-
-                    android:text="*"
-                    android:textColor="@color/colorAccent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:id="@+id/bkbs_text5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/xihao5"
-                    android:text="任务描述"
-                    android:textColor="@color/colornavblack"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:layout_below="@+id/bkbs_text5"
-                    android:layout_alignLeft="@id/bkbs_text5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:lines="3"
-                    android:hint="请输入任务描述内容"
-
-                    />
-
-            </RelativeLayout>
-
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:text="请上传相关的图片"
-            android:textSize="12sp"
-            android:textColor="@color/colorWord99"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
         <LinearLayout
-            android:padding="10dp"
-            android:orientation="horizontal"
-            android:background="@color/white"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="15dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/image1"
+                    android:layout_width="33dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:src="@mipmap/kqglz_ar03" />
+                <TextView
+                    android:id="@+id/start_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/start"
+                    android:layout_toRightOf="@+id/image1"
+                    android:text="2018.02"
+                    android:paddingLeft="20dp"
+                    android:drawablePadding="4dp"
+                    android:textColor="@color/colorWord66"
+                    android:textSize="14sp" />
+                <ImageView
+                    android:id="@+id/image2"
+                    android:layout_width="33dp"
+                    android:layout_toRightOf="@+id/start_time"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:src="@mipmap/kqglz_ar02" />
+
+                <TextView
+                    android:id="@+id/duchaduban_counts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/start_time"
+                    android:layout_alignParentRight="true"
+                    android:text="考情人数15人"
+                    android:drawablePadding="4dp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/colorWord66"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+        <RelativeLayout
+
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_marginLeft="10dp"
-                android:src="@mipmap/kqdk0102"
-                android:layout_width="20dp"
-                android:layout_height="20dp" />
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="考勤人数"
+                android:textSize="18sp" />
 
             <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textSize="16sp"
-                android:textColor="@color/colornavblack"
-                android:text="文件夹/我的文档/ico图片"
+                android:text="6人 "
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:drawableRight="@mipmap/kqglz_ar02"
+                android:layout_alignBottom="@+id/text1"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/upimg_btn"
-            android:padding="10dp"
+        <RelativeLayout
 
-            android:orientation="horizontal"
             android:background="@color/white"
-            android:layout_marginTop="1dp"
-
+            android:orientation="horizontal"
             android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_marginLeft="10dp"
-                android:src="@mipmap/kqdk0103"
-                android:layout_width="20dp"
-                android:layout_height="20dp" />
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="打卡人数"
+                android:textSize="18sp" />
 
             <TextView
-                android:layout_marginLeft="15dp"
-                android:textSize="16sp"
-                android:textColor="@color/colornavblack"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="添加图片附件"
+                android:text="1人 "
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:drawableRight="@mipmap/kqglz_ar02"
+                android:layout_alignBottom="@+id/text2"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-        </LinearLayout>
+        </RelativeLayout>
 
+        <RelativeLayout
+
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="缺卡人数"
+                android:textSize="18sp" />
+
+            <TextView
+                android:text="1人 "
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:drawableRight="@mipmap/kqglz_ar02"
+                android:layout_alignBottom="@+id/text3"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/text4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@id/image1"
+                android:text="请假人数"
+                android:textSize="18sp" />
+
+            <TextView
+                android:text="6人 "
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:drawableRight="@mipmap/kqglz_ar02"
+                android:layout_alignBottom="@+id/text4"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/text5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="日志填报"
+                android:textSize="18sp" />
+
+            <TextView
+                android:text="7人 "
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:drawableRight="@mipmap/kqglz_ar02"
+                android:layout_alignBottom="@+id/text5"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/text6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="任务人数"
+                android:textSize="18sp" />
+
+            <TextView
+                android:text="2人 "
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:drawableRight="@mipmap/kqglz_ar02"
+                android:layout_alignBottom="@+id/text6"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
     </LinearLayout>
     </ScrollView>
 </FrameLayout>

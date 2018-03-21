@@ -13,7 +13,9 @@ import net.syxsoft.ldyhapplication.bean.MainPanel;
 import net.syxsoft.ldyhapplication.ui.AppActivity;
 import net.syxsoft.ldyhapplication.ui.KaoqiRZSBFragment;
 import net.syxsoft.ldyhapplication.ui.KaoqiguanliFragment;
+import net.syxsoft.ldyhapplication.ui.KaoqinDuchadubanFragment;
 import net.syxsoft.ldyhapplication.ui.KaoqinRenwuFragment;
+import net.syxsoft.ldyhapplication.ui.KaoqinTousuFragment;
 
 import java.util.List;
 
@@ -73,6 +75,14 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 else if (mainPanelText != null && mainPanelText.equals("任务管理")) {
                     AppActivity appActivity=  (AppActivity)parent.getContext();
                     appActivity.pushFragment(new KaoqinRenwuFragment());
+                }
+                else if (mainPanelText != null && mainPanelText.equals("督查督办")) {
+                    AppActivity appActivity=  (AppActivity)parent.getContext();
+                    appActivity.pushFragment(new KaoqinDuchadubanFragment());
+                }
+                else if (mainPanelText != null && mainPanelText.equals("投诉举报")) {
+                    AppActivity appActivity=  (AppActivity)parent.getContext();
+                    appActivity.pushFragment(new KaoqinTousuFragment());
                 }
             }
         });

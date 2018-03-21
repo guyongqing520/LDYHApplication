@@ -17,17 +17,52 @@ import net.syxsoft.ldyhapplication.R;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.OnClick;
 
-public class KaoqinRenwuNewFragment extends BaseFragment {
 
-    private List<String> zycd_list=null;
-    private ArrayAdapter<String> zycd_Adapter=null;
-    private Spinner zycd_spinner=null;
+public class KaoqinTousuNewFragment extends BaseFragment {
 
+    @BindView(R.id.tousu_type_dw)
+    TextView tousu_type_dw;
+
+    @BindView(R.id.tousu_type_dw_bt)
+    TextView tousu_type_dw_bt;
+
+    @BindView(R.id.tousu_type_gr)
+    TextView tousu_type_gr;
+
+    @BindView(R.id.tousu_type_gr_bt)
+    TextView tousu_type_gr_bt;
+
+    @BindView(R.id.tousu_btsr)
+    TextView tousu_btsr;
+
+    int navblue=1;
+    int word999=1;
+    int grey=1;
+    @OnClick(R.id.tousu_type_gr)
+    public void onGrClicked(){
+        tousu_type_dw.setTextColor(word999);
+        tousu_type_dw_bt.setBackgroundColor(grey);
+        tousu_type_gr.setTextColor(navblue);
+        tousu_type_gr_bt.setBackgroundColor(navblue);
+
+        tousu_btsr.setText("被投诉人");
+    }
+    @OnClick(R.id.tousu_type_dw)
+    public void onDwClicked(){
+        tousu_type_dw.setTextColor(navblue);
+        tousu_type_dw_bt.setBackgroundColor(navblue);
+        tousu_type_gr.setTextColor(word999);
+        tousu_type_gr_bt.setBackgroundColor(grey);
+
+        tousu_btsr.setText("被投诉单位");
+    }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_kaoqin_renwu_new;
+        return R.layout.fragment_kaoqin_tousu_new;
     }
 
     @Override
@@ -36,7 +71,7 @@ public class KaoqinRenwuNewFragment extends BaseFragment {
 
         //设置标题
         TextView textView = actionBar.findViewById(R.id.toolbar_title);
-        textView.setText("创建任务");
+        textView.setText("投诉举报");
 
         //启用返回导航
         actionBar.setNavigationIcon(R.mipmap.title_bar_back);
@@ -53,19 +88,9 @@ public class KaoqinRenwuNewFragment extends BaseFragment {
         //去掉底部导航
         BottomNavigationView navigation= getHoldingActivity().findViewById(R.id.navigation);
         navigation.setVisibility(View.GONE);
-
-        //重要程度
-//        zycd_spinner=(Spinner)container.findViewById(R.id.renwu_spinner_zycd);
-//        zycd_spinner.setPrompt("请选择重要程度");
-//        zycd_list=new ArrayList<String>();
-//        zycd_list.add("很重要哦");
-//        zycd_list.add("重要");
-//        zycd_list.add("一般");
-//
-//        zycd_Adapter=new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item,zycd_list);
-//        zycd_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        zycd_spinner.setAdapter(zycd_Adapter);
-
+        navblue=getResources().getColor( R.color.colornavblue);
+        word999=getResources().getColor( R.color.colorWord99);
+        grey=getResources().getColor( R.color.grey);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 }

@@ -7,7 +7,7 @@
     <include layout="@layout/actionbar_base_layout"></include>
 
     <RelativeLayout
-        android:id="@+id/renwu_new"
+        android:id="@+id/tousu_new"
         android:background="@color/white"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_toRightOf="@id/image1"
-            android:text="新建任务"
+            android:text="投诉举报"
             android:textSize="18sp" />
         <ImageView
             android:layout_marginRight="10dp"
@@ -41,7 +41,7 @@
             android:layout_height="20dp" />
     </RelativeLayout>
     <RelativeLayout
-        android:id="@+id/renwu_fz_list"
+        android:id="@+id/tousu_list"
         android:background="@color/white"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
@@ -63,7 +63,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_toRightOf="@+id/image2"
-            android:text="我负责的"
+            android:text="我要查询"
             android:textSize="18sp" />
         <ImageView
             android:layout_marginRight="10dp"
@@ -72,82 +72,6 @@
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="20dp" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/renwu_pf_list"
-
-        android:background="@color/white"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/image3"
-            android:layout_width="33dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:src="@mipmap/rzsb03" />
-
-        <TextView
-            android:id="@+id/renwu_textView_pf"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_toRightOf="@+id/image3"
-            android:text="我派发的"
-            android:textSize="18sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_alignBottom="@+id/renwu_textView_pf"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:src="@mipmap/kqglz_ar02" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/renwu_cy_list"
-
-        android:background="@color/white"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/image4"
-            android:layout_width="33dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:src="@mipmap/rzsb03" />
-
-        <TextView
-            android:id="@+id/renwu_textView_cy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_toRightOf="@+id/image4"
-            android:text="我参与的"
-            android:textSize="18sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_alignBottom="@+id/renwu_textView_cy"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:src="@mipmap/kqglz_ar02" />
     </RelativeLayout>
 
 </LinearLayout>

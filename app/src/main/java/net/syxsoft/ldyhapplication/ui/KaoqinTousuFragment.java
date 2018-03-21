@@ -13,24 +13,19 @@ import net.syxsoft.ldyhapplication.R;
 
 import butterknife.OnClick;
 
-public class KaoqinRenwuFragment extends BaseFragment {
+public class KaoqinTousuFragment extends BaseFragment {
 
-    @OnClick(R.id.renwu_new)
-    public void onNewRenwuBtnClicked(){getHoldingActivity().pushFragment(new KaoqinRenwuNewFragment());}
-    @OnClick(R.id.renwu_fz_list)
-    public void onFzBtnClicked(){getHoldingActivity().pushFragment(new KaoqinRenwuFzListFragment());}
-    @OnClick(R.id.renwu_pf_list)
+    @OnClick(R.id.tousu_new)
+    public void onNewRenwuBtnClicked(){getHoldingActivity().pushFragment(new KaoqinTousuNewFragment());}
+    @OnClick(R.id.tousu_list)
     public void onPfBtnClicked(){
-        getHoldingActivity().pushFragment(new KaoqinRenwuPfListFragment());
+        //getHoldingActivity().pushFragment(new KaoqinRenwuPfListFragment());
     }
-    @OnClick(R.id.renwu_cy_list)
-    public void onCyBtnClicked(){
-        getHoldingActivity().pushFragment(new KaoqinRenwuCyListFragment());
-    }
+
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_kaoqin_renwu;
+        return R.layout.fragment_kaoqin_tousu;
     }
 
     @Override
@@ -39,7 +34,7 @@ public class KaoqinRenwuFragment extends BaseFragment {
 
         //设置标题
         TextView textView = actionBar.findViewById(R.id.toolbar_title);
-        textView.setText("任务管理");
+        textView.setText("投诉举报");
 
         //启用返回导航
         actionBar.setNavigationIcon(R.mipmap.title_bar_back);
