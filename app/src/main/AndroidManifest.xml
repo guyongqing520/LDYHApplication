@@ -36,6 +36,7 @@
             android:value="ZbkQeU5Mc5m7v9kPWYOlkkZcGW4Hm4Yo" />
 
         <activity android:name=".ui.KaoqiDakaActivity" />
+        <activity android:name=".ui.LoginActivity" />
         <activity android:name=".ui.IndexActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

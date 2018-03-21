@@ -19,6 +19,7 @@ import net.syxsoft.ldyhapplication.R;
 import net.syxsoft.ldyhapplication.bean.LoginBean;
 import net.syxsoft.ldyhapplication.callback.GsonObjectCallback;
 import net.syxsoft.ldyhapplication.model.UserModel;
+import net.syxsoft.ldyhapplication.utils.MD5Utils;
 import net.syxsoft.ldyhapplication.utils.OkHttp3Utils;
 
 import java.io.IOException;
@@ -71,35 +72,37 @@ public class LoginFragment extends BaseFragment {
             progressDialog.setMessage("登录中...");
             progressDialog.show();
 
-            OkHttp3Utils.getInstance().doGet(getRootApiUrl()+"/api/user/login/" + username + "/" + password,
-                    new GsonObjectCallback<LoginBean>() {
+            String jsonParams="{\"username\":\""+username+"\",\"userpwd\":\""+ MD5Utils.getMd5Value(password)+"\"}";
 
+            OkHttp3Utils.getInstance().doPostJson(getRootApiUrl()+"/api/user/login",jsonParams,
+                    new GsonObjectCallback<LoginBean>() {
                         @Override
                         public void onSuccess(LoginBean loginBean) {
-                            progressDialog.dismiss();
 
                             if (loginBean.getRequestCode() != 200) {
                                 new AlertDialog.Builder(getContext())
-                                        .setMessage(loginBean.getErrorMessage())
+                                        .setMessage(loginBean.getErrorMessage().toString())
                                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-
                                             }
                                         }).create().show();
                                 return;
-
                             }
 
                             //增加用户信息，以后都要利用此帐号和密码进行对比用户，防止此用户信息有新的更新作用
                             UserModel userModel = new UserModel();
-                            userModel.addUserAccountInfo(username, password,loginBean.getSuccessInfo(), getContext());
 
+                            if (loginBean.getSuccessInfo()!=null) {
+                                userModel.addUserAccountInfo(username, password, loginBean.getSuccessInfo().getPersonId(), getContext());
+                            }
                             //导航到主面板
+
+                            progressDialog.dismiss();
+
                             Intent intent = new Intent(getContext(), IndexActivity.class);
                             startActivity(intent);
                             getHoldingActivity().finish();
-
                         }
 
                         @Override

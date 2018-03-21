@@ -1,5 +1,7 @@
 package net.syxsoft.ldyhapplication.ui;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -14,25 +16,33 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import net.syxsoft.ldyhapplication.Adapter.CalendarAdapter;
+import android.widget.Toast;
+
+import net.syxsoft.ldyhapplication.Adapter.CalendarMonthanalysisAdapter;
 import net.syxsoft.ldyhapplication.R;
+import net.syxsoft.ldyhapplication.bean.KaoqMonthanalysisBean;
+import net.syxsoft.ldyhapplication.bean.UserAccountBean;
+import net.syxsoft.ldyhapplication.callback.GsonObjectCallback;
+import net.syxsoft.ldyhapplication.model.UserModel;
 import net.syxsoft.ldyhapplication.utils.DateUtils;
+import net.syxsoft.ldyhapplication.utils.OkHttp3Utils;
 
 
+import java.io.IOException;
 import java.util.Calendar;
 
 import butterknife.BindView;
 
-import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class KaoqiguanlillistdateFragment extends BaseFragment{
+public class KaoqiguanlillistdateFragment extends BaseFragment {
 
     //定义adapter
-    private CalendarAdapter dateAdapter;
+    private CalendarMonthanalysisAdapter dateAdapter;
     private String title;
     private int year;
     private int month;
@@ -60,19 +70,77 @@ public class KaoqiguanlillistdateFragment extends BaseFragment{
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        getHoldingActivity().getMenuInflater().inflate(R.menu.menu_chang,menu);
+        getHoldingActivity().getMenuInflater().inflate(R.menu.menu_chang, menu);
     }
 
     private void initData() {
 
         Calendar calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH)+1;
-        today=calendar.get(Calendar.DATE);
+        month = calendar.get(Calendar.MONTH) + 1;
+        today = calendar.get(Calendar.DATE);
         days = DateUtils.getDayOfMonthFormat(year, month);
 
         setTile();
     }
+
+    private void initKaoqin(){
+        //拉取月考勤
+        if (!getHoldingActivity().isNetWorkAvailable()) {
+            Toast.makeText(getHoldingActivity(), "没有网络连接，请稍后重试", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        //加载个人信息
+        UserModel userModel = new UserModel();
+        UserAccountBean userAccountBean = userModel.getUserAccountInfo(getContext());
+
+        if (userAccountBean == null || userAccountBean.getUserid() == null || userAccountBean.getUserid().length() == 0) {
+            //导航到login
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            startActivity(intent);
+            getHoldingActivity().finish();
+
+            return;
+        }
+
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("加载中...");
+        progressDialog.show();
+
+        //提交信息
+        try {
+            OkHttp3Utils.getInstance().doGet(getRootApiUrl() + "/api/attendence/monthanalysis/" + userAccountBean.getUserid() + "/" + year + "/" + month,
+                    new GsonObjectCallback<KaoqMonthanalysisBean>() {
+
+                        @Override
+                        public void onSuccess(KaoqMonthanalysisBean kaoqMonthanalysisBean) {
+
+                            if (kaoqMonthanalysisBean.getRequestCode() != 200) {
+                                progressDialog.dismiss();
+                                Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
+                            } else {
+                                dateAdapter = new CalendarMonthanalysisAdapter(getContext(), days, year, month, today, kaoqMonthanalysisBean);//传入当前月的年
+                                recyclerView.setAdapter(dateAdapter);
+                                dateAdapter.notifyDataSetChanged();
+                            }
+                            progressDialog.dismiss();
+                        }
+
+                        @Override
+                        public void onFailed(Call call, IOException e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } catch (Exception ex) {
+            progressDialog.dismiss();
+            Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     //日历下一个月
     private int[][] nextMonth() {
@@ -107,7 +175,7 @@ public class KaoqiguanlillistdateFragment extends BaseFragment{
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, final @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
@@ -121,28 +189,25 @@ public class KaoqiguanlillistdateFragment extends BaseFragment{
 
         //初始化数据
         initData();
-
-        dateAdapter = new CalendarAdapter(container.getContext(), days, year, month,today);//传入当前月的年
+        dateAdapter = new CalendarMonthanalysisAdapter(getContext(), days, year, month, today, null);//传入当前月的年
         recyclerView.setAdapter(dateAdapter);
+
+        initKaoqin();
 
         return view;
     }
 
     @OnClick(R.id.record_left)
-    public void onRecordLeftBtnClicked(){
+    public void onRecordLeftBtnClicked() {
         days = prevMonth();
-        dateAdapter = new CalendarAdapter(getContext(),days, year, month,today);
-        recyclerView.setAdapter(dateAdapter);
-        dateAdapter.notifyDataSetChanged();
+        initKaoqin();
         setTile();
     }
 
     @OnClick(R.id.record_right)
-    public void onRecordRightBtnClicked(){
+    public void onRecordRightBtnClicked() {
         days = nextMonth();
-        dateAdapter = new CalendarAdapter(getContext(),days, year, month,today);
-        recyclerView.setAdapter(dateAdapter);
-        dateAdapter.notifyDataSetChanged();
+        initKaoqin();
         setTile();
     }
 
@@ -162,7 +227,6 @@ public class KaoqiguanlillistdateFragment extends BaseFragment{
 
     @BindView(R.id.recyler_view_date)
     RecyclerView recyclerView;
-
 
 
 }

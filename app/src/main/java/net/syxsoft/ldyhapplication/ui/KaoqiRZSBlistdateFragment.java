@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import net.syxsoft.ldyhapplication.Adapter.CalendarAdapter;
 import net.syxsoft.ldyhapplication.Adapter.RZCalendarAdapter;
 import net.syxsoft.ldyhapplication.R;
 import net.syxsoft.ldyhapplication.utils.DateUtils;

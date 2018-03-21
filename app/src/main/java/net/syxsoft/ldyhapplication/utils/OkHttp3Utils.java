@@ -75,10 +75,10 @@ public class OkHttp3Utils {
             File sdcache = new File(Environment.getExternalStorageDirectory(), "cache");
             int cacheSize = 10 * 1024 * 1024;
 
-            okHttpClient = new OkHttpClient.Builder().connectTimeout(15, TimeUnit.SECONDS)
+            okHttpClient = new OkHttpClient.Builder().connectTimeout(1500, TimeUnit.SECONDS)
                     //添加OkHttp3的拦截器
                     .addNetworkInterceptor(new CacheInterceptor())
-                    .writeTimeout(20, TimeUnit.SECONDS).readTimeout(20, TimeUnit.SECONDS)
+                    .writeTimeout(2000, TimeUnit.SECONDS).readTimeout(2000, TimeUnit.SECONDS)
                     .cache(new Cache(sdcache.getAbsoluteFile(), cacheSize))
                     .build();
         }
