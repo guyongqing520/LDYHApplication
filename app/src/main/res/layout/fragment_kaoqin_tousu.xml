@@ -22,7 +22,7 @@
             android:layout_width="33dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:src="@mipmap/rzsb01" />
+            android:src="@mipmap/tj_ts" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
             android:layout_width="33dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:src="@mipmap/rzsb02" />
+            android:src="@mipmap/tj_sear" />
 
         <TextView
             android:layout_width="wrap_content"

@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/bkbs_text1"
+                android:id="@+id/rzsb_bgdd_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -44,14 +44,15 @@
                 android:text="办公地点"
                 android:textColor="@color/colornavblack"
                 android:textSize="16sp" />
-            <TextView
-                android:text="请输入"
-                android:layout_marginRight="10dp"
-                android:textColor="@color/colorWord99"
-                android:layout_alignBottom="@+id/bkbs_text1"
-                android:layout_alignParentRight="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/rzsb_bgdd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/rzsb_bgdd_title"
+                android:layout_marginLeft="30sp"
+                android:lines="1"
+                android:hint="请输入"
+                />
 
         </RelativeLayout>
 
@@ -90,6 +91,7 @@
                 android:textSize="16sp" />
             <TextView
                 android:text="请选择"
+                android:id="@+id/rzsb_bglx"
                 android:drawableRight="@mipmap/kqglz_ar02"
                 android:layout_alignBottom="@+id/bkbs_text3"
                 android:layout_alignParentRight="true"
@@ -135,6 +137,7 @@
                 android:textSize="16sp" />
             <TextView
                 android:text="请选择"
+                android:id="@+id/rzsb_glrw"
                 android:drawableRight="@mipmap/kqglz_ar02"
                 android:layout_alignBottom="@+id/bkbs_text4"
                 android:layout_alignParentRight="true"
@@ -168,13 +171,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/xihao2"
-                android:text="补卡原因"
+                android:text="工作内容"
                 android:textColor="@color/colornavblack"
                 android:textSize="16sp" />
 
             <EditText
                 android:gravity="top"
                 android:textSize="16sp"
+                android:id="@+id/rzsb_gznr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/bkbs_text2"
