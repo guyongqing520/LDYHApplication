@@ -9,7 +9,6 @@ import android.widget.TextView;
 import net.syxsoft.ldyhapplication.R;
 import net.syxsoft.ldyhapplication.bean.KaoqDayanalysisBean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

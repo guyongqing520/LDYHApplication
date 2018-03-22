@@ -104,7 +104,7 @@ public class KaoqiguanlillistdateFragment extends BaseFragment {
                     public void onSuccess(Call call, Response response, KaoqMonthanalysisBean kaoqMonthanalysisBean) {
 
                         if (kaoqMonthanalysisBean.getRequestCode() == 200) {
-                            dateAdapter = new CalendarMonthanalysisAdapter(getContext(), days, year, month, today, kaoqMonthanalysisBean);//传入当前月的年
+                            dateAdapter = new CalendarMonthanalysisAdapter(getContext(), days, year, month, today, kaoqMonthanalysisBean,recylerviewdatedayanalysisView,userId);//传入当前月的年
                             recyclerView.setAdapter(dateAdapter);
                             dateAdapter.notifyDataSetChanged();
                         }
@@ -122,7 +122,7 @@ public class KaoqiguanlillistdateFragment extends BaseFragment {
 
         //提交信息
         OkHttpManager.getInstance().getRequest(getRootApiUrl() + "/api/attendence/dayanalysis/" + userId + "/" + year +
-                        "-" + month + "-20",
+                        "-" + month + "-" + today,
                 new LoadCallBack<KaoqDayanalysisBean>(getContext()) {
 
                     @Override
