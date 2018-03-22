@@ -1,11 +1,13 @@
 package net.syxsoft.ldyhapplication.utils;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -41,6 +43,7 @@ public class OkHttp3Utils {
      */
 
     private static OkHttp3Utils okHttp3Utils = null;
+    private static ProgressDialog progressDialog=null;
 
     private OkHttp3Utils() {
     }
@@ -101,16 +104,25 @@ public class OkHttp3Utils {
      * 参数2 回调Callback
      */
 
-    public static void doGet(String url, Callback callback) {
+    public static void doGet(String url, Callback callback,Context context) {
+
+        if (!NetWorkUtils.isNetWorkAvailable(context)) {
+            Toast.makeText(context, "没有网络连接，请稍后重试", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         //创建OkHttpClient请求对象
         OkHttpClient okHttpClient = getOkHttpClient();
         //创建Request
         Request request = new Request.Builder().url(url).build();
+
+
+
         //得到Call对象
         Call call = okHttpClient.newCall(request);
         //执行异步请求
         call.enqueue(callback);
+
     }
 
     /**
@@ -119,7 +131,12 @@ public class OkHttp3Utils {
      * 参数2 回调Callback
      */
 
-    public static void doPost(String url, Map<String, String> params, Callback callback) {
+    public static void doPost(String url, Map<String, String> params, Callback callback,Context context) {
+
+        if (!NetWorkUtils.isNetWorkAvailable(context)) {
+            Toast.makeText(context, "没有网络连接，请稍后重试", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         //创建OkHttpClient请求对象
         OkHttpClient okHttpClient = getOkHttpClient();
@@ -137,6 +154,27 @@ public class OkHttp3Utils {
         Call call = okHttpClient.newCall(request);
         call.enqueue(callback);
 
+
+    }
+
+    /**
+     * Post请求发送JSON数据
+     * 参数一：请求Url
+     * 参数二：请求的JSON
+     * 参数三：请求回调
+     */
+    public static void doPostJson(String url, String jsonParams, Callback callback,Context context) {
+
+        if (!NetWorkUtils.isNetWorkAvailable(context)) {
+            Toast.makeText(context, "没有网络连接，请稍后重试", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonParams);
+        Request request = new Request.Builder().url(url).post(requestBody).build();
+        Call call = getOkHttpClient().newCall(request);
+        call.enqueue(callback);
+
     }
 
     /**
@@ -145,6 +183,7 @@ public class OkHttp3Utils {
      * 参数2 回调Callback
      */
     public static void uploadPic(String url, File file, String fileName) {
+
         //创建OkHttpClient请求对象
         OkHttpClient okHttpClient = getOkHttpClient();
         //创建RequestBody 封装file参数
@@ -171,18 +210,6 @@ public class OkHttp3Utils {
 
     }
 
-    /**
-     * Post请求发送JSON数据
-     * 参数一：请求Url
-     * 参数二：请求的JSON
-     * 参数三：请求回调
-     */
-    public static void doPostJson(String url, String jsonParams, Callback callback) {
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonParams);
-        Request request = new Request.Builder().url(url).post(requestBody).build();
-        Call call = getOkHttpClient().newCall(request);
-        call.enqueue(callback);
-    }
 
     /**
      * 下载文件 以流的形式把apk写入的指定文件 得到file后进行安装
@@ -191,6 +218,8 @@ public class OkHttp3Utils {
      * 参数三：保存文件的文件名
      */
     public static void download(final Context context, final String url, final String saveDir) {
+
+
         Request request = new Request.Builder().url(url).build();
         Call call = getOkHttpClient().newCall(request);
         call.enqueue(new Callback() {

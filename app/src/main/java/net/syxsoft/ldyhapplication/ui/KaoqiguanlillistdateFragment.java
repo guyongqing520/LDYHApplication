@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -18,23 +19,30 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.syxsoft.ldyhapplication.Adapter.CalendarDayanalysisAdapter;
 import net.syxsoft.ldyhapplication.Adapter.CalendarMonthanalysisAdapter;
 import net.syxsoft.ldyhapplication.R;
+import net.syxsoft.ldyhapplication.bean.KaoqDayanalysisBean;
 import net.syxsoft.ldyhapplication.bean.KaoqMonthanalysisBean;
 import net.syxsoft.ldyhapplication.bean.UserAccountBean;
 import net.syxsoft.ldyhapplication.callback.GsonObjectCallback;
+import net.syxsoft.ldyhapplication.callback.LoadCallBack;
 import net.syxsoft.ldyhapplication.model.UserModel;
 import net.syxsoft.ldyhapplication.utils.DateUtils;
 import net.syxsoft.ldyhapplication.utils.OkHttp3Utils;
+import net.syxsoft.ldyhapplication.utils.OkHttpManager;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import butterknife.BindView;
 
 import butterknife.OnClick;
 import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,7 +51,9 @@ public class KaoqiguanlillistdateFragment extends BaseFragment {
 
     //定义adapter
     private CalendarMonthanalysisAdapter dateAdapter;
+    private CalendarDayanalysisAdapter calendarDayanalysisAdapter;
     private String title;
+    private String userId;
     private int year;
     private int month;
     private int today;
@@ -84,63 +94,56 @@ public class KaoqiguanlillistdateFragment extends BaseFragment {
         setTile();
     }
 
-    private void initKaoqin(){
-        //拉取月考勤
-        if (!getHoldingActivity().isNetWorkAvailable()) {
-            Toast.makeText(getHoldingActivity(), "没有网络连接，请稍后重试", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        //加载个人信息
-        UserModel userModel = new UserModel();
-        UserAccountBean userAccountBean = userModel.getUserAccountInfo(getContext());
-
-        if (userAccountBean == null || userAccountBean.getUserid() == null || userAccountBean.getUserid().length() == 0) {
-            //导航到login
-            Intent intent = new Intent(getContext(), LoginActivity.class);
-            startActivity(intent);
-            getHoldingActivity().finish();
-
-            return;
-        }
-
-        final ProgressDialog progressDialog = new ProgressDialog(getContext());
-
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setMessage("加载中...");
-        progressDialog.show();
-
+    //拉取月考勤
+    private void initKaoqin() {
         //提交信息
-        try {
-            OkHttp3Utils.getInstance().doGet(getRootApiUrl() + "/api/attendence/monthanalysis/" + userAccountBean.getUserid() + "/" + year + "/" + month,
-                    new GsonObjectCallback<KaoqMonthanalysisBean>() {
+        OkHttpManager.getInstance().getRequest(getRootApiUrl() + "/api/attendence/monthanalysis/" + userId + "/" + year + "/" + month,
+                new LoadCallBack<KaoqMonthanalysisBean>(getContext()) {
 
-                        @Override
-                        public void onSuccess(KaoqMonthanalysisBean kaoqMonthanalysisBean) {
+                    @Override
+                    public void onSuccess(Call call, Response response, KaoqMonthanalysisBean kaoqMonthanalysisBean) {
 
-                            if (kaoqMonthanalysisBean.getRequestCode() != 200) {
-                                progressDialog.dismiss();
-                                Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
-                            } else {
-                                dateAdapter = new CalendarMonthanalysisAdapter(getContext(), days, year, month, today, kaoqMonthanalysisBean);//传入当前月的年
-                                recyclerView.setAdapter(dateAdapter);
-                                dateAdapter.notifyDataSetChanged();
-                            }
-                            progressDialog.dismiss();
+                        if (kaoqMonthanalysisBean.getRequestCode() == 200) {
+                            dateAdapter = new CalendarMonthanalysisAdapter(getContext(), days, year, month, today, kaoqMonthanalysisBean);//传入当前月的年
+                            recyclerView.setAdapter(dateAdapter);
+                            dateAdapter.notifyDataSetChanged();
                         }
+                    }
 
-                        @Override
-                        public void onFailed(Call call, IOException e) {
-                            progressDialog.dismiss();
-                            Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        } catch (Exception ex) {
-            progressDialog.dismiss();
-            Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
-        }
+                    @Override
+                    public void onEror(Call call, int statusCode, Exception e) {
+
+                    }
+                });
     }
 
+    //拉取个人考勤情况
+    public void initDayanalysis(int year,int month,int day) {
+
+        //提交信息
+        OkHttpManager.getInstance().getRequest(getRootApiUrl() + "/api/attendence/dayanalysis/" + userId + "/" + year +
+                        "-" + month + "-20",
+                new LoadCallBack<KaoqDayanalysisBean>(getContext()) {
+
+                    @Override
+                    public void onSuccess(Call call, Response response, KaoqDayanalysisBean kaoqDayanalysisBean) {
+
+                        if (kaoqDayanalysisBean.getRequestCode() == 200) {
+                            List<KaoqDayanalysisBean.SuccessInfoBean> successInfoBeans = kaoqDayanalysisBean.getSuccessInfo();
+                            if (successInfoBeans != null && successInfoBeans.size() > 0) {
+                                calendarDayanalysisAdapter = new CalendarDayanalysisAdapter(getContext(), successInfoBeans);
+                                recylerviewdatedayanalysisView.setAdapter(calendarDayanalysisAdapter);
+                                calendarDayanalysisAdapter.notifyDataSetChanged();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onEror(Call call, int statusCode, Exception e) {
+
+                    }
+                });
+    }
 
     //日历下一个月
     private int[][] nextMonth() {
@@ -177,22 +180,25 @@ public class KaoqiguanlillistdateFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, final @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        userId=getUserId();
+
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         //去掉底部导航
         BottomNavigationView navigation = getHoldingActivity().findViewById(R.id.navigation);
         navigation.setVisibility(View.GONE);
 
-        //日历布局
+        initData();
+
+        //日历布局及初始化日历数据
         GridLayoutManager layoutManager = new GridLayoutManager(container.getContext(), 7);
         recyclerView.setLayoutManager(layoutManager);
-
-        //初始化数据
-        initData();
-        dateAdapter = new CalendarMonthanalysisAdapter(getContext(), days, year, month, today, null);//传入当前月的年
-        recyclerView.setAdapter(dateAdapter);
-
         initKaoqin();
+
+        //布局及初始化个人考勤情况
+        recylerviewdatedayanalysisView.setLayoutManager(new LinearLayoutManager(container.getContext(),LinearLayoutManager.VERTICAL,true));
+        initDayanalysis(year,month,today);
+
 
         return view;
     }
@@ -227,6 +233,9 @@ public class KaoqiguanlillistdateFragment extends BaseFragment {
 
     @BindView(R.id.recyler_view_date)
     RecyclerView recyclerView;
+
+    @BindView(R.id.recyler_view_date_dayanalysis)
+    RecyclerView recylerviewdatedayanalysisView;
 
 
 }

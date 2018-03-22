@@ -18,15 +18,20 @@ import android.widget.Toast;
 import net.syxsoft.ldyhapplication.R;
 import net.syxsoft.ldyhapplication.bean.LoginBean;
 import net.syxsoft.ldyhapplication.callback.GsonObjectCallback;
+import net.syxsoft.ldyhapplication.callback.LoadCallBack;
 import net.syxsoft.ldyhapplication.model.UserModel;
 import net.syxsoft.ldyhapplication.utils.MD5Utils;
 import net.syxsoft.ldyhapplication.utils.OkHttp3Utils;
+import net.syxsoft.ldyhapplication.utils.OkHttpManager;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,13 +46,13 @@ public class LoginFragment extends BaseFragment {
     EditText password_txt;
 
     @OnClick(R.id.login_btn)
-    public void onRegisterBtnClicked(){
+    public void onRegisterBtnClicked() {
 
-        final String username=mobile_txt.getText().toString();
-        final String password=password_txt.getText().toString();
+        final String username = mobile_txt.getText().toString();
+        final String password = password_txt.getText().toString();
 
         //!CharTools.isPhoneLegal(username）
-        if (username==null||username.length()==0||password==null||password.length()==0) {
+        if (username == null || username.length() == 0 || password == null || password.length() == 0) {
 
             new AlertDialog.Builder(getContext())
                     .setMessage("手机号码和密码不正确")
@@ -61,61 +66,42 @@ public class LoginFragment extends BaseFragment {
 
         }
 
-        if(!getHoldingActivity().isNetWorkAvailable()){
-            Toast.makeText(getHoldingActivity(), "没有网络连接，请稍后重试", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        final ProgressDialog progressDialog=new ProgressDialog(getContext());
-        try {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("username", username);
+        params.put("userpwd", MD5Utils.getMd5Value(password));
 
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            progressDialog.setMessage("登录中...");
-            progressDialog.show();
-
-            String jsonParams="{\"username\":\""+username+"\",\"userpwd\":\""+ MD5Utils.getMd5Value(password)+"\"}";
-
-            OkHttp3Utils.getInstance().doPostJson(getRootApiUrl()+"/api/user/login",jsonParams,
-                    new GsonObjectCallback<LoginBean>() {
-                        @Override
-                        public void onSuccess(LoginBean loginBean) {
-
-                            if (loginBean.getRequestCode() != 200) {
-                                new AlertDialog.Builder(getContext())
-                                        .setMessage(loginBean.getErrorMessage().toString())
-                                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                            }
-                                        }).create().show();
-                                return;
-                            }
-
-                            //增加用户信息，以后都要利用此帐号和密码进行对比用户，防止此用户信息有新的更新作用
-                            UserModel userModel = new UserModel();
-
-                            if (loginBean.getSuccessInfo()!=null) {
-                                userModel.addUserAccountInfo(username, password, loginBean.getSuccessInfo().getPersonId(), getContext());
-                            }
-                            //导航到主面板
-
-                            progressDialog.dismiss();
-
-                            Intent intent = new Intent(getContext(), IndexActivity.class);
-                            startActivity(intent);
-                            getHoldingActivity().finish();
+        OkHttpManager.getInstance().postRequest(getRootApiUrl() + "/api/user/login", new LoadCallBack<LoginBean>(getActivity()) {
+                    @Override
+                    public void onSuccess(Call call, Response response, LoginBean loginBean) {
+                        if (loginBean.getRequestCode() != 200) {
+                            new AlertDialog.Builder(getContext())
+                                    .setMessage(loginBean.getErrorMessage().toString())
+                                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    }).create().show();
+                            return;
                         }
 
-                        @Override
-                        public void onFailed(Call call, IOException e) {
-                            progressDialog.dismiss();
-                            Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        }catch (Exception ex){
-            progressDialog.dismiss();
-            Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
-        }
+                        //增加用户信息，以后都要利用此帐号和密码进行对比用户，防止此用户信息有新的更新作用
+                        UserModel userModel = new UserModel();
 
+                        if (loginBean.getSuccessInfo() != null) {
+                            userModel.addUserAccountInfo(username, password, loginBean.getSuccessInfo().getPersonId(), getContext());
+                        }
+                        //导航到主面板
+                        Intent intent = new Intent(getContext(), IndexActivity.class);
+                        startActivity(intent);
+                        getHoldingActivity().finish();
+                    }
+
+                    @Override
+                    public void onEror(Call call, int statusCode, Exception e) {
+
+                    }
+                }
+                , params);
     }
 
     @Override

@@ -188,7 +188,7 @@ public class KaoqiDakaFragment extends BaseFragment {
         try {
 
             OkHttp3Utils.getInstance().doGet(getRootApiUrl() + "/api/user/getpersoninfo/" + userAccountBean.getUserid(),
-                    new GsonObjectCallback<PersoninfoBean>() {
+                    new GsonObjectCallback<PersoninfoBean>(getContext()) {
 
                         @Override
                         public void onSuccess(PersoninfoBean personinfo) {
@@ -209,7 +209,7 @@ public class KaoqiDakaFragment extends BaseFragment {
                             progressDialog.dismiss();
                             Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    },getContext());
         } catch (Exception ex) {
             progressDialog.dismiss();
             Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
@@ -219,7 +219,7 @@ public class KaoqiDakaFragment extends BaseFragment {
         try {
 
             OkHttp3Utils.getInstance().doGet(getRootApiUrl() + "/api/attendence/init/" + userAccountBean.getUserid(),
-                    new GsonObjectCallback<AttendenceBean>() {
+                    new GsonObjectCallback<AttendenceBean>(getContext()) {
 
                         @Override
                         public void onSuccess(AttendenceBean attendenceBean) {
@@ -261,7 +261,7 @@ public class KaoqiDakaFragment extends BaseFragment {
                             progressDialog.dismiss();
                             Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    },getContext());
         } catch (Exception ex) {
             progressDialog.dismiss();
             Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();

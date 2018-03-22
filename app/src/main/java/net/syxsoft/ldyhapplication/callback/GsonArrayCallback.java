@@ -1,5 +1,7 @@
 package net.syxsoft.ldyhapplication.callback;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Handler;
 
 import com.google.gson.Gson;
@@ -7,6 +9,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import net.syxsoft.ldyhapplication.ui.AppActivity;
 import net.syxsoft.ldyhapplication.utils.OkHttp3Utils;
 
 import java.io.IOException;
@@ -17,6 +20,7 @@ import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.Request;
 import okhttp3.Response;
 
 /**
@@ -27,13 +31,40 @@ import okhttp3.Response;
  */
 
 public abstract class GsonArrayCallback<T> implements Callback {
+
+    private Context mContext;
+    private ProgressDialog mProgressDialog;
     private Handler handler = OkHttp3Utils.getInstance().getHandler();
+
+    private void initDialog(){
+        mProgressDialog = new ProgressDialog(mContext);
+        mProgressDialog.setTitle("加载中...");
+        mProgressDialog.setCanceledOnTouchOutside(true);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        mProgressDialog.setMax(100);
+    }
+
+    private void hideDialog() {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+        }
+    }
+
+    public GsonArrayCallback(Context context) {
+        mContext = context;
+        initDialog();
+    }
+
 
     //主线程处理
     public abstract void onSuccess(List<T> list);
 
     //主线程处理
     public abstract void onFailed(Call call, IOException e);
+
+    public void OnRequestBefore() {
+        mProgressDialog.show();
+    }
 
     //请求失败
     @Override
@@ -44,11 +75,14 @@ public abstract class GsonArrayCallback<T> implements Callback {
                 onFailed(call, e);
             }
         });
+
+        hideDialog();
     }
 
     //请求json 并直接返回集合 主线程处理
     @Override
-    public void onResponse(Call call, Response response) throws IOException {
+    public void onResponse(Call call, final Response response) throws IOException {
+
         final List<T> mList = new ArrayList<T>();
 
         String json = response.body().string();
@@ -73,5 +107,7 @@ public abstract class GsonArrayCallback<T> implements Callback {
                 onSuccess(mList);
             }
         });
+
+        hideDialog();
     }
 }

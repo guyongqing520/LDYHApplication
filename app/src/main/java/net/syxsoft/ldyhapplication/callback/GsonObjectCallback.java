@@ -1,5 +1,7 @@
 package net.syxsoft.ldyhapplication.callback;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Handler;
 
 import com.google.gson.Gson;
@@ -12,6 +14,7 @@ import java.lang.reflect.Type;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.Request;
 import okhttp3.Response;
 
 /**
@@ -23,13 +26,38 @@ import okhttp3.Response;
 
 public abstract class GsonObjectCallback<T> implements Callback {
     private Handler handler = OkHttp3Utils.getInstance().getHandler();
+    private Context mContext;
+    private ProgressDialog mProgressDialog;
 
+    private void initDialog(){
+        mProgressDialog = new ProgressDialog(mContext);
+        mProgressDialog.setTitle("加载中...");
+        mProgressDialog.setCanceledOnTouchOutside(true);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        mProgressDialog.setMax(100);
+    }
+
+    private void hideDialog() {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+        }
+    }
+
+    public GsonObjectCallback(Context context) {
+        mContext = context;
+        initDialog();
+    }
 
     //主线程处理
     public abstract void onSuccess(T t);
 
     //主线程处理
     public abstract void onFailed(Call call, IOException e);
+
+
+    public void OnRequestBefore() {
+        mProgressDialog.show();
+    }
 
     //请求失败
     @Override
@@ -40,6 +68,7 @@ public abstract class GsonObjectCallback<T> implements Callback {
                 onFailed(call, e);
             }
         });
+        hideDialog();
     }
 
     //请求json 并直接返回泛型的对象 主线程处理
@@ -60,5 +89,7 @@ public abstract class GsonObjectCallback<T> implements Callback {
                 onSuccess(t);
             }
         });
+
+        hideDialog();
     }
 }

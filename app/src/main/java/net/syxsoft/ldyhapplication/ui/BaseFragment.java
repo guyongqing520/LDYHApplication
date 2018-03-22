@@ -1,5 +1,6 @@
 package net.syxsoft.ldyhapplication.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -7,6 +8,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import net.syxsoft.ldyhapplication.R;
+import net.syxsoft.ldyhapplication.bean.UserAccountBean;
+import net.syxsoft.ldyhapplication.model.UserModel;
+
 import butterknife.ButterKnife;
 
 /**
@@ -47,5 +51,21 @@ public abstract class BaseFragment extends AppFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
        getHoldingActivity().getMenuInflater().inflate(R.menu.menu_nosubmit, menu);
+    }
+
+    public String getUserId(){
+        //加载个人信息
+        UserModel userModel = new UserModel();
+        UserAccountBean userAccountBean = userModel.getUserAccountInfo(getContext());
+
+        if (userAccountBean == null || userAccountBean.getUserid() == null || userAccountBean.getUserid().length() == 0) {
+            //导航到login
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            startActivity(intent);
+            getHoldingActivity().finish();
+
+            return null;
+        }
+        return userAccountBean.getUserid();
     }
 }

@@ -132,7 +132,7 @@ public class KaoqiDakaWaiqinFragment extends BaseFragment {
             //提交信息
             try {
                 OkHttp3Utils.getInstance().doGet(getRootApiUrl() + "/api/",
-                        new GsonObjectCallback<AttendenceBean>() {
+                        new GsonObjectCallback<AttendenceBean>(getContext()) {
 
                             @Override
                             public void onSuccess(AttendenceBean attendenceBean) {
@@ -149,7 +149,7 @@ public class KaoqiDakaWaiqinFragment extends BaseFragment {
                                 progressDialog.dismiss();
                                 Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
                             }
-                        });
+                        },getContext());
             } catch (Exception ex) {
                 progressDialog.dismiss();
                 Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
