@@ -48,7 +48,6 @@ public class KaoqiRZSBtbFragment extends BaseFragment {
 
     private OptionsPickerView  optionsPickerView;
     private ArrayList<rztb_bglx_model> Rztb_bglx_list=new ArrayList<>();
-    private String userId;
 
     @BindView(R.id.rzsb_gznr)
     EditText rzsb_gznr;
@@ -105,7 +104,7 @@ public class KaoqiRZSBtbFragment extends BaseFragment {
         }
 
         Map<String, String> params = new HashMap<String, String>();
-        params.put("personId", userId);
+        params.put("personId", getHoldingActivity().getUserAccount().getUserid());
         params.put("type", "1");
         params.put("address", "四川成都");
         params.put("taskId", "12");
@@ -137,8 +136,6 @@ public class KaoqiRZSBtbFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        userId=getUserId();
 
         //去掉底部导航
         BottomNavigationView navigation= getHoldingActivity().findViewById(R.id.navigation);

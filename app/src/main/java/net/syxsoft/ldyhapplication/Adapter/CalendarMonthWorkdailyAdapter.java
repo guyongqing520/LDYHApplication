@@ -1,7 +1,6 @@
 package net.syxsoft.ldyhapplication.Adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,7 +30,7 @@ import okhttp3.Response;
  * Created by gyq on 2018/2/28.
  */
 
-public class CalendarMonthanalysisAdapter extends RecyclerView.Adapter<CalendarMonthanalysisAdapter.ViewHolder> {
+public class CalendarMonthWorkdailyAdapter extends RecyclerView.Adapter<CalendarMonthWorkdailyAdapter.ViewHolder> {
 
     private List<Integer> odays = new ArrayList<>();
     private List<Integer> days = new ArrayList<>();
@@ -63,9 +62,9 @@ public class CalendarMonthanalysisAdapter extends RecyclerView.Adapter<CalendarM
         }
     }
 
-    public CalendarMonthanalysisAdapter(Context context, int[][] days, int year, int month, int today,
-                                        KaoqMonthanalysisBean kaoqMonthanalysisBean,
-                                        RecyclerView recylerviewdatedayanalysisView, String userId, TextView selectDate) {
+    public CalendarMonthWorkdailyAdapter(Context context, int[][] days, int year, int month, int today,
+                                         KaoqMonthanalysisBean kaoqMonthanalysisBean,
+                                         RecyclerView recylerviewdatedayanalysisView, String userId, TextView selectDate) {
         this.context = context;
         this.today = today;
         this.odays.clear();

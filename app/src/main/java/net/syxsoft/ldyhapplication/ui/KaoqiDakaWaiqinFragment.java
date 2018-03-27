@@ -1,13 +1,11 @@
 package net.syxsoft.ldyhapplication.ui;
 
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,17 +19,20 @@ import android.widget.Toast;
 import com.bigkoo.pickerview.TimePickerView;
 
 import net.syxsoft.ldyhapplication.R;
-import net.syxsoft.ldyhapplication.bean.AttendenceBean;
-import net.syxsoft.ldyhapplication.callback.GsonObjectCallback;
-import net.syxsoft.ldyhapplication.utils.OkHttp3Utils;
+import net.syxsoft.ldyhapplication.bean.ResultBean;
+import net.syxsoft.ldyhapplication.callback.LoadCallBack;
+import net.syxsoft.ldyhapplication.utils.MyAlert;
+import net.syxsoft.ldyhapplication.utils.OkHttpManager;
 
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import okhttp3.Call;
+import okhttp3.Response;
 
 import static net.syxsoft.ldyhapplication.utils.DateUtils.getSimpleDateFormat;
 
@@ -56,13 +57,13 @@ public class KaoqiDakaWaiqinFragment extends BaseFragment {
         TimePickerView pvTime = new TimePickerView.Builder(getContext(), new TimePickerView.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {//选中事件回调
-                starttime_select.setText(getSimpleDateFormat(date, null));
+                starttime_select.setText(getSimpleDateFormat(date, "yyyy-MM-dd HH:mm"));
             }
         })
                 .setSubmitText("确定")
                 .setCancelText("取消")
                 .setTitleText("请选择时间")
-                .setType(new boolean[]{true, true, true, false, false, false})
+                .setType(new boolean[]{true, true, true, true, true, false})
                 .setDate(Calendar.getInstance())
                 .build();
 
@@ -75,13 +76,13 @@ public class KaoqiDakaWaiqinFragment extends BaseFragment {
         TimePickerView pvTime = new TimePickerView.Builder(getContext(), new TimePickerView.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {//选中事件回调
-                endtime_select.setText(getSimpleDateFormat(date, null));
+                endtime_select.setText(getSimpleDateFormat(date, "yyyy-MM-dd HH:mm"));
             }
         })
                 .setSubmitText("确定")
                 .setCancelText("取消")
                 .setTitleText("请选择时间")
-                .setType(new boolean[]{true, true, true, false, false, false})
+                .setType(new boolean[]{true, true, true, true, true, false})
                 .setDate(Calendar.getInstance())
                 .build();
 
@@ -117,43 +118,42 @@ public class KaoqiDakaWaiqinFragment extends BaseFragment {
          * method stub
          */
 
-        if (!getHoldingActivity().isNetWorkAvailable()) {
-            Toast.makeText(getHoldingActivity(), "没有网络连接，请稍后重试", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        final ProgressDialog progressDialog = new ProgressDialog(getContext());
-
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setMessage("加载中...");
-        progressDialog.show();
-
-        if (item.getItemId()==R.id.action_settings) {
+        if (item.getItemId() == R.id.action_settings) {
             //提交信息
-            try {
-                OkHttp3Utils.getInstance().doGet(getRootApiUrl() + "/api/",
-                        new GsonObjectCallback<AttendenceBean>(getContext()) {
 
-                            @Override
-                            public void onSuccess(AttendenceBean attendenceBean) {
-                                progressDialog.dismiss();
-
-                                if (attendenceBean.getRequestCode() != 200) {
-                                    progressDialog.dismiss();
-                                    Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-
-                            @Override
-                            public void onFailed(Call call, IOException e) {
-                                progressDialog.dismiss();
-                                Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
-                            }
-                        },getContext());
-            } catch (Exception ex) {
-                progressDialog.dismiss();
-                Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
+            if (starttime_select.getText() == null || starttime_select.getText().toString().length() <= 0) {
+                new MyAlert("", "请选择开始时间", true, false, getContext());
             }
+
+            if (endtime_select.getText() == null || endtime_select.getText().toString().length() <= 0) {
+                new MyAlert("", "请选择结束时间", true, false, getContext());
+            }
+
+            if (remark.getText() == null || remark.getText().toString().length() <= 0) {
+                new MyAlert("", "请输入备注内容", true, false, getContext());
+            }
+
+            Map<String, String> params = new HashMap<>();
+            params.put("personId", getHoldingActivity().getUserAccount().getUserid());
+            params.put("reason", remark.getText().toString());
+            params.put("start", starttime_select.getText().toString());
+            params.put("end", endtime_select.getText().toString());
+
+            OkHttpManager.getInstance().postRequest(getRootApiUrl() + "/api/attappply/addout",
+                    new LoadCallBack<ResultBean>(getContext()) {
+
+                        @Override
+                        public void onSuccess(Call call, Response response, ResultBean resultBean) {
+
+                            if (resultBean.getRequestCode() != 200) {
+                                Toast.makeText(getHoldingActivity(), resultBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        public void onEror(Call call, int statusCode, Exception e) {
+                        }
+                    }, params);
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -166,7 +166,6 @@ public class KaoqiDakaWaiqinFragment extends BaseFragment {
         //去掉底部导航
         BottomNavigationView navigation = getHoldingActivity().findViewById(R.id.navigation);
         navigation.setVisibility(View.GONE);
-
 
         return super.onCreateView(inflater, container, savedInstanceState);
     }

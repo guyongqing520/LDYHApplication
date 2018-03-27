@@ -53,7 +53,6 @@ public class KaoqiguanlillistdateFragment extends BaseFragment {
     private CalendarMonthanalysisAdapter dateAdapter;
     private CalendarDayanalysisAdapter calendarDayanalysisAdapter;
     private String title;
-    private String userId;
     private int year;
     private int month;
     private int today;
@@ -91,20 +90,23 @@ public class KaoqiguanlillistdateFragment extends BaseFragment {
         today = calendar.get(Calendar.DATE);
         days = DateUtils.getDayOfMonthFormat(year, month);
 
-        setTile();
+        setTitle();
+
+        setSelectDateTitle(year,month,today,DateUtils.dateToWeek(calendar.getTime().toString()));
     }
 
     //拉取月考勤
     private void initKaoqin() {
         //提交信息
-        OkHttpManager.getInstance().getRequest(getRootApiUrl() + "/api/attendence/monthanalysis/" + userId + "/" + year + "/" + month,
+        OkHttpManager.getInstance().getRequest(getRootApiUrl() + "/api/attendence/monthanalysis/" + getHoldingActivity().getUserAccount().getUserid() + "/" + year + "/" + month,
                 new LoadCallBack<KaoqMonthanalysisBean>(getContext()) {
 
                     @Override
                     public void onSuccess(Call call, Response response, KaoqMonthanalysisBean kaoqMonthanalysisBean) {
 
                         if (kaoqMonthanalysisBean.getRequestCode() == 200) {
-                            dateAdapter = new CalendarMonthanalysisAdapter(getContext(), days, year, month, today, kaoqMonthanalysisBean,recylerviewdatedayanalysisView,userId);//传入当前月的年
+                            dateAdapter = new CalendarMonthanalysisAdapter(getContext(), days, year, month, today, kaoqMonthanalysisBean,recylerviewdatedayanalysisView,
+                                    getHoldingActivity().getUserAccount().getUserid(),select_date);//传入当前月的年
                             recyclerView.setAdapter(dateAdapter);
                             dateAdapter.notifyDataSetChanged();
                         }
@@ -121,7 +123,7 @@ public class KaoqiguanlillistdateFragment extends BaseFragment {
     public void initDayanalysis(int year,int month,int day) {
 
         //提交信息
-        OkHttpManager.getInstance().getRequest(getRootApiUrl() + "/api/attendence/dayanalysis/" + userId + "/" + year +
+        OkHttpManager.getInstance().getRequest(getRootApiUrl() + "/api/attendence/dayanalysis/" + getHoldingActivity().getUserAccount().getUserid() + "/" + year +
                         "-" + month + "-" + today,
                 new LoadCallBack<KaoqDayanalysisBean>(getContext()) {
 
@@ -170,17 +172,20 @@ public class KaoqiguanlillistdateFragment extends BaseFragment {
     }
 
     //设置日历标题
-    private void setTile() {
+    private void setTitle() {
         title = year + "年" + month + "月";
         record_title.setText(title);
+    }
+
+    private void setSelectDateTitle(int year,int month,int day,String week) {
+        String title = year + "年" + month + "月" + day+"（" + week + "）";
+        select_date.setText(title);
     }
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, final @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        userId=getUserId();
 
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
@@ -207,14 +212,14 @@ public class KaoqiguanlillistdateFragment extends BaseFragment {
     public void onRecordLeftBtnClicked() {
         days = prevMonth();
         initKaoqin();
-        setTile();
+        setTitle();
     }
 
     @OnClick(R.id.record_right)
     public void onRecordRightBtnClicked() {
         days = nextMonth();
         initKaoqin();
-        setTile();
+        setTitle();
     }
 
     @Override
@@ -236,6 +241,9 @@ public class KaoqiguanlillistdateFragment extends BaseFragment {
 
     @BindView(R.id.recyler_view_date_dayanalysis)
     RecyclerView recylerviewdatedayanalysisView;
+
+    @BindView(R.id.select_date)
+    TextView select_date;
 
 
 }

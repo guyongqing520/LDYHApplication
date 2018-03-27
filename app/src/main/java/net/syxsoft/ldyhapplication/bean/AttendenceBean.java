@@ -6,10 +6,11 @@ package net.syxsoft.ldyhapplication.bean;
 
 public class AttendenceBean {
 
+
     /**
      * RequestCode : 200
      * ErrorMessage : null
-     * SuccessInfo : {"timeAreaId":"","isAtt":false,"resultMsg":"非考勤时间"}
+     * SuccessInfo : {"timeAreaId":"677eeff2-b72f-47b5-ac86-f6ac80c175ad","timeTitle":"第二段时间","isAtt":true,"resultMsg":"【签退】<br/>11:30--19:30","addressCenter":"遵义市"}
      */
 
     private int RequestCode;
@@ -42,14 +43,18 @@ public class AttendenceBean {
 
     public static class SuccessInfoBean {
         /**
-         * timeAreaId :
-         * isAtt : false
-         * resultMsg : 非考勤时间
+         * timeAreaId : 677eeff2-b72f-47b5-ac86-f6ac80c175ad
+         * timeTitle : 第二段时间
+         * isAtt : true
+         * resultMsg : 【签退】<br/>11:30--19:30
+         * addressCenter : 遵义市
          */
 
         private String timeAreaId;
+        private String timeTitle;
         private boolean isAtt;
         private String resultMsg;
+        private String addressCenter;
 
         public String getTimeAreaId() {
             return timeAreaId;
@@ -57,6 +62,14 @@ public class AttendenceBean {
 
         public void setTimeAreaId(String timeAreaId) {
             this.timeAreaId = timeAreaId;
+        }
+
+        public String getTimeTitle() {
+            return timeTitle;
+        }
+
+        public void setTimeTitle(String timeTitle) {
+            this.timeTitle = timeTitle;
         }
 
         public boolean isIsAtt() {
@@ -73,6 +86,14 @@ public class AttendenceBean {
 
         public void setResultMsg(String resultMsg) {
             this.resultMsg = resultMsg;
+        }
+
+        public String getAddressCenter() {
+            return addressCenter;
+        }
+
+        public void setAddressCenter(String addressCenter) {
+            this.addressCenter = addressCenter;
         }
     }
 }

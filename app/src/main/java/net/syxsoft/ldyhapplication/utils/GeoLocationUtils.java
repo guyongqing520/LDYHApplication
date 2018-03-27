@@ -1,11 +1,9 @@
 package net.syxsoft.ldyhapplication.utils;
 
+import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 
-import com.baidu.mapapi.model.inner.GeoPoint;
-
-import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -17,28 +15,26 @@ import static com.baidu.mapapi.BMapManager.getContext;
 
 public class GeoLocationUtils {
 
-    public static GeoPoint getGeoPointBystr(String str) {
-        GeoPoint gpGeoPoint = null;
-        if (str != null) {
-            Geocoder gc = new Geocoder(getContext(), Locale.CHINA);
+
+    public static Address addressTolatlng(String address, Context context) {
+
+        Address maddress = null;
+        if (address != null) {
+            Geocoder gc = new Geocoder(context, Locale.CHINA);
             List<Address> addressList = null;
             try {
-
-                addressList = gc.getFromLocationName(str, 1);
+                addressList = gc.getFromLocationName(address, 1);
                 if (!addressList.isEmpty()) {
-                    Address address_temp = addressList.get(0);
-                    //计算经纬度
-                    double Latitude = address_temp.getLatitude() * 1E6;
-                    double Longitude = address_temp.getLongitude() * 1E6;
-                    //生产GeoPoint
-                    gpGeoPoint = new GeoPoint((int) Latitude, (int) Longitude);
+                    maddress = addressList.get(0);
+
                 }
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return gpGeoPoint;
+        return maddress;
     }
+
 
     public static double GetShortDistance(double lon1, double lat1, double lon2, double lat2) {
         double DEF_2PI = 6.28318530712; // 2*PI

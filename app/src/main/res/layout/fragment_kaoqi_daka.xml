@@ -138,6 +138,7 @@
 </LinearLayout>
 
     <TextView
+        android:visibility="gone"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
             android:text="请上传相关的图片"
@@ -147,6 +148,7 @@
             android:layout_height="wrap_content" />
 
     <LinearLayout
+        android:visibility="gone"
     android:padding="10dp"
     android:orientation="horizontal"
     android:background="@color/white"
@@ -172,6 +174,7 @@ android:layout_marginLeft="10dp"
 </LinearLayout>
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/upimg_btn"
         android:padding="10dp"
 

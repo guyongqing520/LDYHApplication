@@ -26,6 +26,7 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.model.inner.GeoPoint;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.loader.ImageLoader;
@@ -37,22 +38,31 @@ import com.squareup.picasso.Picasso;
 import net.syxsoft.ldyhapplication.R;
 import net.syxsoft.ldyhapplication.bean.AttendenceBean;
 import net.syxsoft.ldyhapplication.bean.PersoninfoBean;
+import net.syxsoft.ldyhapplication.bean.ResultBean;
 import net.syxsoft.ldyhapplication.bean.UserAccountBean;
 import net.syxsoft.ldyhapplication.callback.GsonObjectCallback;
+import net.syxsoft.ldyhapplication.callback.LoadCallBack;
 import net.syxsoft.ldyhapplication.model.UserModel;
 import net.syxsoft.ldyhapplication.utils.DateUtils;
+import net.syxsoft.ldyhapplication.utils.GeoLocationUtils;
+import net.syxsoft.ldyhapplication.utils.MyAlert;
 import net.syxsoft.ldyhapplication.utils.OkHttp3Utils;
+import net.syxsoft.ldyhapplication.utils.OkHttpManager;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.Address;
 import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,9 +70,10 @@ import okhttp3.Call;
 public class KaoqiDakaFragment extends BaseFragment {
 
     protected LocationClient mlocaltionClient;
-    protected boolean attrid=false;
+    protected boolean attrid = false;
     protected double currentlon;
     protected double currentlat;
+    protected String addressCenter;
 
     @OnClick(R.id.sq_daka)
     public void onRegisterBtnClicked() {
@@ -93,15 +104,61 @@ public class KaoqiDakaFragment extends BaseFragment {
     @OnClick(R.id.daka_btn)
     public void OnDakaBtnClicked() {
 
-        if (!attrid) {
-            Toast.makeText(getContext(), "当前时间无法打卡", Toast.LENGTH_SHORT).show();
+        if (!attrid || dakadate.getText() == null || dakadate.getText().toString().length() <= 0) {
+
+            new MyAlert("", "当前时间无法打卡", true, false, getContext());
+
+        } else if (addressCenter == null || addressCenter.length() == 0 || address.getText() == null ||
+                address.getText().toString().length() <= 0 || currentlat == 0 || currentlon == 0) {
+
+            new MyAlert("", "定位失败无法打卡，请打开定位", true, false, getContext());
+
+        } else {
+
+            android.location.Address maddress = GeoLocationUtils.addressTolatlng(addressCenter, getContext());
+            if (maddress == null) {
+                new MyAlert("", "定位失败无法打卡，请打开定位", true, false, getContext());
+            } else {
+
+                double centerLat = maddress.getLatitude();
+                double centerLng = maddress.getLongitude();
+
+                double ds = GeoLocationUtils.GetShortDistance(centerLng, centerLat, currentlon, currentlat);
+
+                if (ds > 1000) {
+                    new MyAlert("", "打卡距离超过1千米，无法打卡", true, false, getContext());
+                } else {
+
+                    Map<String, String> params = new HashMap<>();
+                    params.put("personId", getHoldingActivity().getUserAccount().getUserid());
+                    params.put("timeAreaId", dakadate.getText().toString());
+                    params.put("address", address.getText().toString());
+                    params.put("imgUrl", "");
+                    params.put("isout", String.valueOf(false));
+
+
+                    OkHttpManager.getInstance().postRequest(getRootApiUrl() + "/api/attendence/sign",
+                            new LoadCallBack<ResultBean>(getContext()) {
+
+                                @Override
+                                public void onSuccess(Call call, Response response, ResultBean resultBean) {
+
+                                    if (resultBean.getRequestCode() != 200) {
+                                        Toast.makeText(getHoldingActivity(), resultBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        new MyAlert("", "打卡成功", true, false, getContext());
+                                    }
+                                }
+
+                                public void onEror(Call call, int statusCode, Exception e) {
+                                }
+                            }, params);
+
+                }
+            }
         }
-
-        //double s=currentlon;
-
-       // else if (GeoLocationUtils.GetShortDistance())
-
     }
+
 
     //上传图片
     @OnClick(R.id.upimg_btn)
@@ -137,46 +194,12 @@ public class KaoqiDakaFragment extends BaseFragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         //上传图片初始化
-        ImagePicker imagePicker = ImagePicker.getInstance();
-        imagePicker.setImageLoader(new PicassoImageLoader());   //设置图片加载器
-        imagePicker.setShowCamera(true);  //显示拍照按钮
-        imagePicker.setCrop(true);        //允许裁剪（单选才有效）
-        imagePicker.setSaveRectangle(true); //是否按矩形区域保存
-        imagePicker.setSelectLimit(9);    //选中数量限制
-        imagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
-        imagePicker.setFocusWidth(800);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
-        imagePicker.setFocusHeight(800);  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
-        imagePicker.setOutPutX(1000);//保存文件的宽度。单位像素
-        imagePicker.setOutPutY(1000);//保存文件的高度。单位像素
+        initImageSet();
 
         //启用底部导航
         BottomNavigationView navigation = getHoldingActivity().findViewById(R.id.navigation);
         navigation.setVisibility(View.VISIBLE);
 
-
-        //加载个人信息
-        UserModel userModel = new UserModel();
-        UserAccountBean userAccountBean = userModel.getUserAccountInfo(getContext());
-
-        if (userAccountBean == null || userAccountBean.getUserid() == null || userAccountBean.getUserid().length() == 0) {
-            //导航到login
-            Intent intent = new Intent(getContext(), LoginActivity.class);
-            startActivity(intent);
-            getHoldingActivity().finish();
-
-            return view;
-        }
-
-        if (!getHoldingActivity().isNetWorkAvailable()) {
-            Toast.makeText(getHoldingActivity(), "没有网络连接，请稍后重试", Toast.LENGTH_SHORT).show();
-            return view;
-        }
-
-        final ProgressDialog progressDialog = new ProgressDialog(getContext());
-
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setMessage("加载中...");
-        progressDialog.show();
 
         //更新时间
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -185,87 +208,70 @@ public class KaoqiDakaFragment extends BaseFragment {
         today.setText(datestr + "(" + DateUtils.dateToWeek(datestr) + ")");
 
         //获取用户并更新用户信息
-        try {
+        OkHttpManager.getInstance().getRequest(getRootApiUrl() + "/api/user/getpersoninfo/" + getHoldingActivity().getUserAccount().getUserid(),
+                new LoadCallBack<PersoninfoBean>(getContext()) {
 
-            OkHttp3Utils.getInstance().doGet(getRootApiUrl() + "/api/user/getpersoninfo/" + userAccountBean.getUserid(),
-                    new GsonObjectCallback<PersoninfoBean>(getContext()) {
+                    @Override
+                    public void onSuccess(Call call, Response response, PersoninfoBean personinfo) {
 
-                        @Override
-                        public void onSuccess(PersoninfoBean personinfo) {
-                            progressDialog.dismiss();
-
-                            if (personinfo.getRequestCode() != 200) {
-                                progressDialog.dismiss();
-                                Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
-                            }
-
-                            //更新用户信息
-                            username.setText(personinfo.getSuccessInfo().getPersonInfo().getName());
-                            position.setText(personinfo.getSuccessInfo().getPersonInfo().getRemark());
-                        }
-
-                        @Override
-                        public void onFailed(Call call, IOException e) {
-                            progressDialog.dismiss();
+                        if (personinfo.getRequestCode() != 200) {
                             Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
                         }
-                    },getContext());
-        } catch (Exception ex) {
-            progressDialog.dismiss();
-            Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
-        }
+
+                        //更新用户信息
+                        username.setText(personinfo.getSuccessInfo().getPersonInfo().getName());
+                        position.setText(personinfo.getSuccessInfo().getPersonInfo().getPosition() == null ? "" :
+                                personinfo.getSuccessInfo().getPersonInfo().getPosition().toString());
+                    }
+
+                    public void onEror(Call call, int statusCode, Exception e) {
+                    }
+                });
+
 
         //获取打卡信息
-        try {
+        OkHttpManager.getInstance().getRequest(getRootApiUrl() + "/api/attendence/init/" + getHoldingActivity().getUserAccount().getUserid(),
+                new LoadCallBack<AttendenceBean>(getContext()) {
 
-            OkHttp3Utils.getInstance().doGet(getRootApiUrl() + "/api/attendence/init/" + userAccountBean.getUserid(),
-                    new GsonObjectCallback<AttendenceBean>(getContext()) {
+                    @Override
+                    public void onSuccess(Call call, Response response, AttendenceBean attendenceBean) {
 
-                        @Override
-                        public void onSuccess(AttendenceBean attendenceBean) {
-                            progressDialog.dismiss();
-
-                            if (attendenceBean.getRequestCode() != 200) {
-                                progressDialog.dismiss();
-                                Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
-                            }
-
-                            //更新打卡信息
-                            AttendenceBean.SuccessInfoBean successInfoBean = attendenceBean.getSuccessInfo();
-
-                            if (successInfoBean != null) {
-                                dakatext.setText(successInfoBean.getResultMsg());
-                                if (successInfoBean.getResultMsg().length() > 6) {
-                                    dakatext.setTextSize(14);
-                                }
-
-                                if (successInfoBean.getTimeAreaId().length() == 0) {
-                                    dakadate.setText("无打卡时间段");
-                                } else {
-                                    dakadate.setText(successInfoBean.getTimeAreaId());
-                                }
-                                attrid=successInfoBean.isIsAtt();
-
-                            } else {
-                                dakatext.setText(String.valueOf(attendenceBean.getErrorMessage()));
-                                if (String.valueOf(attendenceBean.getErrorMessage()).length() > 6) {
-                                    dakatext.setTextSize(14);
-                                }
-                                dakadate.setText("无打卡时间段");
-                                attrid=false;
-                            }
-                        }
-
-                        @Override
-                        public void onFailed(Call call, IOException e) {
-                            progressDialog.dismiss();
+                        if (attendenceBean.getRequestCode() != 200) {
                             Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
                         }
-                    },getContext());
-        } catch (Exception ex) {
-            progressDialog.dismiss();
-            Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
-        }
+
+                        //更新打卡信息
+                        AttendenceBean.SuccessInfoBean successInfoBean = attendenceBean.getSuccessInfo();
+
+                        if (successInfoBean != null) {
+                            dakatext.setText(successInfoBean.getResultMsg());
+                            if (successInfoBean.getResultMsg().length() > 6) {
+                                dakatext.setTextSize(14);
+                            }
+
+                            if (successInfoBean.getTimeAreaId().length() == 0) {
+                                dakadate.setText("无打卡时间段");
+                            } else {
+                                dakadate.setText(successInfoBean.getTimeAreaId());
+                            }
+                            attrid = successInfoBean.isIsAtt();
+                            addressCenter = successInfoBean.getAddressCenter();
+
+                        } else {
+                            dakatext.setText(String.valueOf(attendenceBean.getErrorMessage()));
+                            if (String.valueOf(attendenceBean.getErrorMessage()).length() > 6) {
+                                dakatext.setTextSize(14);
+                            }
+                            dakadate.setText("无打卡时间段");
+                            attrid = false;
+                        }
+                    }
+
+                    @Override
+                    public void onEror(Call call, int statusCode, Exception e) {
+                    }
+                });
+
 
         //定位信息
         try {
@@ -299,6 +305,7 @@ public class KaoqiDakaFragment extends BaseFragment {
         }
 
         return view;
+
     }
 
     @Override
@@ -327,10 +334,10 @@ public class KaoqiDakaFragment extends BaseFragment {
         if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
             if (data != null && requestCode == 2) {
                 ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                ImageItem a= images.get(0);
-                String s=a.path;
-               // MyAdapter adapter = new MyAdapter(images);
-               // gridView.setAdapter(adapter);
+                ImageItem a = images.get(0);
+                String s = a.path;
+                // MyAdapter adapter = new MyAdapter(images);
+                // gridView.setAdapter(adapter);
             } else {
                 Toast.makeText(getContext(), "没有数据", Toast.LENGTH_SHORT).show();
             }
@@ -354,13 +361,28 @@ public class KaoqiDakaFragment extends BaseFragment {
         mlocaltionClient.setLocOption(option);
     }
 
+    private void initImageSet() {
+        //上传图片初始化
+        ImagePicker imagePicker = ImagePicker.getInstance();
+        imagePicker.setImageLoader(new PicassoImageLoader());   //设置图片加载器
+        imagePicker.setShowCamera(true);  //显示拍照按钮
+        imagePicker.setCrop(true);        //允许裁剪（单选才有效）
+        imagePicker.setSaveRectangle(true); //是否按矩形区域保存
+        imagePicker.setSelectLimit(9);    //选中数量限制
+        imagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
+        imagePicker.setFocusWidth(800);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setFocusHeight(800);  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setOutPutX(1000);//保存文件的宽度。单位像素
+        imagePicker.setOutPutY(1000);//保存文件的高度。单位像素
+    }
+
     private class MyLocationListener implements BDLocationListener {
 
         @Override
         public void onReceiveLocation(BDLocation location) {
             address.setText("位置：" + location.getAddrStr());
-            currentlat=location.getLatitude();
-            currentlon=location.getLongitude();
+            currentlat = location.getLatitude();
+            currentlon = location.getLongitude();
         }
     }
 

@@ -190,4 +190,22 @@ public class DateUtils {
         SimpleDateFormat format = new SimpleDateFormat(formatString);
         return format.format(date.getTime());
     }
+
+    public static Date strToDate(String str,String formatString) {
+
+        if (formatString == null || formatString.length() == 0) {
+            formatString = "yyyy-MM-dd";
+        }
+
+        SimpleDateFormat format = new SimpleDateFormat(formatString);
+
+        Date date = null;
+        try {
+            date = format.parse(str);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+
 }

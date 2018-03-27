@@ -6,10 +6,11 @@ package net.syxsoft.ldyhapplication.bean;
 
 public class PersoninfoBean {
 
+
     /**
      * RequestCode : 200
      * ErrorMessage : null
-     * SuccessInfo : {"PersonInfo":{"personId":"7bdc959c-c774-440a-a236-8064c54f4cbd","sex":"1","name":"gc","email":null,"cardId":"420624199302021215","pBirthday":"1111.11","homeTown":null,"headImg":null,"pInPartlyTime":null,"pJiGuan":"zhonguo","pMinZu":"白族","Political":"民盟盟员","pStartWork":null,"QQ":null,"Tel":"110","WeChat":null,"remark":"干部人员"},"depName":"遵义市"}
+     * SuccessInfo : {"PersonInfo":{"personId":"7bdc959c-c774-440a-a236-8064c54f4cbd","name":"gc","sex":"男","position":null,"political":"民盟盟员","Annualleave":0,"pInPartlyTime":null,"Tel":"110","QQ":null,"WeChat":null,"email":null,"headImg":null,"remark":"干部人员"},"depName":"遵义市"}
      */
 
     private int RequestCode;
@@ -42,7 +43,7 @@ public class PersoninfoBean {
 
     public static class SuccessInfoBean {
         /**
-         * PersonInfo : {"personId":"7bdc959c-c774-440a-a236-8064c54f4cbd","sex":"1","name":"gc","email":null,"cardId":"420624199302021215","pBirthday":"1111.11","homeTown":null,"headImg":null,"pInPartlyTime":null,"pJiGuan":"zhonguo","pMinZu":"白族","Political":"民盟盟员","pStartWork":null,"QQ":null,"Tel":"110","WeChat":null,"remark":"干部人员"}
+         * PersonInfo : {"personId":"7bdc959c-c774-440a-a236-8064c54f4cbd","name":"gc","sex":"男","position":null,"political":"民盟盟员","Annualleave":0,"pInPartlyTime":null,"Tel":"110","QQ":null,"WeChat":null,"email":null,"headImg":null,"remark":"干部人员"}
          * depName : 遵义市
          */
 
@@ -68,40 +69,32 @@ public class PersoninfoBean {
         public static class PersonInfoBean {
             /**
              * personId : 7bdc959c-c774-440a-a236-8064c54f4cbd
-             * sex : 1
              * name : gc
-             * email : null
-             * cardId : 420624199302021215
-             * pBirthday : 1111.11
-             * homeTown : null
-             * headImg : null
+             * sex : 男
+             * position : null
+             * political : 民盟盟员
+             * Annualleave : 0.0
              * pInPartlyTime : null
-             * pJiGuan : zhonguo
-             * pMinZu : 白族
-             * Political : 民盟盟员
-             * pStartWork : null
-             * QQ : null
              * Tel : 110
+             * QQ : null
              * WeChat : null
+             * email : null
+             * headImg : null
              * remark : 干部人员
              */
 
             private String personId;
-            private String sex;
             private String name;
-            private Object email;
-            private String cardId;
-            private String pBirthday;
-            private Object homeTown;
-            private Object headImg;
+            private String sex;
+            private Object position;
+            private String political;
+            private double Annualleave;
             private Object pInPartlyTime;
-            private String pJiGuan;
-            private String pMinZu;
-            private String Political;
-            private Object pStartWork;
-            private Object QQ;
             private String Tel;
+            private Object QQ;
             private Object WeChat;
+            private Object email;
+            private Object headImg;
             private String remark;
 
             public String getPersonId() {
@@ -112,14 +105,6 @@ public class PersoninfoBean {
                 this.personId = personId;
             }
 
-            public String getSex() {
-                return sex;
-            }
-
-            public void setSex(String sex) {
-                this.sex = sex;
-            }
-
             public String getName() {
                 return name;
             }
@@ -128,44 +113,36 @@ public class PersoninfoBean {
                 this.name = name;
             }
 
-            public Object getEmail() {
-                return email;
+            public String getSex() {
+                return sex;
             }
 
-            public void setEmail(Object email) {
-                this.email = email;
+            public void setSex(String sex) {
+                this.sex = sex;
             }
 
-            public String getCardId() {
-                return cardId;
+            public Object getPosition() {
+                return position;
             }
 
-            public void setCardId(String cardId) {
-                this.cardId = cardId;
+            public void setPosition(Object position) {
+                this.position = position;
             }
 
-            public String getPBirthday() {
-                return pBirthday;
+            public String getPolitical() {
+                return political;
             }
 
-            public void setPBirthday(String pBirthday) {
-                this.pBirthday = pBirthday;
+            public void setPolitical(String political) {
+                this.political = political;
             }
 
-            public Object getHomeTown() {
-                return homeTown;
+            public double getAnnualleave() {
+                return Annualleave;
             }
 
-            public void setHomeTown(Object homeTown) {
-                this.homeTown = homeTown;
-            }
-
-            public Object getHeadImg() {
-                return headImg;
-            }
-
-            public void setHeadImg(Object headImg) {
-                this.headImg = headImg;
+            public void setAnnualleave(double Annualleave) {
+                this.Annualleave = Annualleave;
             }
 
             public Object getPInPartlyTime() {
@@ -176,36 +153,12 @@ public class PersoninfoBean {
                 this.pInPartlyTime = pInPartlyTime;
             }
 
-            public String getPJiGuan() {
-                return pJiGuan;
+            public String getTel() {
+                return Tel;
             }
 
-            public void setPJiGuan(String pJiGuan) {
-                this.pJiGuan = pJiGuan;
-            }
-
-            public String getPMinZu() {
-                return pMinZu;
-            }
-
-            public void setPMinZu(String pMinZu) {
-                this.pMinZu = pMinZu;
-            }
-
-            public String getPolitical() {
-                return Political;
-            }
-
-            public void setPolitical(String Political) {
-                this.Political = Political;
-            }
-
-            public Object getPStartWork() {
-                return pStartWork;
-            }
-
-            public void setPStartWork(Object pStartWork) {
-                this.pStartWork = pStartWork;
+            public void setTel(String Tel) {
+                this.Tel = Tel;
             }
 
             public Object getQQ() {
@@ -216,20 +169,28 @@ public class PersoninfoBean {
                 this.QQ = QQ;
             }
 
-            public String getTel() {
-                return Tel;
-            }
-
-            public void setTel(String Tel) {
-                this.Tel = Tel;
-            }
-
             public Object getWeChat() {
                 return WeChat;
             }
 
             public void setWeChat(Object WeChat) {
                 this.WeChat = WeChat;
+            }
+
+            public Object getEmail() {
+                return email;
+            }
+
+            public void setEmail(Object email) {
+                this.email = email;
+            }
+
+            public Object getHeadImg() {
+                return headImg;
+            }
+
+            public void setHeadImg(Object headImg) {
+                this.headImg = headImg;
             }
 
             public String getRemark() {

@@ -43,16 +43,16 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/type"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignBottom="@+id/bkbs_text"
                 android:layout_width="wrap_content"
                 android:textSize="16sp"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/colorWord99"
                 android:drawableRight="@mipmap/kqglz_ar02"
                 android:drawablePadding="4dp"
-                android:text="请选择" />
+                android:hint="请选择" />
 
         </RelativeLayout>
 
@@ -89,16 +89,15 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/start_time"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_alignBottom="@+id/bkbs_text2"
                 android:layout_width="wrap_content"
                 android:textSize="16sp"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/colorWord99"
                 android:drawableRight="@mipmap/kqglz_ar02"
                 android:drawablePadding="4dp"
-                android:text="请选择" />
+                android:hint="请选择" />
         </RelativeLayout>
 
 
@@ -117,7 +116,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView android:id="@+id/xihao2"
+            <TextView android:id="@+id/xihao4"
                 android:layout_centerVertical="true"
                 android:text="*"
                 android:textColor="@color/colorAccent"
@@ -129,21 +128,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/xihao2"
+                android:layout_toRightOf="@+id/xihao4"
                 android:text="结束时间"
                 android:textSize="16sp" />
 
             <TextView
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignBottom="@+id/bkbs_text3"
+                android:id="@+id/end_time"
                 android:layout_width="wrap_content"
-                android:textSize="16sp"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/colorWord99"
-                android:drawableRight="@mipmap/kqglz_ar02"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
                 android:drawablePadding="4dp"
-                android:text="请选择" />
+                android:drawableRight="@mipmap/kqglz_ar02"
+                android:hint="请选择"
+                android:textSize="16sp" />
 
         </RelativeLayout>
 
@@ -179,17 +178,18 @@
                 android:text="时长（小时）"
                 android:textSize="16sp" />
 
-            <TextView
+            <EditText
+                android:id="@+id/longtime"
+                android:inputType="number"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_alignBottom="@+id/bkbs_text4"
                 android:layout_width="wrap_content"
                 android:textSize="16sp"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/colorWord99"
-                android:drawableRight="@mipmap/kqglz_ar02"
-                android:drawablePadding="4dp"
-                android:text="请选择" />
+                android:layout_marginRight="12dp"
+                android:background="@null"
+                android:gravity="right"
+                android:hint="请输入" />
 
         </RelativeLayout>
 
@@ -199,7 +199,7 @@
         android:layout_marginTop="1dp"
         android:layout_width="match_parent"
         android:background="@color/white"
-        android:padding="10dp"
+        android:padding="15dp"
         android:orientation="horizontal"
         xmlns:android="http://schemas.android.com/apk/res/android" >
 
@@ -209,31 +209,82 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView android:id="@+id/xihao5"
+            <TextView android:id="@+id/xihao2"
+                android:layout_centerVertical="true"
                 android:text="*"
                 android:textColor="@color/colorAccent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/bkbs_text4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/xihao2"
+                android:text="处理人"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/dealperson"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:drawablePadding="4dp"
+                android:drawableRight="@mipmap/kqglz_ar02"
+                android:hint="请选择"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/xihao5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="*"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
                 android:id="@+id/bkbs_text5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/xihao5"
-                android:text="审批意见"
+                android:text="请假事由"
                 android:textColor="@color/colornavblack"
                 android:textSize="16sp" />
 
             <EditText
-                android:layout_below="@+id/bkbs_text5"
-                android:layout_alignLeft="@id/bkbs_text5"
+                android:id="@+id/reason"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lines="4"
-                android:gravity="top"
-                android:textSize="15sp"
+                android:layout_alignLeft="@id/bkbs_text5"
+                android:layout_below="@+id/bkbs_text5"
                 android:background="@null"
+                android:gravity="top"
                 android:hint="请输入请假事由"
+                android:lines="4"
+                android:textSize="15sp"
 
                 />
 
@@ -242,6 +293,7 @@
 
     </LinearLayout>
     <LinearLayout
+        android:visibility="gone"
         android:padding="10dp"
         android:orientation="horizontal"
         android:background="@color/white"
@@ -267,6 +319,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:visibility="gone"
         android:padding="10dp"
 
         android:orientation="horizontal"

@@ -84,6 +84,7 @@
             android:layout_height="40dp">
 
             <TextView
+                android:id="@+id/select_date"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="20dp"
                 android:textColor="@color/colorWord33"

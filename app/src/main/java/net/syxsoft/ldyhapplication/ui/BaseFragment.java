@@ -53,19 +53,4 @@ public abstract class BaseFragment extends AppFragment {
        getHoldingActivity().getMenuInflater().inflate(R.menu.menu_nosubmit, menu);
     }
 
-    public String getUserId(){
-        //加载个人信息
-        UserModel userModel = new UserModel();
-        UserAccountBean userAccountBean = userModel.getUserAccountInfo(getContext());
-
-        if (userAccountBean == null || userAccountBean.getUserid() == null || userAccountBean.getUserid().length() == 0) {
-            //导航到login
-            Intent intent = new Intent(getContext(), LoginActivity.class);
-            startActivity(intent);
-            getHoldingActivity().finish();
-
-            return null;
-        }
-        return userAccountBean.getUserid();
-    }
 }

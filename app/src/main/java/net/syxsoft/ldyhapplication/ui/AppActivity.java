@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 
 import net.syxsoft.ldyhapplication.R;
+import net.syxsoft.ldyhapplication.bean.UserAccountBean;
 import net.syxsoft.ldyhapplication.utils.BottomNavigationViewHelper;
 import net.syxsoft.ldyhapplication.utils.MyApp;
 import net.syxsoft.ldyhapplication.utils.NetWorkUtils;
@@ -22,11 +23,18 @@ public abstract class AppActivity extends AppCompatActivity{
     protected abstract int getContentViewId();
     protected abstract BaseFragment getFirstFragment();
     protected abstract int getFragmentContainerId();
+    protected abstract UserAccountBean getUserAccount();
     protected abstract BottomNavigationView.OnNavigationItemSelectedListener getNavigationItemSelectedListener();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (getUserAccount()==null) {  //导航到login
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         //写死竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
