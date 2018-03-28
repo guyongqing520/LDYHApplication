@@ -1,7 +1,6 @@
 package net.syxsoft.ldyhapplication.ui;
 
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -18,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
-import com.bigkoo.pickerview.lib.WheelView;
 
 import net.syxsoft.ldyhapplication.R;
 
@@ -27,18 +25,15 @@ import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Response;
 
-import net.syxsoft.ldyhapplication.bean.AttendenceBean;
-import net.syxsoft.ldyhapplication.callback.GsonObjectCallback;
+import net.syxsoft.ldyhapplication.bean.ResultBean;
+import net.syxsoft.ldyhapplication.bean.SyskeyvalueBean;
 import net.syxsoft.ldyhapplication.callback.LoadCallBack;
-import net.syxsoft.ldyhapplication.model.rztb_bglx_model;
-import net.syxsoft.ldyhapplication.bean.RzsbRztbBean;
-import net.syxsoft.ldyhapplication.utils.MD5Utils;
-import net.syxsoft.ldyhapplication.utils.OkHttp3Utils;
+import net.syxsoft.ldyhapplication.utils.MyAlert;
 import net.syxsoft.ldyhapplication.utils.OkHttpManager;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -46,8 +41,11 @@ import java.util.Map;
  */
 public class KaoqiRZSBtbFragment extends BaseFragment {
 
-    private OptionsPickerView  optionsPickerView;
-    private ArrayList<rztb_bglx_model> Rztb_bglx_list=new ArrayList<>();
+    //办公类型
+    private SyskeyvalueBean syskeyvalueBean;
+    private String bflxTypeValueId="0";  //办公类型
+
+    private  String glrwTypeValueId="1"; //关联任务
 
     @BindView(R.id.rzsb_gznr)
     EditText rzsb_gznr;
@@ -61,18 +59,117 @@ public class KaoqiRZSBtbFragment extends BaseFragment {
     @BindView(R.id.rzsb_glrw)
     TextView rzsb_glrw;
 
-    @OnClick(R.id.rzsb_glrw)
-    public void onRzsbGlrwBtnClicked() {
-          optionsPickerView=new OptionsPickerView.Builder(getContext(), new OptionsPickerView.OnOptionsSelectListener() {
+    //选择办公类型
+    @OnClick(R.id.rzsb_bglx)
+    public void OnBglxSelectBtnClicked() {
+
+        //条件选择器
+        final OptionsPickerView pvOptions = new OptionsPickerView.Builder(getContext(), new OptionsPickerView.OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                Toast.makeText(getContext(),Rztb_bglx_list.get(options1).getTitle(),Toast.LENGTH_SHORT).show();
+                //返回的分别是三个级别的选中位置
+
+                if (syskeyvalueBean != null && syskeyvalueBean.getSuccessInfo().size() > 0) {
+                    String tx = syskeyvalueBean.getSuccessInfo().get(options1).getText();
+                    bflxTypeValueId = syskeyvalueBean.getSuccessInfo().get(options1).getValue();
+                    rzsb_bglx.setText(tx);
+                }
             }
-        }).build();
-        optionsPickerView.setPicker(Rztb_bglx_list);
-        optionsPickerView.show();
+        })
+                .setTitleText("办公类型")
+                .setSubmitText("确定")
+                .setCancelText("取消").build();
+
+        if (syskeyvalueBean == null || syskeyvalueBean.getSuccessInfo().size() == 0) {
+            OkHttpManager.getInstance().getRequest(getRootApiUrl() + "/api/syskeyvalue/list/OfficeType",
+                    new LoadCallBack<SyskeyvalueBean>(getContext()) {
+
+                        @Override
+                        public void onSuccess(Call call, Response response, SyskeyvalueBean syskeyvalueBean1) {
+
+                            if (syskeyvalueBean1 != null && syskeyvalueBean1.getRequestCode() == 200) {
+                                syskeyvalueBean = syskeyvalueBean1;
+                                pvOptions.setPicker(getPickDateItemText(syskeyvalueBean.getSuccessInfo()));
+                                pvOptions.show();
+
+                            } else {
+                                Toast.makeText(getHoldingActivity(), syskeyvalueBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        public void onEror(Call call, int statusCode, Exception e) {
+                        }
+                    });
+
+        } else {
+
+            pvOptions.setPicker(getPickDateItemText(syskeyvalueBean.getSuccessInfo()));
+            pvOptions.show();
+        }
     }
 
+    //选择关联任务
+    @OnClick(R.id.rzsb_glrw)
+    public void OnGlrwSelectBtnClicked() {
+
+        //条件选择器
+        final OptionsPickerView pvOptions = new OptionsPickerView.Builder(getContext(), new OptionsPickerView.OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                //返回的分别是三个级别的选中位置
+
+                if (syskeyvalueBean != null && syskeyvalueBean.getSuccessInfo().size() > 0) {
+                    String tx = syskeyvalueBean.getSuccessInfo().get(options1).getText();
+                    glrwTypeValueId = syskeyvalueBean.getSuccessInfo().get(options1).getValue();
+                    rzsb_glrw.setText(tx);
+                }
+            }
+        })
+                .setTitleText("关联任务")
+                .setSubmitText("确定")
+                .setCancelText("取消").build();
+
+        if (syskeyvalueBean == null || syskeyvalueBean.getSuccessInfo().size() == 0) {
+            OkHttpManager.getInstance().getRequest(getRootApiUrl() + "/api/syskeyvalue/list/OfficeType",
+                    new LoadCallBack<SyskeyvalueBean>(getContext()) {
+
+                        @Override
+                        public void onSuccess(Call call, Response response, SyskeyvalueBean syskeyvalueBean1) {
+
+                            if (syskeyvalueBean1 != null && syskeyvalueBean1.getRequestCode() == 200) {
+                                syskeyvalueBean = syskeyvalueBean1;
+                                pvOptions.setPicker(getPickDateItemText(syskeyvalueBean.getSuccessInfo()));
+                                pvOptions.show();
+
+                            } else {
+                                Toast.makeText(getHoldingActivity(), syskeyvalueBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        public void onEror(Call call, int statusCode, Exception e) {
+                        }
+                    });
+
+        } else {
+
+            pvOptions.setPicker(getPickDateItemText(syskeyvalueBean.getSuccessInfo()));
+            pvOptions.show();
+        }
+    }
+
+
+    private List<String> getPickDateItemText(List<SyskeyvalueBean.SuccessInfoBean> list) {
+
+        List<String> mlist = new ArrayList<>();
+
+        if (list != null && list.size() > 0) {
+            for (SyskeyvalueBean.SuccessInfoBean item : list) {
+                mlist.add(item.getText());
+            }
+        }
+
+        return mlist;
+    }
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_rzsb_rztb;
@@ -103,32 +200,41 @@ public class KaoqiRZSBtbFragment extends BaseFragment {
             return false;
         }
 
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("personId", getHoldingActivity().getUserAccount().getUserid());
-        params.put("type", "1");
-        params.put("address", "四川成都");
-        params.put("taskId", "12");
-        params.put("content", "这里是日志的内容部分");
+
 
         if (item.getItemId() == R.id.action_settings) {
             //提交信息
-
-            OkHttpManager.getInstance().postRequest(getRootApiUrl() + "/api/workdaily/write/",
-                    new LoadCallBack<RzsbRztbBean>(getContext()) {
-
-                        @Override
-                        public void onSuccess(Call call, Response response, RzsbRztbBean rzsbRztbBean) {
-                            if (rzsbRztbBean.getRequestCode() != 200) {
-                                Toast.makeText(getContext(), "提交失败，请稍后重试", Toast.LENGTH_SHORT).show();
+            if (rzsb_gznr.getText() == null || rzsb_gznr.getText().toString().length() <= 0) {
+                new MyAlert("", "请填写工作内容", true, false, getContext());
+            }
+            else if (bflxTypeValueId == null || bflxTypeValueId.toString().length() <= 0) {
+                new MyAlert("", "请选择办公类型", true, false, getContext());
+            }
+            else if (rzsb_bgdd.getText() == null || rzsb_bgdd.getText().toString().length() <= 0) {
+                new MyAlert("", "请填写办公地点", true, false, getContext());
+            }else {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("personId", getHoldingActivity().getUserAccount().getUserid());
+                params.put("type", bflxTypeValueId);
+                params.put("address", rzsb_bgdd.getText().toString());
+                params.put("taskId", "");
+                params.put("content", rzsb_gznr.getText().toString());
+                OkHttpManager.getInstance().postRequest(getRootApiUrl() + "/api/workdaily/write/",
+                        new LoadCallBack<ResultBean>(getContext()) {
+                            @Override
+                            public void onSuccess(Call call, Response response, ResultBean resultBean) {
+                                if (resultBean.getRequestCode() != 200) {
+                                    Toast.makeText(getHoldingActivity(), resultBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
 
-                        @Override
-                        public void onEror(Call call, int statusCode, Exception e) {
+                            @Override
+                            public void onEror(Call call, int statusCode, Exception e) {
 
-                        }
-                    }, params);
+                            }
+                        }, params);
 
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -140,11 +246,6 @@ public class KaoqiRZSBtbFragment extends BaseFragment {
         //去掉底部导航
         BottomNavigationView navigation= getHoldingActivity().findViewById(R.id.navigation);
         navigation.setVisibility(View.GONE);
-
-        Rztb_bglx_list.add(new rztb_bglx_model(1,"个人办公"));
-        Rztb_bglx_list.add(new rztb_bglx_model(2,"小组办公"));
-        Rztb_bglx_list.add(new rztb_bglx_model(3,"企业办公"));
-        Rztb_bglx_list.add(new rztb_bglx_model(4,"集团办公"));
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 

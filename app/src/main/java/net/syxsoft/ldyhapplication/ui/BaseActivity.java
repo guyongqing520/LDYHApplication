@@ -27,7 +27,9 @@ public abstract class BaseActivity extends AppActivity {
         //加载个人信息
         UserModel userModel = new UserModel();
         UserAccountBean userAccountBean = userModel.getUserAccountInfo(this);
-
+        userAccountBean.setUsername("huzhimin");
+        userAccountBean.setPassword("123456");
+        userAccountBean.setUserid("101");
         if (userAccountBean == null || userAccountBean.getUserid() == null || userAccountBean.getUserid().length() == 0) {
             return null;
         }
