@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import net.syxsoft.ldyhapplication.R;
 import net.syxsoft.ldyhapplication.bean.UserAccountBean;
@@ -53,4 +54,8 @@ public abstract class BaseFragment extends AppFragment {
        getHoldingActivity().getMenuInflater().inflate(R.menu.menu_nosubmit, menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
 }

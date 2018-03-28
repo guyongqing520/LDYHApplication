@@ -3,6 +3,8 @@ package net.syxsoft.ldyhapplication.callback;
 import android.app.ProgressDialog;
 import android.content.Context;
 
+import net.syxsoft.ldyhapplication.ui.AppActivity;
+
 import java.io.IOException;
 
 import okhttp3.Call;

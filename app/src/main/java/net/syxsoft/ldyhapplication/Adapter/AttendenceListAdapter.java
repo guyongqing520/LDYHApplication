@@ -8,39 +8,40 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.syxsoft.ldyhapplication.R;
-import net.syxsoft.ldyhapplication.bean.KaoqDayanalysisBean;
+import net.syxsoft.ldyhapplication.bean.AttendenceListBean;
+import net.syxsoft.ldyhapplication.utils.DateUtils;
 
+
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by gyq on 2018/2/28.
  */
 
-public class CalendarDayWorkdailyAdapter extends RecyclerView.Adapter<CalendarDayWorkdailyAdapter.ViewHolder> {
+public class AttendenceListAdapter extends RecyclerView.Adapter<AttendenceListAdapter.ViewHolder> {
 
     private Context context;
-    private List<KaoqDayanalysisBean.SuccessInfoBean> successInfoBeans;
+    private List<AttendenceListBean.SuccessInfoBean.RowsBean> rows;
 
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         View view;
         TextView name;
-        TextView attribute;
         TextView address;
 
 
         public ViewHolder(View view) {
             super(view);
             this.view = view;
-            this.name = view.findViewById(R.id.qdsj);
-            this.attribute = view.findViewById(R.id.state_text);
-            this.address = view.findViewById(R.id.adress_text);
+            this.name = view.findViewById(R.id.name);
+            this.address = view.findViewById(R.id.address);
         }
     }
 
-    public CalendarDayWorkdailyAdapter(Context context, List<KaoqDayanalysisBean.SuccessInfoBean> successInfoBeans) {
+    public AttendenceListAdapter(Context context, List<AttendenceListBean.SuccessInfoBean.RowsBean> rows) {
         this.context = context;
-        this.successInfoBeans = successInfoBeans;
+        this.rows = rows;
     }
 
     @Override
@@ -50,7 +51,7 @@ public class CalendarDayWorkdailyAdapter extends RecyclerView.Adapter<CalendarDa
             context = parent.getContext();
         }
 
-        View view = LayoutInflater.from(context).inflate(R.layout.date_dayanalysis_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.attendence_item_layout, parent, false);
         return new ViewHolder(view);
     }
 
@@ -58,13 +59,16 @@ public class CalendarDayWorkdailyAdapter extends RecyclerView.Adapter<CalendarDa
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        holder.name.setText(successInfoBeans.get(position).getName());
-        holder.address.setText(successInfoBeans.get(position).getAddress());
-        holder.attribute.setText(successInfoBeans.get(position).getAttribute());
+        try {
+            Date date = DateUtils.getDateGST(rows.get(position).getTime(), "yyyy-MM-dd'T'HH:mm");
+            holder.name.setText(DateUtils.getSimpleDateFormat(date, "yyyy年MM月dd日 HH:mm"));
+            holder.address.setText("签到地点：" + rows.get(position).getAddress());
+        } catch (Exception ex) {
+        }
     }
 
     @Override
     public int getItemCount() {
-        return successInfoBeans.size();
+        return rows.size();
     }
 }

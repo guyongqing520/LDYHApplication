@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -49,6 +50,15 @@ public class KaoqiDakaTongjiFragment extends BaseFragment {
 
         //启用返回导航
         actionBar.setNavigationIcon(R.mipmap.title_bar_back);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home) {
+            getHoldingActivity().finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Nullable

@@ -4,6 +4,7 @@ package net.syxsoft.ldyhapplication.utils;
  * Created by 谷永庆 on 2018/2/17.
  */
 
+import java.security.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -208,4 +209,12 @@ public class DateUtils {
         return date;
     }
 
+    public static Date getDateGST(Object obj, String pattern) throws ParseException{
+        String str = obj.toString().trim();
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        if(str.equals(""))
+            return null;
+        else
+            return sdf.parse(str);
+    }
 }

@@ -1,13 +1,10 @@
 package net.syxsoft.ldyhapplication.ui;
 
 
-import android.os.Binder;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,8 +18,10 @@ import com.bigkoo.pickerview.TimePickerView;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
 import net.syxsoft.ldyhapplication.Adapter.AttendenceListAdapter;
+import net.syxsoft.ldyhapplication.Adapter.AttendenceListmyqijiaAdapter;
 import net.syxsoft.ldyhapplication.R;
 import net.syxsoft.ldyhapplication.bean.AttendenceListBean;
+import net.syxsoft.ldyhapplication.bean.LeavelistBean;
 import net.syxsoft.ldyhapplication.callback.LoadCallBack;
 import net.syxsoft.ldyhapplication.utils.DateUtils;
 import net.syxsoft.ldyhapplication.utils.OkHttpManager;
@@ -44,19 +43,19 @@ import static net.syxsoft.ldyhapplication.utils.DateUtils.getSimpleDateFormat;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class KaoqiguanlillistFragment extends BaseFragment {
+public class KaoqiguanlillistmyqijiaFragment extends BaseFragment {
 
-    private AttendenceListAdapter attendenceListAdapter;
+    private AttendenceListmyqijiaAdapter attendenceListmyqijiaAdapter;
     private int pageIndex = 1;
     private int total = 0;
-    private String starttime=DateUtils.getSimpleDateFormat(Calendar.getInstance().getTime(),"yyyy-MM-01");
-    private String endtime=DateUtils.getSimpleDateFormat(Calendar.getInstance().getTime(),null);
-    private List<AttendenceListBean.SuccessInfoBean.RowsBean> rows = new ArrayList<>();
+    private String starttime = DateUtils.getSimpleDateFormat(Calendar.getInstance().getTime(), "yyyy-MM-01");
+    private String endtime = DateUtils.getSimpleDateFormat(Calendar.getInstance().getTime(), null);
+    private List<LeavelistBean.SuccessInfoBean.RowsBean> rows = new ArrayList<>();
 
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_kaoqiguanli_list;
+        return R.layout.fragment_kaoqi_daka_qinjia_list;
     }
 
     @Override
@@ -107,8 +106,8 @@ public class KaoqiguanlillistFragment extends BaseFragment {
         pullLoadMoreRecyclerView.setLinearLayout();
         initData(starttime, endtime,true);
 
-        start_time.setText(DateUtils.getSimpleDateFormat(Calendar.getInstance().getTime(),"yyyy年MM月01日"));
-        end_time.setText(DateUtils.getSimpleDateFormat(Calendar.getInstance().getTime(),"yyyy年MM月dd日"));
+        start_time.setText(DateUtils.getSimpleDateFormat(Calendar.getInstance().getTime(), "yyyy年MM月01日"));
+        end_time.setText(DateUtils.getSimpleDateFormat(Calendar.getInstance().getTime(), "yyyy年MM月dd日"));
 
         pullLoadMoreRecyclerView.setOnPullLoadMoreListener(new PullLoadMoreRecyclerView.PullLoadMoreListener() {
             @Override
@@ -134,33 +133,32 @@ public class KaoqiguanlillistFragment extends BaseFragment {
     }
 
     //拉取个人考勤情况
-
-    private void initData(String start, String end,final boolean ispush) {
+    private void initData(String start, String end, final boolean ispush) {
 
         //提交信息
-        OkHttpManager.getInstance().getRequest(getRootApiUrl() + "/api/attendence/list/" + getHoldingActivity().getUserAccount().getUserid() + "/" + start +
-                        "/" + end + "/" + pageIndex + "/" + "10",
-                new LoadCallBack<AttendenceListBean>(getContext()) {
+        OkHttpManager.getInstance().getRequest(getRootApiUrl() + "/api/attappply/leavelist/" + getHoldingActivity().getUserAccount().getUserid() + "/" + start +
+                        "/" + end + "/" + pageIndex + "/10/false/-1",
+                new LoadCallBack<LeavelistBean>(getContext()) {
 
                     @Override
                     public void OnRequestBefore(Request request) {
-                      //取消加载默认加载框,首页不取消
-                        if(ispush){
+                        //取消加载默认加载框,首页不取消
+                        if (ispush) {
                             super.OnRequestBefore(request);
                         }
                     }
 
                     @Override
-                    public void onSuccess(Call call, Response response, AttendenceListBean attendenceListBean) {
+                    public void onSuccess(Call call, Response response, LeavelistBean leavelistBean) {
 
-                        if (attendenceListBean.getRequestCode() == 200) {
-                            AttendenceListBean.SuccessInfoBean successInfoBeans = attendenceListBean.getSuccessInfo();
+                        if (leavelistBean.getRequestCode() == 200) {
+                            LeavelistBean.SuccessInfoBean successInfoBeans = leavelistBean.getSuccessInfo();
                             if (successInfoBeans != null && successInfoBeans.getRows().size() >= 0) {
 
                                 rows.addAll(successInfoBeans.getRows());
-                                attendenceListAdapter = new AttendenceListAdapter(getContext(), rows);
-                                pullLoadMoreRecyclerView.setAdapter(attendenceListAdapter);
-                                attendenceListAdapter.notifyDataSetChanged();
+                                attendenceListmyqijiaAdapter = new AttendenceListmyqijiaAdapter(getContext(), rows);
+                                pullLoadMoreRecyclerView.setAdapter(attendenceListmyqijiaAdapter);
+                                attendenceListmyqijiaAdapter.notifyDataSetChanged();
 
                                 pageIndex++;
                                 total = successInfoBeans.getTotal();
@@ -200,7 +198,7 @@ public class KaoqiguanlillistFragment extends BaseFragment {
             @Override
             public void onTimeSelect(Date date, View v) {//选中事件回调
                 start_time.setText(getSimpleDateFormat(date, "yyyy年MM月dd日"));
-                starttime=getSimpleDateFormat(date, "yyyy-MM-dd");
+                starttime = getSimpleDateFormat(date, "yyyy-MM-dd");
 
                 pageIndex = 1;
                 rows.clear();
@@ -225,7 +223,7 @@ public class KaoqiguanlillistFragment extends BaseFragment {
             @Override
             public void onTimeSelect(Date date, View v) {//选中事件回调
                 end_time.setText(getSimpleDateFormat(date, "yyyy年MM月dd日"));
-                endtime=getSimpleDateFormat(date, "yyyy-MM-dd");
+                endtime = getSimpleDateFormat(date, "yyyy-MM-dd");
 
                 pageIndex = 1;
                 rows.clear();
@@ -244,8 +242,9 @@ public class KaoqiguanlillistFragment extends BaseFragment {
     }
 
 
-    @OnClick(R.id.tab_text2)
+    @OnClick(R.id.tab_text1)
     public void onTabBtnClicked() {
-        getHoldingActivity().pushFragment(new KaoqiguanlillistmyqijiaFragment());
+        getHoldingActivity().pushFragment(new KaoqiguanlillistFragment());
     }
+
 }

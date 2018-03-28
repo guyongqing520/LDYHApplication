@@ -16,6 +16,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -186,6 +187,16 @@ public class KaoqiDakaFragment extends BaseFragment {
         //启用返回导航
         actionBar.setNavigationIcon(R.mipmap.title_bar_back);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home) {
+            getHoldingActivity().finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Nullable
     @Override
