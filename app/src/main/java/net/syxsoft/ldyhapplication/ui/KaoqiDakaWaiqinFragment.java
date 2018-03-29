@@ -144,9 +144,10 @@ public class KaoqiDakaWaiqinFragment extends BaseFragment {
 
                         @Override
                         public void onSuccess(Call call, Response response, ResultBean resultBean) {
-
-                            if (resultBean.getRequestCode() != 200) {
-                                Toast.makeText(getHoldingActivity(), resultBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                            if (getHoldingActivity()!=null) {
+                                if (resultBean.getRequestCode() != 200) {
+                                    Toast.makeText(getHoldingActivity(), resultBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
 

@@ -83,7 +83,8 @@ public class KaoqiguanlillistmyqijiaFragment extends BaseFragment {
                 pushFragment(new KaoqiguanlillistdateFragment());
                 break;
             case android.R.id.home:
-                getHoldingActivity().finish();
+                popFragment(new KaoqiguanlillistdateFragment());
+                popFragment(new KaoqiguanlillistmyqijiaFragment());
                 break;
 
         }
@@ -135,9 +136,10 @@ public class KaoqiguanlillistmyqijiaFragment extends BaseFragment {
     //拉取个人考勤情况
     private void initData(String start, String end, final boolean ispush) {
 
+        String url=getRootApiUrl() + "/api/attappply/leavelist/" + getHoldingActivity().getUserAccount().getUserid() + "/" + start +
+                "/" + end + "/" + pageIndex + "/10/false/-1";
         //提交信息
-        OkHttpManager.getInstance().getRequest(getRootApiUrl() + "/api/attappply/leavelist/" + getHoldingActivity().getUserAccount().getUserid() + "/" + start +
-                        "/" + end + "/" + pageIndex + "/10/false/-1",
+        OkHttpManager.getInstance().getRequest(url,
                 new LoadCallBack<LeavelistBean>(getContext()) {
 
                     @Override
@@ -151,25 +153,27 @@ public class KaoqiguanlillistmyqijiaFragment extends BaseFragment {
                     @Override
                     public void onSuccess(Call call, Response response, LeavelistBean leavelistBean) {
 
-                        if (leavelistBean.getRequestCode() == 200) {
-                            LeavelistBean.SuccessInfoBean successInfoBeans = leavelistBean.getSuccessInfo();
-                            if (successInfoBeans != null && successInfoBeans.getRows().size() >= 0) {
+                        if (getHoldingActivity()!=null) {
+                            if (leavelistBean.getRequestCode() == 200) {
+                                LeavelistBean.SuccessInfoBean successInfoBeans = leavelistBean.getSuccessInfo();
+                                if (successInfoBeans != null && successInfoBeans.getRows().size() >= 0) {
 
-                                rows.addAll(successInfoBeans.getRows());
-                                attendenceListmyqijiaAdapter = new AttendenceListmyqijiaAdapter(getContext(), rows);
-                                pullLoadMoreRecyclerView.setAdapter(attendenceListmyqijiaAdapter);
-                                attendenceListmyqijiaAdapter.notifyDataSetChanged();
+                                    rows.addAll(successInfoBeans.getRows());
+                                    attendenceListmyqijiaAdapter = new AttendenceListmyqijiaAdapter(getContext(), rows);
+                                    pullLoadMoreRecyclerView.setAdapter(attendenceListmyqijiaAdapter);
+                                    attendenceListmyqijiaAdapter.notifyDataSetChanged();
 
-                                pageIndex++;
-                                total = successInfoBeans.getTotal();
+                                    pageIndex++;
+                                    total = successInfoBeans.getTotal();
 
+                                    pullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+                                    pullLoadMoreRecyclerView.setRefreshing(false);
+
+                                }
+                            } else {
                                 pullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                                 pullLoadMoreRecyclerView.setRefreshing(false);
-
                             }
-                        } else {
-                            pullLoadMoreRecyclerView.setPullLoadMoreCompleted();
-                            pullLoadMoreRecyclerView.setRefreshing(false);
                         }
                     }
 

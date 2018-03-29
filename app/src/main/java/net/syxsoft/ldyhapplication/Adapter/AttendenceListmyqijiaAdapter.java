@@ -71,15 +71,20 @@ public class AttendenceListmyqijiaAdapter extends RecyclerView.Adapter<Attendenc
             holder.starttime.setText("开始时间：" + rows.get(position).getStart());
             holder.endtime.setText("结束时间：" + rows.get(position).getStart());
 
-            String status = rows.get(position).getStatus();
-            holder.state.setText(status);
+            holder.state.setText(rows.get(position).getStatustext());
 
-            if (status.equals("通过")) {
-                holder.state.setTextColor(ContextCompat.getColor(context, R.color.colorbgpink1));
-            } else if (status.equals("未审批")) {
-                holder.state.setTextColor(ContextCompat.getColor(context, R.color.colorbgpink));
-            } else if (status.equals("已拒绝")) {
-                holder.state.setTextColor(ContextCompat.getColor(context, R.color.colorbgpink2));
+            int status = rows.get(position).getStatus();
+
+            switch (status) {
+                case 0:
+                    holder.state.setTextColor(ContextCompat.getColor(context, R.color.colorbgpink));
+                    break;
+                case 1:
+                    holder.state.setTextColor(ContextCompat.getColor(context, R.color.colorbgpink1));
+                    break;
+                case 2:
+                    holder.state.setTextColor(ContextCompat.getColor(context, R.color.colorbgpink2));
+                    break;
             }
 
 

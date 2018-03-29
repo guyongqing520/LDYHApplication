@@ -92,7 +92,7 @@ public class KaoqiguanlillistdateFragment extends BaseFragment {
 
         setTitle();
 
-        setSelectDateTitle(year,month,today,DateUtils.dateToWeek(calendar.getTime().toString()));
+        setSelectDateTitle(year, month, today, DateUtils.dateToWeek(calendar.getTime().toString()));
     }
 
     //拉取月考勤
@@ -104,11 +104,14 @@ public class KaoqiguanlillistdateFragment extends BaseFragment {
                     @Override
                     public void onSuccess(Call call, Response response, KaoqMonthanalysisBean kaoqMonthanalysisBean) {
 
-                        if (kaoqMonthanalysisBean.getRequestCode() == 200) {
-                            dateAdapter = new CalendarMonthanalysisAdapter(getContext(), days, year, month, today, kaoqMonthanalysisBean,recylerviewdatedayanalysisView,
-                                    getHoldingActivity().getUserAccount().getUserid(),select_date);//传入当前月的年
-                            recyclerView.setAdapter(dateAdapter);
-                            dateAdapter.notifyDataSetChanged();
+                        if (getHoldingActivity() != null) {
+                            if (kaoqMonthanalysisBean.getRequestCode() == 200 && !getHoldingActivity().isFinishing()) {
+                                dateAdapter = new CalendarMonthanalysisAdapter(getContext(), days, year, month, today, kaoqMonthanalysisBean, recylerviewdatedayanalysisView,
+                                        getHoldingActivity().getUserAccount().getUserid(), select_date);//传入当前月的年
+                                recyclerView.setAdapter(dateAdapter);
+                                dateAdapter.notifyDataSetChanged();
+
+                            }
                         }
                     }
 
@@ -120,7 +123,7 @@ public class KaoqiguanlillistdateFragment extends BaseFragment {
     }
 
     //拉取个人考勤情况
-    public void initDayanalysis(int year,int month,int day) {
+    public void initDayanalysis(int year, int month, int day) {
 
         //提交信息
         OkHttpManager.getInstance().getRequest(getRootApiUrl() + "/api/attendence/dayanalysis/" + getHoldingActivity().getUserAccount().getUserid() + "/" + year +
@@ -130,12 +133,14 @@ public class KaoqiguanlillistdateFragment extends BaseFragment {
                     @Override
                     public void onSuccess(Call call, Response response, KaoqDayanalysisBean kaoqDayanalysisBean) {
 
-                        if (kaoqDayanalysisBean.getRequestCode() == 200) {
-                            List<KaoqDayanalysisBean.SuccessInfoBean> successInfoBeans = kaoqDayanalysisBean.getSuccessInfo();
-                            if (successInfoBeans != null && successInfoBeans.size() > 0) {
-                                calendarDayanalysisAdapter = new CalendarDayanalysisAdapter(getContext(), successInfoBeans);
-                                recylerviewdatedayanalysisView.setAdapter(calendarDayanalysisAdapter);
-                                calendarDayanalysisAdapter.notifyDataSetChanged();
+                        if (getHoldingActivity() != null) {
+                            if (kaoqDayanalysisBean.getRequestCode() == 200 && !getHoldingActivity().isFinishing()) {
+                                List<KaoqDayanalysisBean.SuccessInfoBean> successInfoBeans = kaoqDayanalysisBean.getSuccessInfo();
+                                if (successInfoBeans != null && successInfoBeans.size() > 0) {
+                                    calendarDayanalysisAdapter = new CalendarDayanalysisAdapter(getContext(), successInfoBeans);
+                                    recylerviewdatedayanalysisView.setAdapter(calendarDayanalysisAdapter);
+                                    calendarDayanalysisAdapter.notifyDataSetChanged();
+                                }
                             }
                         }
                     }
@@ -177,8 +182,8 @@ public class KaoqiguanlillistdateFragment extends BaseFragment {
         record_title.setText(title);
     }
 
-    private void setSelectDateTitle(int year,int month,int day,String week) {
-        String title = year + "年" + month + "月" + day+"（" + week + "）";
+    private void setSelectDateTitle(int year, int month, int day, String week) {
+        String title = year + "年" + month + "月" + day + "（" + week + "）";
         select_date.setText(title);
     }
 
@@ -201,8 +206,8 @@ public class KaoqiguanlillistdateFragment extends BaseFragment {
         initKaoqin();
 
         //布局及初始化个人考勤情况
-        recylerviewdatedayanalysisView.setLayoutManager(new LinearLayoutManager(container.getContext(),LinearLayoutManager.VERTICAL,true));
-        initDayanalysis(year,month,today);
+        recylerviewdatedayanalysisView.setLayoutManager(new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, true));
+        initDayanalysis(year, month, today);
 
 
         return view;

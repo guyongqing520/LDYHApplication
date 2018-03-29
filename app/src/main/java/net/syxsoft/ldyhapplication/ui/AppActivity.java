@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -50,6 +51,7 @@ public abstract class AppActivity extends AppCompatActivity{
             BottomNavigationView navigation = findViewById(R.id.navigation);
             BottomNavigationViewHelper.disableShiftMode(navigation);
             navigation.setOnNavigationItemSelectedListener(getNavigationItemSelectedListener());
+
         }catch(Exception ex) {}
 
         //添加Activity
@@ -68,19 +70,14 @@ public abstract class AppActivity extends AppCompatActivity{
     public void pushFragment(BaseFragment fragment){
         //此方法指在让保存唯一碎片，并让当前压栈的碎片位于最上方
         if (fragment != null){
-            int num = getSupportFragmentManager().getBackStackEntryCount();
-            for (int i = 0; i < num; i++) {
-                FragmentManager.BackStackEntry backstatck = getSupportFragmentManager().getBackStackEntryAt(i);
 
-                if (backstatck.getName().equals(fragment.getClass().getSimpleName())){
-                    getSupportFragmentManager().popBackStack(fragment.getClass().getSimpleName(),1);
-                }
-            }
+            FragmentManager fm = getSupportFragmentManager();
+            fm.popBackStack(fragment.getClass().getName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            FragmentTransaction transaction = fm.beginTransaction();
+            transaction.replace(getFragmentContainerId(), fragment, fragment.getClass().getName());
+            transaction.addToBackStack(null);//将fragment加入返回栈
+            transaction.commitAllowingStateLoss();
 
-            getSupportFragmentManager().beginTransaction()
-                    .replace(getFragmentContainerId(), fragment)
-                    .addToBackStack(((Object)fragment).getClass().getSimpleName())
-                    .commitAllowingStateLoss();
         }
     }
 

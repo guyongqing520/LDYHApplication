@@ -84,7 +84,8 @@ public class KaoqiguanlillistFragment extends BaseFragment {
                 pushFragment(new KaoqiguanlillistdateFragment());
                 break;
             case android.R.id.home:
-                getHoldingActivity().finish();
+                popFragment(new KaoqiguanlillistdateFragment());
+                popFragment(new KaoqiguanlillistmyqijiaFragment());
                 break;
 
         }
@@ -153,25 +154,27 @@ public class KaoqiguanlillistFragment extends BaseFragment {
                     @Override
                     public void onSuccess(Call call, Response response, AttendenceListBean attendenceListBean) {
 
-                        if (attendenceListBean.getRequestCode() == 200) {
-                            AttendenceListBean.SuccessInfoBean successInfoBeans = attendenceListBean.getSuccessInfo();
-                            if (successInfoBeans != null && successInfoBeans.getRows().size() >= 0) {
+                        if (getHoldingActivity()!=null) {
+                            if (attendenceListBean.getRequestCode() == 200) {
+                                AttendenceListBean.SuccessInfoBean successInfoBeans = attendenceListBean.getSuccessInfo();
+                                if (successInfoBeans != null && successInfoBeans.getRows().size() >= 0) {
 
-                                rows.addAll(successInfoBeans.getRows());
-                                attendenceListAdapter = new AttendenceListAdapter(getContext(), rows);
-                                pullLoadMoreRecyclerView.setAdapter(attendenceListAdapter);
-                                attendenceListAdapter.notifyDataSetChanged();
+                                    rows.addAll(successInfoBeans.getRows());
+                                    attendenceListAdapter = new AttendenceListAdapter(getContext(), rows);
+                                    pullLoadMoreRecyclerView.setAdapter(attendenceListAdapter);
+                                    attendenceListAdapter.notifyDataSetChanged();
 
-                                pageIndex++;
-                                total = successInfoBeans.getTotal();
+                                    pageIndex++;
+                                    total = successInfoBeans.getTotal();
 
+                                    pullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+                                    pullLoadMoreRecyclerView.setRefreshing(false);
+
+                                }
+                            } else {
                                 pullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                                 pullLoadMoreRecyclerView.setRefreshing(false);
-
                             }
-                        } else {
-                            pullLoadMoreRecyclerView.setPullLoadMoreCompleted();
-                            pullLoadMoreRecyclerView.setRefreshing(false);
                         }
                     }
 

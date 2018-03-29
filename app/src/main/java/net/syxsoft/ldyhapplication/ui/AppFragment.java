@@ -1,4 +1,5 @@
 package net.syxsoft.ldyhapplication.ui;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,29 +14,37 @@ import android.view.ViewGroup;
 public abstract class AppFragment extends Fragment {
 
     protected abstract int getLayoutId();
+
     protected abstract Toolbar getToolbar();
+
     protected abstract String getRootApiUrl();
 
     protected abstract void initView(View view, Bundle savedInstanceState);
-    protected void releaseView(){
+
+    protected void releaseView() {
 
     }
 
     protected abstract void initActionBar(Toolbar actionBar);
 
-    protected BaseActivity getHoldingActivity(){
-        if (getActivity() instanceof BaseActivity){
-            return (BaseActivity)getActivity();
-        }else {
+    protected BaseActivity getHoldingActivity() {
+
+        if (getActivity() == null || getActivity().isFinishing()) {
+            return null;
+        }
+
+        if (getActivity() instanceof BaseActivity) {
+            return (BaseActivity) getActivity();
+        } else {
             throw new ClassCastException("activity must extends BaseActivity");
         }
     }
 
-    protected void pushFragment(BaseFragment fragment){
+    protected void pushFragment(BaseFragment fragment) {
         getHoldingActivity().pushFragment(fragment);
     }
 
-    protected void popFragment(BaseFragment fragment){
+    protected void popFragment(BaseFragment fragment) {
         getHoldingActivity().popFragment();
     }
 
@@ -54,10 +63,10 @@ public abstract class AppFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        Toolbar toolbar =getToolbar();
+        Toolbar toolbar = getToolbar();
         getHoldingActivity().setSupportActionBar(toolbar);
 
-        if (toolbar != null){
+        if (toolbar != null) {
             initActionBar(toolbar);
         }
     }

@@ -11,6 +11,7 @@ import net.syxsoft.ldyhapplication.bean.UserAccountBean;
 import net.syxsoft.ldyhapplication.model.UserModel;
 
 public abstract class BaseActivity extends AppActivity {
+
     @Override
     protected int getContentViewId() {
         return R.layout.activity_base;
@@ -27,11 +28,11 @@ public abstract class BaseActivity extends AppActivity {
         //加载个人信息
         UserModel userModel = new UserModel();
         UserAccountBean userAccountBean = userModel.getUserAccountInfo(this);
-        userAccountBean.setUsername("huzhimin");
-        userAccountBean.setPassword("123456");
-        userAccountBean.setUserid("101");
+
         if (userAccountBean == null || userAccountBean.getUserid() == null || userAccountBean.getUserid().length() == 0) {
-            return null;
+             Intent intent = new Intent(this, LoginActivity.class);
+             startActivity(intent);
+             finish();
         }
         return userAccountBean;
     }

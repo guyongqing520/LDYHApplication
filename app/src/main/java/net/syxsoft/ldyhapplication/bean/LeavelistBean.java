@@ -11,7 +11,7 @@ public class LeavelistBean {
     /**
      * RequestCode : 200
      * ErrorMessage : null
-     * SuccessInfo : {"rows":[{"Id":"362eb15f-bb07-4f47-8035-ae6b1078bbfc","type":"病假","start":"2018-03-05","end":"2018-03-08","addtime":"2018-03-05","longtime":1.2,"reason":"份饭","Status":"通过","pname":"审核人：gc"},{"Id":"f779745c-365d-48b9-b7cd-6a6c23ae6fc2","type":"病假","start":"2018-03-05","end":"2018-03-06","addtime":"2018-03-05","longtime":0,"reason":"测试","Status":"未审批","pname":"审核人：gc"}],"total":2}
+     * SuccessInfo : {"rows":[{"Id":"8d532e06-c838-4a0f-80a5-0274412da84b","type":"年休假","start":"2018-03-28","end":"2018-03-05","addtime":"2018-03-28","longtime":0,"reason":"测试数据","statustext":"未审批","status":0,"pname":"审核人：宝宝8013"},{"Id":"3a565081-cc4d-44e4-83be-a7df830c795f","type":"年休假","start":"2018-03-13","end":"2018-03-05","addtime":"2018-03-28","longtime":0,"reason":"测试","statustext":"未审批","status":0,"pname":"审核人：宝宝8013"},{"Id":"362eb15f-bb07-4f47-8035-ae6b1078bbfc","type":"病假","start":"2018-03-05","end":"2018-03-08","addtime":"2018-03-05","longtime":1.2,"reason":"份饭","statustext":"已批准","status":1,"pname":"审核人：gc11"},{"Id":"f779745c-365d-48b9-b7cd-6a6c23ae6fc2","type":"病假","start":"2018-03-05","end":"2018-03-06","addtime":"2018-03-05","longtime":0,"reason":"测试","statustext":"未审批","status":0,"pname":"审核人：gc11"}],"total":4}
      */
 
     private int RequestCode;
@@ -44,8 +44,8 @@ public class LeavelistBean {
 
     public static class SuccessInfoBean {
         /**
-         * rows : [{"Id":"362eb15f-bb07-4f47-8035-ae6b1078bbfc","type":"病假","start":"2018-03-05","end":"2018-03-08","addtime":"2018-03-05","longtime":1.2,"reason":"份饭","Status":"通过","pname":"审核人：gc"},{"Id":"f779745c-365d-48b9-b7cd-6a6c23ae6fc2","type":"病假","start":"2018-03-05","end":"2018-03-06","addtime":"2018-03-05","longtime":0,"reason":"测试","Status":"未审批","pname":"审核人：gc"}]
-         * total : 2
+         * rows : [{"Id":"8d532e06-c838-4a0f-80a5-0274412da84b","type":"年休假","start":"2018-03-28","end":"2018-03-05","addtime":"2018-03-28","longtime":0,"reason":"测试数据","statustext":"未审批","status":0,"pname":"审核人：宝宝8013"},{"Id":"3a565081-cc4d-44e4-83be-a7df830c795f","type":"年休假","start":"2018-03-13","end":"2018-03-05","addtime":"2018-03-28","longtime":0,"reason":"测试","statustext":"未审批","status":0,"pname":"审核人：宝宝8013"},{"Id":"362eb15f-bb07-4f47-8035-ae6b1078bbfc","type":"病假","start":"2018-03-05","end":"2018-03-08","addtime":"2018-03-05","longtime":1.2,"reason":"份饭","statustext":"已批准","status":1,"pname":"审核人：gc11"},{"Id":"f779745c-365d-48b9-b7cd-6a6c23ae6fc2","type":"病假","start":"2018-03-05","end":"2018-03-06","addtime":"2018-03-05","longtime":0,"reason":"测试","statustext":"未审批","status":0,"pname":"审核人：gc11"}]
+         * total : 4
          */
 
         private int total;
@@ -69,15 +69,16 @@ public class LeavelistBean {
 
         public static class RowsBean {
             /**
-             * Id : 362eb15f-bb07-4f47-8035-ae6b1078bbfc
-             * type : 病假
-             * start : 2018-03-05
-             * end : 2018-03-08
-             * addtime : 2018-03-05
-             * longtime : 1.2
-             * reason : 份饭
-             * Status : 通过
-             * pname : 审核人：gc
+             * Id : 8d532e06-c838-4a0f-80a5-0274412da84b
+             * type : 年休假
+             * start : 2018-03-28
+             * end : 2018-03-05
+             * addtime : 2018-03-28
+             * longtime : 0.0
+             * reason : 测试数据
+             * statustext : 未审批
+             * status : 0
+             * pname : 审核人：宝宝8013
              */
 
             private String Id;
@@ -87,7 +88,8 @@ public class LeavelistBean {
             private String addtime;
             private double longtime;
             private String reason;
-            private String Status;
+            private String statustext;
+            private int status;
             private String pname;
 
             public String getId() {
@@ -146,12 +148,20 @@ public class LeavelistBean {
                 this.reason = reason;
             }
 
-            public String getStatus() {
-                return Status;
+            public String getStatustext() {
+                return statustext;
             }
 
-            public void setStatus(String Status) {
-                this.Status = Status;
+            public void setStatustext(String statustext) {
+                this.statustext = statustext;
+            }
+
+            public int getStatus() {
+                return status;
+            }
+
+            public void setStatus(int status) {
+                this.status = status;
             }
 
             public String getPname() {

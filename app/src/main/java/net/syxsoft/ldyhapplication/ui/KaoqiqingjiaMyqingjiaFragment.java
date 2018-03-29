@@ -80,12 +80,14 @@ public class KaoqiqingjiaMyqingjiaFragment extends BaseFragment {
                                     @Override
                                     public void onSuccess(Call call, Response response, PersoninfoBean personinfoBean) {
 
-                                        if (personinfoBean != null && personinfoBean.getRequestCode() == 200) {
-                                            Annualleave = personinfoBean.getSuccessInfo().getPersonInfo().getAnnualleave();
-                                            longtime.setHint("当前年假还有" + (int) Annualleave * 8 + "小时");
+                                        if (getHoldingActivity()!=null) {
+                                            if (personinfoBean != null && personinfoBean.getRequestCode() == 200) {
+                                                Annualleave = personinfoBean.getSuccessInfo().getPersonInfo().getAnnualleave();
+                                                longtime.setHint("当前年假还有" + (int) Annualleave * 8 + "小时");
 
-                                        } else {
-                                            Toast.makeText(getHoldingActivity(), syskeyvalueBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(getHoldingActivity(), syskeyvalueBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                                            }
                                         }
                                     }
 
@@ -112,13 +114,15 @@ public class KaoqiqingjiaMyqingjiaFragment extends BaseFragment {
                         @Override
                         public void onSuccess(Call call, Response response, SyskeyvalueBean syskeyvalueBean1) {
 
-                            if (syskeyvalueBean1 != null && syskeyvalueBean1.getRequestCode() == 200) {
-                                syskeyvalueBean = syskeyvalueBean1;
-                                pvOptions.setPicker(getPickDateItemText(syskeyvalueBean.getSuccessInfo()));
-                                pvOptions.show();
+                            if (getHoldingActivity()!=null) {
+                                if (syskeyvalueBean1 != null && syskeyvalueBean1.getRequestCode() == 200) {
+                                    syskeyvalueBean = syskeyvalueBean1;
+                                    pvOptions.setPicker(getPickDateItemText(syskeyvalueBean.getSuccessInfo()));
+                                    pvOptions.show();
 
-                            } else {
-                                Toast.makeText(getHoldingActivity(), syskeyvalueBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getHoldingActivity(), syskeyvalueBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
 
@@ -209,15 +213,17 @@ public class KaoqiqingjiaMyqingjiaFragment extends BaseFragment {
                         @Override
                         public void onSuccess(Call call, Response response, DirectleaderBean directleaderBean1) {
 
-                            if (directleaderBean1 != null && directleaderBean1.getRequestCode() == 200) {
+                            if (getHoldingActivity()!=null) {
+                                if (directleaderBean1 != null && directleaderBean1.getRequestCode() == 200) {
 
-                                directleaderBean = directleaderBean1;
+                                    directleaderBean = directleaderBean1;
 
-                                pvOptions.setPicker(getDirectleaderItemText(directleaderBean.getSuccessInfo()));
-                                pvOptions.show();
+                                    pvOptions.setPicker(getDirectleaderItemText(directleaderBean.getSuccessInfo()));
+                                    pvOptions.show();
 
-                            } else {
-                                Toast.makeText(getHoldingActivity(), directleaderBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getHoldingActivity(), directleaderBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
 
@@ -313,8 +319,10 @@ public class KaoqiqingjiaMyqingjiaFragment extends BaseFragment {
                             @Override
                             public void onSuccess(Call call, Response response, ResultBean resultBean) {
 
-                                if (resultBean.getRequestCode() != 200) {
-                                    Toast.makeText(getHoldingActivity(), resultBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                                if (getHoldingActivity()!=null) {
+                                    if (resultBean.getRequestCode() != 200) {
+                                        Toast.makeText(getHoldingActivity(), resultBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             }
 

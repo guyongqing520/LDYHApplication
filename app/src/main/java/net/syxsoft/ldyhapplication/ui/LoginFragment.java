@@ -15,12 +15,14 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.syxsoft.ldyhapplication.R;
 import net.syxsoft.ldyhapplication.bean.LoginBean;
 import net.syxsoft.ldyhapplication.callback.GsonObjectCallback;
 import net.syxsoft.ldyhapplication.callback.LoadCallBack;
 import net.syxsoft.ldyhapplication.model.UserModel;
 import net.syxsoft.ldyhapplication.utils.MD5Utils;
+import net.syxsoft.ldyhapplication.utils.MyAlert;
 import net.syxsoft.ldyhapplication.utils.OkHttp3Utils;
 import net.syxsoft.ldyhapplication.utils.OkHttpManager;
 
@@ -73,32 +75,30 @@ public class LoginFragment extends BaseFragment {
         OkHttpManager.getInstance().postRequest(getRootApiUrl() + "/api/user/login", new LoadCallBack<LoginBean>(getActivity()) {
                     @Override
                     public void onSuccess(Call call, Response response, LoginBean loginBean) {
-                        if (loginBean.getRequestCode() != 200) {
-                            new AlertDialog.Builder(getContext())
-                                    .setMessage(loginBean.getErrorMessage().toString())
-                                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                        }
-                                    }).create().show();
-                            return;
-                        }
 
-                        //增加用户信息，以后都要利用此帐号和密码进行对比用户，防止此用户信息有新的更新作用
-                        UserModel userModel = new UserModel();
+                        if (getHoldingActivity()!=null) {
 
-                        if (loginBean.getSuccessInfo() != null) {
-                            userModel.addUserAccountInfo(username, password, loginBean.getSuccessInfo().getPersonId(), getContext());
+                            if (loginBean.getRequestCode() != 200) {
+                                new MyAlert("", loginBean.getErrorMessage().toString(), true, false, getContext());
+                                return;
+                            }
+
+                            //增加用户信息，以后都要利用此帐号和密码进行对比用户，防止此用户信息有新的更新作用
+                            UserModel userModel = new UserModel();
+
+                            if (loginBean.getSuccessInfo() != null) {
+                                userModel.addUserAccountInfo(username, password, loginBean.getSuccessInfo().getPersonId(), getContext());
+                            }
+                            //导航到主面板
+                            Intent intent = new Intent(getContext(), IndexActivity.class);
+                            startActivity(intent);
+                            getHoldingActivity().finish();
                         }
-                        //导航到主面板
-                        Intent intent = new Intent(getContext(), IndexActivity.class);
-                        startActivity(intent);
-                        getHoldingActivity().finish();
                     }
 
                     @Override
                     public void onEror(Call call, int statusCode, Exception e) {
-
+                        //Toast.makeText(getContext(), "网络连接错误", Toast.LENGTH_SHORT).show();
                     }
                 }
                 , params);
@@ -123,7 +123,7 @@ public class LoginFragment extends BaseFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater,@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
         //启用底部导航

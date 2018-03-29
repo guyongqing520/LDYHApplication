@@ -144,10 +144,12 @@ public class KaoqiDakaFragment extends BaseFragment {
                                 @Override
                                 public void onSuccess(Call call, Response response, ResultBean resultBean) {
 
-                                    if (resultBean.getRequestCode() != 200) {
-                                        Toast.makeText(getHoldingActivity(), resultBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        new MyAlert("", "打卡成功", true, false, getContext());
+                                    if (getHoldingActivity()!=null) {
+                                        if (resultBean.getRequestCode() != 200) {
+                                            Toast.makeText(getHoldingActivity(), resultBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            new MyAlert("", "打卡成功", true, false, getContext());
+                                        }
                                     }
                                 }
 
@@ -225,14 +227,16 @@ public class KaoqiDakaFragment extends BaseFragment {
                     @Override
                     public void onSuccess(Call call, Response response, PersoninfoBean personinfo) {
 
-                        if (personinfo.getRequestCode() != 200) {
-                            Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
-                        }
+                        if (getHoldingActivity()!=null){
+                            if (personinfo.getRequestCode() != 200) {
+                                Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
+                            }
 
-                        //更新用户信息
-                        username.setText(personinfo.getSuccessInfo().getPersonInfo().getName());
-                        position.setText(personinfo.getSuccessInfo().getPersonInfo().getPosition() == null ? "" :
-                                personinfo.getSuccessInfo().getPersonInfo().getPosition().toString());
+                            //更新用户信息
+                            username.setText(personinfo.getSuccessInfo().getPersonInfo().getName());
+                            position.setText(personinfo.getSuccessInfo().getPersonInfo().getPosition() == null ? "" :
+                                    personinfo.getSuccessInfo().getPersonInfo().getPosition().toString());
+                        }
                     }
 
                     public void onEror(Call call, int statusCode, Exception e) {
@@ -247,34 +251,37 @@ public class KaoqiDakaFragment extends BaseFragment {
                     @Override
                     public void onSuccess(Call call, Response response, AttendenceBean attendenceBean) {
 
-                        if (attendenceBean.getRequestCode() != 200) {
-                            Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
-                        }
+                        if (getHoldingActivity()!=null) {
 
-                        //更新打卡信息
-                        AttendenceBean.SuccessInfoBean successInfoBean = attendenceBean.getSuccessInfo();
-
-                        if (successInfoBean != null) {
-                            dakatext.setText(successInfoBean.getResultMsg());
-                            if (successInfoBean.getResultMsg().length() > 6) {
-                                dakatext.setTextSize(14);
+                            if (attendenceBean.getRequestCode() != 200) {
+                                Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
                             }
 
-                            if (successInfoBean.getTimeAreaId().length() == 0) {
-                                dakadate.setText("无打卡时间段");
+                            //更新打卡信息
+                            AttendenceBean.SuccessInfoBean successInfoBean = attendenceBean.getSuccessInfo();
+
+                            if (successInfoBean != null) {
+                                dakatext.setText(successInfoBean.getResultMsg());
+                                if (successInfoBean.getResultMsg().length() > 6) {
+                                    dakatext.setTextSize(14);
+                                }
+
+                                if (successInfoBean.getTimeAreaId().length() == 0) {
+                                    dakadate.setText("无打卡时间段");
+                                } else {
+                                    dakadate.setText(successInfoBean.getTimeAreaId());
+                                }
+                                attrid = successInfoBean.isIsAtt();
+                                addressCenter = successInfoBean.getAddressCenter();
+
                             } else {
-                                dakadate.setText(successInfoBean.getTimeAreaId());
+                                dakatext.setText(String.valueOf(attendenceBean.getErrorMessage()));
+                                if (String.valueOf(attendenceBean.getErrorMessage()).length() > 6) {
+                                    dakatext.setTextSize(14);
+                                }
+                                dakadate.setText("无打卡时间段");
+                                attrid = false;
                             }
-                            attrid = successInfoBean.isIsAtt();
-                            addressCenter = successInfoBean.getAddressCenter();
-
-                        } else {
-                            dakatext.setText(String.valueOf(attendenceBean.getErrorMessage()));
-                            if (String.valueOf(attendenceBean.getErrorMessage()).length() > 6) {
-                                dakatext.setTextSize(14);
-                            }
-                            dakadate.setText("无打卡时间段");
-                            attrid = false;
                         }
                     }
 
