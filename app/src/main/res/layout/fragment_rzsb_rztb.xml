@@ -51,6 +51,7 @@
                 android:layout_toRightOf="@id/rzsb_bgdd_title"
                 android:layout_marginLeft="30sp"
                 android:lines="1"
+                android:background="@null"
                 android:hint="请输入"
                 />
 

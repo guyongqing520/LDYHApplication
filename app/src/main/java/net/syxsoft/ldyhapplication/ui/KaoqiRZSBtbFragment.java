@@ -19,12 +19,6 @@ import android.widget.Toast;
 import com.bigkoo.pickerview.OptionsPickerView;
 
 import net.syxsoft.ldyhapplication.R;
-
-import butterknife.BindView;
-import butterknife.OnClick;
-import okhttp3.Call;
-import okhttp3.Response;
-
 import net.syxsoft.ldyhapplication.bean.ResultBean;
 import net.syxsoft.ldyhapplication.bean.SyskeyvalueBean;
 import net.syxsoft.ldyhapplication.callback.LoadCallBack;
@@ -35,6 +29,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -111,8 +110,8 @@ public class KaoqiRZSBtbFragment extends BaseFragment {
     //选择关联任务
     @OnClick(R.id.rzsb_glrw)
     public void OnGlrwSelectBtnClicked() {
-
-        //条件选择器
+        Toast.makeText(getHoldingActivity(), "没有关联任务！", Toast.LENGTH_SHORT).show();
+       /* //条件选择器
         final OptionsPickerView pvOptions = new OptionsPickerView.Builder(getContext(), new OptionsPickerView.OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
@@ -154,22 +153,12 @@ public class KaoqiRZSBtbFragment extends BaseFragment {
 
             pvOptions.setPicker(getPickDateItemText(syskeyvalueBean.getSuccessInfo()));
             pvOptions.show();
-        }
+        }*/
     }
 
 
-    private List<String> getPickDateItemText(List<SyskeyvalueBean.SuccessInfoBean> list) {
 
-        List<String> mlist = new ArrayList<>();
 
-        if (list != null && list.size() > 0) {
-            for (SyskeyvalueBean.SuccessInfoBean item : list) {
-                mlist.add(item.getText());
-            }
-        }
-
-        return mlist;
-    }
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_rzsb_rztb;
@@ -199,9 +188,6 @@ public class KaoqiRZSBtbFragment extends BaseFragment {
             Toast.makeText(getHoldingActivity(), "没有网络连接，请稍后重试", Toast.LENGTH_SHORT).show();
             return false;
         }
-
-
-
         if (item.getItemId() == R.id.action_settings) {
             //提交信息
             if (rzsb_gznr.getText() == null || rzsb_gznr.getText().toString().length() <= 0) {
@@ -217,20 +203,26 @@ public class KaoqiRZSBtbFragment extends BaseFragment {
                 params.put("personId", getHoldingActivity().getUserAccount().getUserid());
                 params.put("type", bflxTypeValueId);
                 params.put("address", rzsb_bgdd.getText().toString());
-                params.put("taskId", "");
+                params.put("taskId", glrwTypeValueId);
                 params.put("content", rzsb_gznr.getText().toString());
                 OkHttpManager.getInstance().postRequest(getRootApiUrl() + "/api/workdaily/write/",
                         new LoadCallBack<ResultBean>(getContext()) {
                             @Override
                             public void onSuccess(Call call, Response response, ResultBean resultBean) {
-                                if (resultBean.getRequestCode() != 200) {
-                                    Toast.makeText(getHoldingActivity(), resultBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
-                                }
-                            }
 
+                                if (getHoldingActivity()!=null) {
+                                    if (resultBean.getRequestCode() != 200) {
+                                        Toast.makeText(getHoldingActivity(), resultBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(getHoldingActivity(), resultBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                                bflxTypeValueId="0";
+                            }
                             @Override
                             public void onEror(Call call, int statusCode, Exception e) {
-
+                                bflxTypeValueId="0";
+                                Toast.makeText(getHoldingActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }, params);
 
@@ -249,4 +241,16 @@ public class KaoqiRZSBtbFragment extends BaseFragment {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
+    private List<String> getPickDateItemText(List<SyskeyvalueBean.SuccessInfoBean> list) {
+
+        List<String> mlist = new ArrayList<>();
+
+        if (list != null && list.size() > 0) {
+            for (SyskeyvalueBean.SuccessInfoBean item : list) {
+                mlist.add(item.getText());
+            }
+        }
+
+        return mlist;
+    }
 }
