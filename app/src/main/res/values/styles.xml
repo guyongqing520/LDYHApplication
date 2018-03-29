@@ -15,7 +15,7 @@
 
     <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/blue</item>
-        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorPrimaryDark">@color/black</item>
         <item name="colorAccent">@color/blue</item>
         <item name="android:windowBackground">@color/grey</item>
         <item name="android:textColor">@color/colorWord33</item>
