@@ -1,7 +1,10 @@
 package net.syxsoft.ldyhapplication.callback;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+
+import com.dou361.dialogui.DialogUIUtils;
 
 import net.syxsoft.ldyhapplication.ui.AppActivity;
 
@@ -17,34 +20,31 @@ import okhttp3.Response;
 
 public abstract class LoadCallBack<T> extends BaseCallBack<T> {
     private Context context;
-    private ProgressDialog progressDialog;
+    private Dialog dialog;
+    private String msg;
+
 
     public LoadCallBack(Context context) {
         this.context = context;
-        initDialog();
+        DialogUIUtils.init(context);
     }
 
-    private void initDialog(){
-        progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("加载中...");
-    }
 
     private void showDialog() {
-        progressDialog.show();
+
+        if (msg == null || msg.length() == 0) {
+            msg = "加载中...";
+        }
+
+        dialog = DialogUIUtils.showLoading(context, msg, true, true, true, false).show();
     }
 
     private void hideDialog() {
-        if (progressDialog != null) {
-            progressDialog.dismiss();
-        }
+        DialogUIUtils.dismiss(dialog);
     }
 
-    public void setMsg(String str) {
-        progressDialog.setMessage(str);
-    }
-
-    public void setMsg(int resId) {
-        progressDialog.setMessage(context.getString(resId));
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
 

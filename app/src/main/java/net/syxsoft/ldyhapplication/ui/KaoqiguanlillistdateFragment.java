@@ -207,7 +207,7 @@ public class KaoqiguanlillistdateFragment extends BaseFragment {
 
         //布局及初始化个人考勤情况
         recylerviewdatedayanalysisView.setLayoutManager(new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, true));
-        initDayanalysis(year, month, today);
+        //initDayanalysis(year, month, today);
 
 
         return view;

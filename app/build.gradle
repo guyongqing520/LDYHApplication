@@ -37,6 +37,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.contrarywind:Android-PickerView:3.2.7'
     implementation 'com.wuxiaolong.pullloadmorerecyclerview:library:1.1.2'
+    implementation 'com.dou361.dialogui:jjdxm-dialogui:1.0.3'
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 

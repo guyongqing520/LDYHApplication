@@ -56,16 +56,8 @@ public class LoginFragment extends BaseFragment {
         //!CharTools.isPhoneLegal(username）
         if (username == null || username.length() == 0 || password == null || password.length() == 0) {
 
-            new AlertDialog.Builder(getContext())
-                    .setMessage("手机号码和密码不正确")
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    }).create().show();
-
+            new MyAlert("", "手机号码和密码不正确", true, false, getContext());
             return;
-
         }
 
         Map<String, String> params = new HashMap<String, String>();

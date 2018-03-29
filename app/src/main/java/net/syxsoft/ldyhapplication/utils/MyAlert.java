@@ -1,8 +1,12 @@
 package net.syxsoft.ldyhapplication.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+
+import com.dou361.dialogui.DialogUIUtils;
+import com.dou361.dialogui.listener.DialogUIListener;
 
 /**
  * Created by 谷永庆 on 2018/3/25.
@@ -12,29 +16,26 @@ public class MyAlert {
     public MyAlert(String title, String message, boolean positiveButton, boolean negativeButton, Context context) {
         if (positiveButton && negativeButton) {
 
-            new AlertDialog.Builder(context)
-                    .setTitle(title)
-                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    })
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+            DialogUIUtils.showAlert((Activity) context,title,message,"","","确认","取消",false,true,true,new DialogUIListener() {
+                @Override
+                public void onPositive() {
+                }
 
-                        }
-                    }).setMessage(message).create().show();
+                @Override
+                public void onNegative() {
+                }
+            }).show();
 
         } else {
-            new AlertDialog.Builder(context)
-                    .setTitle(title)
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+            DialogUIUtils.showAlert((Activity) context,title,message,"","","确认","",false,true,true,new DialogUIListener() {
+                @Override
+                public void onPositive() {
+                }
 
-                        }
-                    }).setMessage(message).create().show();
+                @Override
+                public void onNegative() {
+                }
+            }).show();
         }
     }
 }
