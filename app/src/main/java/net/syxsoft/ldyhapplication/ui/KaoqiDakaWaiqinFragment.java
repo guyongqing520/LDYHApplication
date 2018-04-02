@@ -122,15 +122,15 @@ public class KaoqiDakaWaiqinFragment extends BaseFragment {
             //提交信息
 
             if (starttime_select.getText() == null || starttime_select.getText().toString().length() <= 0) {
-                new MyAlert("", "请选择开始时间", true, false, getContext());
+                MyAlert.getInstance().show("", "请选择开始时间", true, false, getContext());
             }
 
             if (endtime_select.getText() == null || endtime_select.getText().toString().length() <= 0) {
-                new MyAlert("", "请选择结束时间", true, false, getContext());
+                MyAlert.getInstance().show("", "请选择结束时间", true, false, getContext());
             }
 
             if (remark.getText() == null || remark.getText().toString().length() <= 0) {
-                new MyAlert("", "请输入备注内容", true, false, getContext());
+                MyAlert.getInstance().show("", "请输入备注内容", true, false, getContext());
             }
 
             Map<String, String> params = new HashMap<>();
@@ -146,12 +146,9 @@ public class KaoqiDakaWaiqinFragment extends BaseFragment {
                         public void onSuccess(Call call, Response response, ResultBean resultBean) {
                             if (getHoldingActivity()!=null) {
                                 if (resultBean.getRequestCode() != 200) {
-                                    Toast.makeText(getHoldingActivity(), resultBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                                    MyAlert.getInstance().show("", resultBean.getErrorMessage().toString(), true, false, getContext());
                                 }
                             }
-                        }
-
-                        public void onEror(Call call, int statusCode, Exception e) {
                         }
                     }, params);
 
@@ -170,6 +167,5 @@ public class KaoqiDakaWaiqinFragment extends BaseFragment {
 
         return super.onCreateView(inflater, container, savedInstanceState);
     }
-
 
 }

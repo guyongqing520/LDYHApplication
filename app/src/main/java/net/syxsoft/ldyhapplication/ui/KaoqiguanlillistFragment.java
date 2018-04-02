@@ -134,8 +134,7 @@ public class KaoqiguanlillistFragment extends BaseFragment {
         return view;
     }
 
-    //拉取个人考勤情况
-
+    //拉取列表
     private void initData(String start, String end,final boolean ispush) {
 
         //提交信息
@@ -180,6 +179,7 @@ public class KaoqiguanlillistFragment extends BaseFragment {
 
                     @Override
                     public void onEror(Call call, int statusCode, Exception e) {
+                        super.onEror(call,statusCode,e);
                         pullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                         pullLoadMoreRecyclerView.setRefreshing(false);
                     }
@@ -196,7 +196,7 @@ public class KaoqiguanlillistFragment extends BaseFragment {
     TextView end_time;
 
 
-    @OnClick(R.id.start_time)
+    @OnClick({R.id.start_time,R.id.start})
     public void onStartBtnClicked() {
         //时间选择器
         TimePickerView pvTime = new TimePickerView.Builder(getContext(), new TimePickerView.OnTimeSelectListener() {
@@ -221,7 +221,7 @@ public class KaoqiguanlillistFragment extends BaseFragment {
         pvTime.show();
     }
 
-    @OnClick(R.id.end_time)
+    @OnClick({R.id.end_time,R.id.start2})
     public void onEndBtnClicked() {
         //时间选择器
         TimePickerView pvTime = new TimePickerView.Builder(getContext(), new TimePickerView.OnTimeSelectListener() {

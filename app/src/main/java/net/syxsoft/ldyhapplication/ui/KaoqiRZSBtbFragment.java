@@ -23,6 +23,7 @@ import net.syxsoft.ldyhapplication.bean.ResultBean;
 import net.syxsoft.ldyhapplication.bean.SyskeyvalueBean;
 import net.syxsoft.ldyhapplication.callback.LoadCallBack;
 import net.syxsoft.ldyhapplication.utils.MyAlert;
+import net.syxsoft.ldyhapplication.utils.MyToast;
 import net.syxsoft.ldyhapplication.utils.OkHttpManager;
 
 import java.util.ArrayList;
@@ -42,11 +43,11 @@ public class KaoqiRZSBtbFragment extends BaseFragment {
 
     //办公类型
     private SyskeyvalueBean syskeyvalueBean;
-    private String bflxTypeValueId="0";  //办公类型
+    private String bflxTypeValueId = "0";  //办公类型
 
-    private  String glrwTypeValueId="1"; //关联任务
+    private String glrwTypeValueId = "1"; //关联任务
 
-    @BindView(R.id.rzsb_gznr)
+    @BindView(R.id.rzsb_bl_gznr)
     EditText rzsb_gznr;
 
     @BindView(R.id.rzsb_bglx)
@@ -92,12 +93,10 @@ public class KaoqiRZSBtbFragment extends BaseFragment {
                                 pvOptions.show();
 
                             } else {
-                                Toast.makeText(getHoldingActivity(), syskeyvalueBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                                MyToast.getInstance().show( syskeyvalueBean.getErrorMessage().toString(),getContext());
                             }
                         }
 
-                        public void onEror(Call call, int statusCode, Exception e) {
-                        }
                     });
 
         } else {
@@ -157,8 +156,6 @@ public class KaoqiRZSBtbFragment extends BaseFragment {
     }
 
 
-
-
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_rzsb_rztb;
@@ -184,21 +181,16 @@ public class KaoqiRZSBtbFragment extends BaseFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //return super.onOptionsItemSelected(item);
-        if (!getHoldingActivity().isNetWorkAvailable()) {
-            Toast.makeText(getHoldingActivity(), "没有网络连接，请稍后重试", Toast.LENGTH_SHORT).show();
-            return false;
-        }
+
         if (item.getItemId() == R.id.action_settings) {
             //提交信息
             if (rzsb_gznr.getText() == null || rzsb_gznr.getText().toString().length() <= 0) {
-                new MyAlert("", "请填写工作内容", true, false, getContext());
-            }
-            else if (bflxTypeValueId == null || bflxTypeValueId.toString().length() <= 0) {
-                new MyAlert("", "请选择办公类型", true, false, getContext());
-            }
-            else if (rzsb_bgdd.getText() == null || rzsb_bgdd.getText().toString().length() <= 0) {
-                new MyAlert("", "请填写办公地点", true, false, getContext());
-            }else {
+                MyAlert.getInstance().show("", "请填写工作内容", true, false, getContext());
+            } else if (bflxTypeValueId == null || bflxTypeValueId.toString().length() <= 0) {
+                MyAlert.getInstance().show("", "请选择办公类型", true, false, getContext());
+            } else if (rzsb_bgdd.getText() == null || rzsb_bgdd.getText().toString().length() <= 0) {
+                MyAlert.getInstance().show("", "请填写办公地点", true, false, getContext());
+            } else {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("personId", getHoldingActivity().getUserAccount().getUserid());
                 params.put("type", bflxTypeValueId);
@@ -210,19 +202,9 @@ public class KaoqiRZSBtbFragment extends BaseFragment {
                             @Override
                             public void onSuccess(Call call, Response response, ResultBean resultBean) {
 
-                                if (getHoldingActivity()!=null) {
-                                    if (resultBean.getRequestCode() != 200) {
-                                        Toast.makeText(getHoldingActivity(), resultBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(getHoldingActivity(), resultBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
-                                    }
+                                if (getHoldingActivity() != null) {
+                                    MyToast.getInstance().show(resultBean.getErrorMessage().toString(), getContext());
                                 }
-                                bflxTypeValueId="0";
-                            }
-                            @Override
-                            public void onEror(Call call, int statusCode, Exception e) {
-                                bflxTypeValueId="0";
-                                Toast.makeText(getHoldingActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }, params);
 
@@ -236,7 +218,7 @@ public class KaoqiRZSBtbFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         //去掉底部导航
-        BottomNavigationView navigation= getHoldingActivity().findViewById(R.id.navigation);
+        BottomNavigationView navigation = getHoldingActivity().findViewById(R.id.navigation);
         navigation.setVisibility(View.GONE);
         return super.onCreateView(inflater, container, savedInstanceState);
     }

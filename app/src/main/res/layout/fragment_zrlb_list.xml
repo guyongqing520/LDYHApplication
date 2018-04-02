@@ -20,8 +20,9 @@
             android:padding="10dp">
 
             <EditText
+                android:id="@+id/search_text"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="9"
                 android:height="40dp"
@@ -29,13 +30,17 @@
                 android:drawableLeft="@mipmap/searchico"
                 android:drawablePadding="8dp"
                 android:hint="请输入关键字"
+                android:inputType="text"
+                android:singleLine="true"
+                android:imeOptions="actionSearch"
                 android:paddingLeft="10dp"
                 android:textSize="16dp" />
 
             <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/cancel_action"
+                android:visibility="gone"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:text="取消"
@@ -47,6 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:layout_marginBottom="10dp"
             android:padding="15dp">
 
             <RelativeLayout
@@ -56,7 +62,7 @@
                 <TextView
                     android:id="@+id/start"
                     android:layout_width="wrap_content"
-                    android:layout_marginLeft="10dp"
+
                     android:layout_height="wrap_content"
                     android:text="开始" />
 
@@ -66,23 +72,22 @@
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/start"
                     android:layout_below="@+id/start"
+                    android:drawablePadding="4dp"
                     android:drawableRight="@mipmap/kqglz_ar04"
                     android:text="2018年2月1日"
-                    android:drawablePadding="4dp"
                     android:textColor="@color/colorWord66"
                     android:textSize="14sp" />
 
 
                 <TextView
-                    android:id="@+id/start_time2"
+                    android:id="@+id/end_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/start_time"
                     android:layout_alignParentRight="true"
+                    android:drawablePadding="4dp"
                     android:drawableRight="@mipmap/kqglz_ar04"
                     android:text="2018年2月1日"
-                    android:drawablePadding="4dp"
-                    android:layout_marginRight="10dp"
                     android:textColor="@color/colorWord66"
                     android:textSize="14sp" />
 
@@ -90,8 +95,8 @@
                     android:id="@+id/start2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_above="@+id/start_time2"
-                    android:layout_alignLeft="@+id/start_time2"
+                    android:layout_above="@+id/end_time"
+                    android:layout_alignLeft="@+id/end_time"
                     android:text="结束" />
 
                 <ImageView
@@ -105,209 +110,11 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
+            android:id="@+id/pullLoadMoreRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/white"
-            android:padding="15dp">
+            android:layout_height="match_parent" />
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/img1"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@mipmap/rzsb04" />
-
-                <TextView
-                    android:id="@+id/type1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/img1"
-                    android:layout_marginLeft="10sp"
-                    android:layout_toRightOf="@+id/img1"
-                    android:text="完成领导交待的任务"
-                    android:textColor="@color/colornavblack"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/time1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/type1"
-                    android:layout_below="@+id/type1"
-                    android:text="时间：2012-10-22"
-                    android:textColor="@color/colorWord66"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/time2"
-                    android:textColor="@color/colorWord66"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/time1"
-                    android:layout_below="@+id/time1"
-                    android:text="地址：办公室"
-                    android:textSize="14sp" />
-
-
-            </RelativeLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:background="@color/white"
-            android:padding="15dp">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/img1"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@mipmap/rzsb04" />
-
-                <TextView
-                    android:id="@+id/type1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/img1"
-                    android:layout_marginLeft="10sp"
-                    android:layout_toRightOf="@+id/img1"
-                    android:text="完成领导交待的任务"
-                    android:textColor="@color/colornavblack"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/time1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/type1"
-                    android:layout_below="@+id/type1"
-                    android:text="时间：2012-10-22"
-                    android:textColor="@color/colorWord66"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/time2"
-                    android:textColor="@color/colorWord66"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/time1"
-                    android:layout_below="@+id/time1"
-                    android:text="地址：办公室"
-                    android:textSize="14sp" />
-
-
-            </RelativeLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:background="@color/white"
-            android:padding="15dp">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/img1"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@mipmap/rzsb04" />
-
-                <TextView
-                    android:id="@+id/type1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/img1"
-                    android:layout_marginLeft="10sp"
-                    android:layout_toRightOf="@+id/img1"
-                    android:text="完成领导交待的任务"
-                    android:textColor="@color/colornavblack"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/time1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/type1"
-                    android:layout_below="@+id/type1"
-                    android:text="时间：2012-10-22"
-                    android:textColor="@color/colorWord66"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/time2"
-                    android:textColor="@color/colorWord66"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/time1"
-                    android:layout_below="@+id/time1"
-                    android:text="地址：办公室"
-                    android:textSize="14sp" />
-
-            </RelativeLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:background="@color/white"
-            android:padding="15dp">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/img1"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@mipmap/rzsb04" />
-
-                <TextView
-                    android:id="@+id/type1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/img1"
-                    android:layout_marginLeft="10sp"
-                    android:layout_toRightOf="@+id/img1"
-                    android:text="完成领导交待的任务"
-                    android:textColor="@color/colornavblack"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/time1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/type1"
-                    android:layout_below="@+id/type1"
-                    android:text="时间：2012-10-22"
-                    android:textColor="@color/colorWord66"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/time2"
-                    android:textColor="@color/colorWord66"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/time1"
-                    android:layout_below="@+id/time1"
-                    android:text="地址：办公室"
-                    android:textSize="14sp" />
-
-
-            </RelativeLayout>
-        </LinearLayout>
 
     </LinearLayout>
 

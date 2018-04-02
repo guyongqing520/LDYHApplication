@@ -114,11 +114,6 @@ public class KaoqiguanlillistdateFragment extends BaseFragment {
                             }
                         }
                     }
-
-                    @Override
-                    public void onEror(Call call, int statusCode, Exception e) {
-
-                    }
                 });
     }
 
@@ -143,11 +138,6 @@ public class KaoqiguanlillistdateFragment extends BaseFragment {
                                 }
                             }
                         }
-                    }
-
-                    @Override
-                    public void onEror(Call call, int statusCode, Exception e) {
-
                     }
                 });
     }

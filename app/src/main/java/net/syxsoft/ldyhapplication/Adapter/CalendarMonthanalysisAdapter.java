@@ -16,6 +16,7 @@ import net.syxsoft.ldyhapplication.bean.KaoqMonthanalysisBean;
 import net.syxsoft.ldyhapplication.callback.LoadCallBack;
 import net.syxsoft.ldyhapplication.utils.DateUtils;
 import net.syxsoft.ldyhapplication.utils.LunarDateUtils;
+import net.syxsoft.ldyhapplication.utils.MyToast;
 import net.syxsoft.ldyhapplication.utils.OkHttpManager;
 
 import java.util.ArrayList;
@@ -170,7 +171,7 @@ public class CalendarMonthanalysisAdapter extends RecyclerView.Adapter<CalendarM
                                         initDayanalysis(successInfoBean.getDate());
                                     }
                                 } else {
-                                    Toast.makeText(context, "没有任何考勤信息", Toast.LENGTH_SHORT).show();
+                                    MyToast.getInstance().show("没有任何考勤信息",context);
                                 }
                             }
                         }
@@ -199,11 +200,6 @@ public class CalendarMonthanalysisAdapter extends RecyclerView.Adapter<CalendarM
                                 calendarDayanalysisAdapter.notifyDataSetChanged();
                             }
                         }
-                    }
-
-                    @Override
-                    public void onEror(Call call, int statusCode, Exception e) {
-
                     }
                 });
     }

@@ -23,6 +23,7 @@ import net.syxsoft.ldyhapplication.callback.LoadCallBack;
 import net.syxsoft.ldyhapplication.model.UserModel;
 import net.syxsoft.ldyhapplication.utils.MD5Utils;
 import net.syxsoft.ldyhapplication.utils.MyAlert;
+import net.syxsoft.ldyhapplication.utils.MyToast;
 import net.syxsoft.ldyhapplication.utils.OkHttp3Utils;
 import net.syxsoft.ldyhapplication.utils.OkHttpManager;
 
@@ -56,7 +57,7 @@ public class LoginFragment extends BaseFragment {
         //!CharTools.isPhoneLegal(username）
         if (username == null || username.length() == 0 || password == null || password.length() == 0) {
 
-            new MyAlert("", "手机号码和密码不正确", true, false, getContext());
+            MyAlert.getInstance().show("", "手机号码和密码不正确", true, false, getContext());
             return;
         }
 
@@ -71,7 +72,8 @@ public class LoginFragment extends BaseFragment {
                         if (getHoldingActivity()!=null) {
 
                             if (loginBean.getRequestCode() != 200) {
-                                new MyAlert("", loginBean.getErrorMessage().toString(), true, false, getContext());
+
+                                MyAlert.getInstance().show("", loginBean.getErrorMessage().toString(), true, false, getContext());
                                 return;
                             }
 
@@ -86,11 +88,6 @@ public class LoginFragment extends BaseFragment {
                             startActivity(intent);
                             getHoldingActivity().finish();
                         }
-                    }
-
-                    @Override
-                    public void onEror(Call call, int statusCode, Exception e) {
-                        //Toast.makeText(getContext(), "网络连接错误", Toast.LENGTH_SHORT).show();
                     }
                 }
                 , params);

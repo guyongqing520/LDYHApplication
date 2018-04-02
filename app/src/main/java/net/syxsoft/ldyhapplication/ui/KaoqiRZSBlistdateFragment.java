@@ -5,24 +5,36 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import net.syxsoft.ldyhapplication.Adapter.RZCalendarAdapter;
+import net.syxsoft.ldyhapplication.Adapter.CalendarDayWorkdailyAdapter;
+import net.syxsoft.ldyhapplication.Adapter.CalendarMonthWorkdailyAdapter;
 import net.syxsoft.ldyhapplication.R;
+import net.syxsoft.ldyhapplication.bean.KaoqDayworkBean;
+import net.syxsoft.ldyhapplication.bean.KaoqMonthworkBean;
+import net.syxsoft.ldyhapplication.callback.LoadCallBack;
 import net.syxsoft.ldyhapplication.utils.DateUtils;
+import net.syxsoft.ldyhapplication.utils.OkHttpManager;
 
 import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.OnEditorAction;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,7 +42,8 @@ import butterknife.OnClick;
 public class KaoqiRZSBlistdateFragment extends BaseFragment{
 
     //定义adapter
-    private RZCalendarAdapter dateAdapter;
+    private CalendarMonthWorkdailyAdapter dateAdapter;
+    private CalendarDayWorkdailyAdapter calendarDayWorkdailyAdapter;
     private String title;
     private int year;
     private int month;
@@ -69,8 +82,57 @@ public class KaoqiRZSBlistdateFragment extends BaseFragment{
         today=calendar.get(Calendar.DATE);
         days = DateUtils.getDayOfMonthFormat(year, month);
 
-        setTile();
+        setTitle();
     }
+
+    //拉取月任务
+    private void initMonthData() {
+        //提交信息
+        OkHttpManager.getInstance().getRequest(getRootApiUrl() + "/api/workdaily/calendarlist/" + getHoldingActivity().getUserAccount().getUserid() + "/" + year + "-" + month,
+                new LoadCallBack<KaoqMonthworkBean>(getContext()) {
+
+                    @Override
+                    public void onSuccess(Call call, Response response, KaoqMonthworkBean kaoqMonthworkBean) {
+
+                        if (getHoldingActivity() != null) {
+                            if (kaoqMonthworkBean.getRequestCode() == 200 && !getHoldingActivity().isFinishing()) {
+                                dateAdapter = new CalendarMonthWorkdailyAdapter(getContext(), days, year, month, today, kaoqMonthworkBean, recylerviewdatedayworkView,
+                                        getHoldingActivity().getUserAccount().getUserid());//传入当前月的年
+                                recyclerView.setAdapter(dateAdapter);
+                                dateAdapter.notifyDataSetChanged();
+
+                            }
+                        }
+                    }
+                });
+    }
+
+    //拉取天任务
+    public void initDayData(int year, int month, int day) {
+
+        //提交信息
+        OkHttpManager.getInstance().getRequest(getRootApiUrl() + "/api/workdaily/list/" + getHoldingActivity().getUserAccount().getUserid() + "/" + year +
+                        "-" + month + "-" + today+"/" + year +
+                        "-" + month + "-" + today+"/"+""+"/1/10",
+                new LoadCallBack<KaoqDayworkBean>(getContext()) {
+
+                    @Override
+                    public void onSuccess(Call call, Response response, KaoqDayworkBean kaoqDayworkBean) {
+
+                        if (getHoldingActivity() != null) {
+                            if (kaoqDayworkBean.getRequestCode() == 200 && !getHoldingActivity().isFinishing()) {
+                                KaoqDayworkBean.SuccessInfoBean successInfoBean = kaoqDayworkBean.getSuccessInfo();
+                                if (successInfoBean != null && successInfoBean.getRows().size() > 0) {
+                                    calendarDayWorkdailyAdapter = new CalendarDayWorkdailyAdapter(getContext(),successInfoBean);
+                                    recylerviewdatedayworkView.setAdapter(calendarDayWorkdailyAdapter);
+                                    calendarDayWorkdailyAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    }
+                });
+    }
+
 
     //日历下一个月
     private int[][] nextMonth() {
@@ -97,7 +159,7 @@ public class KaoqiRZSBlistdateFragment extends BaseFragment{
     }
 
     //设置日历标题
-    private void setTile() {
+    private void setTitle() {
         title = year + "年" + month + "月";
         record_title.setText(title);
     }
@@ -113,15 +175,17 @@ public class KaoqiRZSBlistdateFragment extends BaseFragment{
         BottomNavigationView navigation = getHoldingActivity().findViewById(R.id.navigation);
         navigation.setVisibility(View.GONE);
 
-        //日历布局
-        GridLayoutManager layoutManager = new GridLayoutManager(container.getContext(), 7);
-        recyclerView.setLayoutManager(layoutManager);
-
         //初始化数据
         initData();
 
-        dateAdapter = new RZCalendarAdapter(container.getContext(), days, year, month,today);//传入当前月的年
-        recyclerView.setAdapter(dateAdapter);
+        //日历布局及初始化日历数据
+        GridLayoutManager layoutManager = new GridLayoutManager(container.getContext(), 7);
+        recyclerView.setLayoutManager(layoutManager);
+        initMonthData();
+
+        //布局及初始化个人考勤情况
+        recylerviewdatedayworkView.setLayoutManager(new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, true));
+        //initDayData(year, month, today);
 
         return view;
     }
@@ -129,19 +193,15 @@ public class KaoqiRZSBlistdateFragment extends BaseFragment{
     @OnClick(R.id.record_left)
     public void onRecordLeftBtnClicked(){
         days = prevMonth();
-        dateAdapter = new RZCalendarAdapter(getContext(),days, year, month,today);
-        recyclerView.setAdapter(dateAdapter);
-        dateAdapter.notifyDataSetChanged();
-        setTile();
+        initMonthData();
+        setTitle();
     }
 
     @OnClick(R.id.record_right)
     public void onRecordRightBtnClicked(){
         days = nextMonth();
-        dateAdapter = new RZCalendarAdapter(getContext(),days, year, month,today);
-        recyclerView.setAdapter(dateAdapter);
-        dateAdapter.notifyDataSetChanged();
-        setTile();
+        initMonthData();
+        setTitle();
     }
 
     @Override
@@ -151,8 +211,23 @@ public class KaoqiRZSBlistdateFragment extends BaseFragment{
                 pushFragment(new KaoqiRZSBlistFragment());
                 break;
 
+            case R.id.action_add:
+                pushFragment(new KaoqiRZSBLBFragment());
+                break;
+
         }
         return false;
+    }
+
+
+    //搜索
+    @OnEditorAction(R.id.search_text)
+    boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+
+        }
+
+        return true;
     }
 
     @BindView(R.id.record_title)
@@ -162,5 +237,7 @@ public class KaoqiRZSBlistdateFragment extends BaseFragment{
     RecyclerView recyclerView;
 
 
+    @BindView(R.id.recyler_view_date_daywork)
+    RecyclerView recylerviewdatedayworkView;
 
 }

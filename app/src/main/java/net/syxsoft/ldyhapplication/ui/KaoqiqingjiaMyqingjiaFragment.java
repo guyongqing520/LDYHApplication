@@ -90,9 +90,6 @@ public class KaoqiqingjiaMyqingjiaFragment extends BaseFragment {
                                             }
                                         }
                                     }
-
-                                    public void onEror(Call call, int statusCode, Exception e) {
-                                    }
                                 });
 
                     } else {
@@ -124,9 +121,6 @@ public class KaoqiqingjiaMyqingjiaFragment extends BaseFragment {
                                     Toast.makeText(getHoldingActivity(), syskeyvalueBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
                                 }
                             }
-                        }
-
-                        public void onEror(Call call, int statusCode, Exception e) {
                         }
                     });
 
@@ -226,9 +220,6 @@ public class KaoqiqingjiaMyqingjiaFragment extends BaseFragment {
                                 }
                             }
                         }
-
-                        public void onEror(Call call, int statusCode, Exception e) {
-                        }
                     });
 
         } else {
@@ -291,17 +282,17 @@ public class KaoqiqingjiaMyqingjiaFragment extends BaseFragment {
             //提交信息
 
             if (typeValueId == null || typeValueId.length() <= 0) {
-                new MyAlert("", "请选择请假类型", true, false, getContext());
+                MyAlert.getInstance().show("", "请选择请假类型", true, false, getContext());
             } else if (starttime.getText() == null || starttime.getText().toString().length() <= 0) {
-                new MyAlert("", "请选择开始时间", true, false, getContext());
+                MyAlert.getInstance().show("", "请选择开始时间", true, false, getContext());
             } else if (endtime.getText() == null || endtime.getText().toString().length() <= 0) {
-                new MyAlert("", "请选择结束时间", true, false, getContext());
+                MyAlert.getInstance().show("", "请选择结束时间", true, false, getContext());
             } else if (longtime.getText() == null || longtime.getText().toString().length() <= 0) {
-                new MyAlert("", "请输入请假时长", true, false, getContext());
+                MyAlert.getInstance().show("", "请输入请假时长", true, false, getContext());
             } else if (leaderValueId == null || leaderValueId.toString().length() <= 0) {
-                new MyAlert("", "请选择处理人", true, false, getContext());
+                MyAlert.getInstance().show("", "请选择处理人", true, false, getContext());
             } else if (reason.getText() == null || reason.getText().toString().length() <= 0) {
-                new MyAlert("", "请输入请假理由", true, false, getContext());
+                MyAlert.getInstance().show("", "请输入请假理由", true, false, getContext());
             } else {
 
                 Map<String, String> params = new HashMap<>();
@@ -321,12 +312,9 @@ public class KaoqiqingjiaMyqingjiaFragment extends BaseFragment {
 
                                 if (getHoldingActivity()!=null) {
                                     if (resultBean.getRequestCode() != 200) {
-                                        Toast.makeText(getHoldingActivity(), resultBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                                        MyAlert.getInstance().show("", resultBean.getErrorMessage().toString(), true, false, getContext());
                                     }
                                 }
-                            }
-
-                            public void onEror(Call call, int statusCode, Exception e) {
                             }
                         }, params);
             }
@@ -367,7 +355,7 @@ public class KaoqiqingjiaMyqingjiaFragment extends BaseFragment {
             Date end = DateUtils.strToDate(endtime.getText().toString(), "yyyy-MM-dd HH:mm");
 
             if (end.getTime() - start.getTime() <= 0) {
-                new MyAlert("", "结束时间必须大于开始时间", true, false, getContext());
+                MyAlert.getInstance().show("", "结束时间必须大于开始时间", true, false, getContext());
             } else {
                 longtime.setText(String.valueOf(getHour(end, start)));
             }

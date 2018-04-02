@@ -3,10 +3,12 @@ package net.syxsoft.ldyhapplication.callback;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Handler;
 
 import com.dou361.dialogui.DialogUIUtils;
 
 import net.syxsoft.ldyhapplication.ui.AppActivity;
+import net.syxsoft.ldyhapplication.utils.MyApp;
 
 import java.io.IOException;
 
@@ -27,8 +29,8 @@ public abstract class LoadCallBack<T> extends BaseCallBack<T> {
     public LoadCallBack(Context context) {
         this.context = context;
         DialogUIUtils.init(context);
-    }
 
+    }
 
     private void showDialog() {
 
@@ -37,6 +39,7 @@ public abstract class LoadCallBack<T> extends BaseCallBack<T> {
         }
 
         dialog = DialogUIUtils.showLoading(context, msg, true, true, true, false).show();
+        dialog.getWindow().setDimAmount(0);
     }
 
     private void hideDialog() {
@@ -55,7 +58,39 @@ public abstract class LoadCallBack<T> extends BaseCallBack<T> {
 
     @Override
     public void onFailure(Call call, IOException e) {
+
         hideDialog();
+
+        final Dialog dialog = DialogUIUtils.showLoading(MyApp.getInstance(), "网络连接失败", true, true, true, false).show();
+        dialog.getWindow().setDimAmount(0);
+        dialog.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.hide();
+            }
+        }, 1000);
+
+
+    }
+
+    @Override
+    public void onEror(Call call, int statusCode, Exception e) {
+        hideDialog();
+
+        final Dialog dialog = DialogUIUtils.showLoading(MyApp.getInstance(), "网络连接错误", true, true, true, false).show();
+        dialog.getWindow().setDimAmount(0);
+        dialog.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.hide();
+            }
+        }, 1000);
     }
 
     @Override

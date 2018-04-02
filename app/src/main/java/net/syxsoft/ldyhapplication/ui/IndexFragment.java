@@ -83,9 +83,6 @@ public class IndexFragment extends BaseFragment {
         GridLayoutManager layoutManager= new GridLayoutManager(container.getContext(),3);
         recyclerView.setLayoutManager(layoutManager);
 
-        if(!getHoldingActivity().isNetWorkAvailable()){
-            Toast.makeText(getHoldingActivity(), "没有网络连接，请稍后重试", Toast.LENGTH_SHORT).show();
-        }
 
         //OkHttp3Utils.getInstance().doGet("http://192.168.1.105/mian.json", new GsonArrayCallback<MainPanel>() {
 

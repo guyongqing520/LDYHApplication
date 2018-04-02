@@ -24,6 +24,7 @@ import net.syxsoft.ldyhapplication.bean.ResultBean;
 import net.syxsoft.ldyhapplication.bean.SyskeyvalueBean;
 import net.syxsoft.ldyhapplication.callback.LoadCallBack;
 import net.syxsoft.ldyhapplication.utils.MyAlert;
+import net.syxsoft.ldyhapplication.utils.MyToast;
 import net.syxsoft.ldyhapplication.utils.OkHttpManager;
 
 import java.util.ArrayList;
@@ -90,20 +91,20 @@ public class KaoqiRZSBLBFragment extends BaseFragment {
             OkHttpManager.getInstance().getRequest(getRootApiUrl() + "/api/syskeyvalue/list/OfficeType",
                     new LoadCallBack<SyskeyvalueBean>(getContext()) {
 
+
                         @Override
                         public void onSuccess(Call call, Response response, SyskeyvalueBean syskeyvalueBean1) {
 
-                            if (syskeyvalueBean1 != null && syskeyvalueBean1.getRequestCode() == 200) {
-                                syskeyvalueBean = syskeyvalueBean1;
-                                pvOptions.setPicker(getPickDateItemText(syskeyvalueBean.getSuccessInfo()));
-                                pvOptions.show();
+                            if (getHoldingActivity()!=null) {
+                                if (syskeyvalueBean1 != null && syskeyvalueBean1.getRequestCode() == 200) {
+                                    syskeyvalueBean = syskeyvalueBean1;
+                                    pvOptions.setPicker(getPickDateItemText(syskeyvalueBean.getSuccessInfo()));
+                                    pvOptions.show();
 
-                            } else {
-                                Toast.makeText(getHoldingActivity(), syskeyvalueBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    MyToast.getInstance().show( syskeyvalueBean.getErrorMessage().toString(),getContext());
+                                }
                             }
-                        }
-
-                        public void onEror(Call call, int statusCode, Exception e) {
                         }
                     });
 
@@ -152,8 +153,7 @@ public class KaoqiRZSBLBFragment extends BaseFragment {
                             }
                         }
 
-                        public void onEror(Call call, int statusCode, Exception e) {
-                        }
+
                     });
 
         } else {
@@ -189,22 +189,19 @@ public class KaoqiRZSBLBFragment extends BaseFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //return super.onOptionsItemSelected(item);
-        if (!getHoldingActivity().isNetWorkAvailable()) {
-            Toast.makeText(getHoldingActivity(), "没有网络连接，请稍后重试", Toast.LENGTH_SHORT).show();
-            return false;
-        }
+
         if (item.getItemId() == R.id.action_settings) {
             //提交信息
             if (rzsb_bl_gznr.getText() == null || rzsb_bl_gznr.getText().toString().length() <= 0) {
-                new MyAlert("", "请填写工作内容", true, false, getContext());
+                MyAlert.getInstance().show("", "请填写工作内容", true, false, getContext());
             }
             else if (bflxTypeValueId == null || bflxTypeValueId.toString().length() <= 0) {
-                new MyAlert("", "请选择办公类型", true, false, getContext());
+                MyAlert.getInstance().show("", "请选择办公类型", true, false, getContext());
             }
             else if (rzsb_bl_bgdd.getText() == null || rzsb_bl_bgdd.getText().toString().length() <= 0) {
-                new MyAlert("", "请填写办公地点", true, false, getContext());
+                MyAlert.getInstance().show("", "请填写办公地点", true, false, getContext());
             }else if (rzsb_bl_xzrq.getText() == null || rzsb_bl_xzrq.getText().toString().length() <= 0) {
-                new MyAlert("", "请选择日期", true, false, getContext());
+                MyAlert.getInstance().show("", "请选择日期", true, false, getContext());
             }else {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("personId", getHoldingActivity().getUserAccount().getUserid());
@@ -229,8 +226,8 @@ public class KaoqiRZSBLBFragment extends BaseFragment {
                             }
                             @Override
                             public void onEror(Call call, int statusCode, Exception e) {
+                                super.onEror(call,statusCode,e);
                                 bflxTypeValueId="0";
-                                Toast.makeText(getHoldingActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }, params);
 

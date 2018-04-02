@@ -13,7 +13,16 @@ import com.dou361.dialogui.listener.DialogUIListener;
  */
 
 public class MyAlert {
-    public MyAlert(String title, String message, boolean positiveButton, boolean negativeButton, Context context) {
+
+    private static MyAlert instance = new MyAlert();
+
+    private MyAlert(){}
+
+    public static MyAlert getInstance(){
+        return instance;
+    }
+
+    public void show(String title, String message, boolean positiveButton, boolean negativeButton, Context context) {
         if (positiveButton && negativeButton) {
 
             DialogUIUtils.showAlert((Activity) context,title,message,"","","确认","取消",false,true,true,new DialogUIListener() {

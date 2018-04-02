@@ -47,6 +47,7 @@ import net.syxsoft.ldyhapplication.model.UserModel;
 import net.syxsoft.ldyhapplication.utils.DateUtils;
 import net.syxsoft.ldyhapplication.utils.GeoLocationUtils;
 import net.syxsoft.ldyhapplication.utils.MyAlert;
+import net.syxsoft.ldyhapplication.utils.MyToast;
 import net.syxsoft.ldyhapplication.utils.OkHttp3Utils;
 import net.syxsoft.ldyhapplication.utils.OkHttpManager;
 
@@ -107,18 +108,18 @@ public class KaoqiDakaFragment extends BaseFragment {
 
         if (!attrid || dakadate.getText() == null || dakadate.getText().toString().length() <= 0) {
 
-            new MyAlert("", "当前时间无法打卡", true, false, getContext());
+            MyAlert.getInstance().show("", "当前时间无法打卡", true, false, getContext());
 
         } else if (addressCenter == null || addressCenter.length() == 0 || address.getText() == null ||
                 address.getText().toString().length() <= 0 || currentlat == 0 || currentlon == 0) {
 
-            new MyAlert("", "定位失败无法打卡，请打开定位", true, false, getContext());
+            MyAlert.getInstance().show("", "定位失败无法打卡，请打开定位", true, false, getContext());
 
         } else {
 
             android.location.Address maddress = GeoLocationUtils.addressTolatlng(addressCenter, getContext());
             if (maddress == null) {
-                new MyAlert("", "定位失败无法打卡，请打开定位", true, false, getContext());
+                MyAlert.getInstance().show("", "定位失败无法打卡，请打开定位", true, false, getContext());
             } else {
 
                 double centerLat = maddress.getLatitude();
@@ -127,7 +128,7 @@ public class KaoqiDakaFragment extends BaseFragment {
                 double ds = GeoLocationUtils.GetShortDistance(centerLng, centerLat, currentlon, currentlat);
 
                 if (ds > 1000) {
-                    new MyAlert("", "打卡距离超过1千米，无法打卡", true, false, getContext());
+                    MyAlert.getInstance().show("", "打卡距离超过1千米，无法打卡", true, false, getContext());
                 } else {
 
                     Map<String, String> params = new HashMap<>();
@@ -137,7 +138,6 @@ public class KaoqiDakaFragment extends BaseFragment {
                     params.put("imgUrl", "");
                     params.put("isout", String.valueOf(false));
 
-
                     OkHttpManager.getInstance().postRequest(getRootApiUrl() + "/api/attendence/sign",
                             new LoadCallBack<ResultBean>(getContext()) {
 
@@ -146,14 +146,11 @@ public class KaoqiDakaFragment extends BaseFragment {
 
                                     if (getHoldingActivity()!=null) {
                                         if (resultBean.getRequestCode() != 200) {
-                                            Toast.makeText(getHoldingActivity(), resultBean.getErrorMessage().toString(), Toast.LENGTH_SHORT).show();
+                                            MyAlert.getInstance().show("", resultBean.getErrorMessage().toString(), true, false, getContext());
                                         } else {
-                                            new MyAlert("", "打卡成功", true, false, getContext());
+                                            MyToast.getInstance().show("打卡成功", getContext());
                                         }
                                     }
-                                }
-
-                                public void onEror(Call call, int statusCode, Exception e) {
                                 }
                             }, params);
 
@@ -229,7 +226,7 @@ public class KaoqiDakaFragment extends BaseFragment {
 
                         if (getHoldingActivity()!=null){
                             if (personinfo.getRequestCode() != 200) {
-                                Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
+                                MyAlert.getInstance().show("", "网络连接失败，请稍后重试", true, false, getContext());
                             }
 
                             //更新用户信息
@@ -237,9 +234,6 @@ public class KaoqiDakaFragment extends BaseFragment {
                             position.setText(personinfo.getSuccessInfo().getPersonInfo().getPosition() == null ? "" :
                                     personinfo.getSuccessInfo().getPersonInfo().getPosition().toString());
                         }
-                    }
-
-                    public void onEror(Call call, int statusCode, Exception e) {
                     }
                 });
 
@@ -254,7 +248,7 @@ public class KaoqiDakaFragment extends BaseFragment {
                         if (getHoldingActivity()!=null) {
 
                             if (attendenceBean.getRequestCode() != 200) {
-                                Toast.makeText(getHoldingActivity(), "网络连接失败，请稍后重试", Toast.LENGTH_SHORT).show();
+                                MyAlert.getInstance().show("", "网络连接失败，请稍后重试", true, false, getContext());
                             }
 
                             //更新打卡信息
@@ -283,10 +277,6 @@ public class KaoqiDakaFragment extends BaseFragment {
                                 attrid = false;
                             }
                         }
-                    }
-
-                    @Override
-                    public void onEror(Call call, int statusCode, Exception e) {
                     }
                 });
 
@@ -319,7 +309,7 @@ public class KaoqiDakaFragment extends BaseFragment {
                 requestLocation();
             }
         } catch (Exception ex) {
-            Toast.makeText(getHoldingActivity(), "定位失败，请打开网络或GPS重试", Toast.LENGTH_SHORT).show();
+            MyAlert.getInstance().show("", "定位失败，请打开网络或GPS重试", true, false, getContext());
         }
 
         return view;
@@ -340,7 +330,7 @@ public class KaoqiDakaFragment extends BaseFragment {
                     }
                     requestLocation();
                 } else {
-                    Toast.makeText(getContext(), "发生未知错误", Toast.LENGTH_SHORT).show();
+                    MyAlert.getInstance().show("", "发生未知错误", true, false, getContext());
                 }
         }
 
@@ -357,7 +347,7 @@ public class KaoqiDakaFragment extends BaseFragment {
                 // MyAdapter adapter = new MyAdapter(images);
                 // gridView.setAdapter(adapter);
             } else {
-                Toast.makeText(getContext(), "没有数据", Toast.LENGTH_SHORT).show();
+                MyToast.getInstance().show("没有数据", getContext());
             }
         }
     }

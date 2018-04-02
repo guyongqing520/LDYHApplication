@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?><!-- TODO: Update blank fragment layout -->
+
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="1dp"
+    android:background="@color/white"
+    android:padding="15dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/rzsb04" />
+
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/img"
+            android:layout_marginLeft="10sp"
+            android:layout_toRightOf="@+id/img"
+            android:text="完成领导交待的任务"
+            android:textColor="@color/colornavblack"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/type"
+            android:layout_below="@+id/type"
+            android:text="时间：2012-10-22"
+            android:textColor="@color/colorWord66"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/address"
+            android:textColor="@color/colorWord66"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/time"
+            android:layout_below="@+id/time"
+            android:text="地址：办公室"
+            android:textSize="14sp" />
+
+
+    </RelativeLayout>
+</LinearLayout>

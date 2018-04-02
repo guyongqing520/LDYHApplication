@@ -179,6 +179,7 @@ public class KaoqiguanlillistmyqijiaFragment extends BaseFragment {
 
                     @Override
                     public void onEror(Call call, int statusCode, Exception e) {
+                        super.onEror(call,statusCode,e);
                         pullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                         pullLoadMoreRecyclerView.setRefreshing(false);
                     }

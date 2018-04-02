@@ -7,14 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.syxsoft.ldyhapplication.R;
 import net.syxsoft.ldyhapplication.bean.KaoqDayanalysisBean;
+import net.syxsoft.ldyhapplication.bean.KaoqDayworkBean;
 import net.syxsoft.ldyhapplication.bean.KaoqMonthanalysisBean;
+import net.syxsoft.ldyhapplication.bean.KaoqMonthworkBean;
 import net.syxsoft.ldyhapplication.callback.LoadCallBack;
 import net.syxsoft.ldyhapplication.utils.DateUtils;
 import net.syxsoft.ldyhapplication.utils.LunarDateUtils;
+import net.syxsoft.ldyhapplication.utils.MyAlert;
+import net.syxsoft.ldyhapplication.utils.MyToast;
 import net.syxsoft.ldyhapplication.utils.OkHttpManager;
 
 import java.util.ArrayList;
@@ -35,24 +38,24 @@ public class CalendarMonthWorkdailyAdapter extends RecyclerView.Adapter<Calendar
     private List<Integer> odays = new ArrayList<>();
     private List<Integer> days = new ArrayList<>();
     private Calendar toadyCalendar = Calendar.getInstance();
-    private KaoqMonthanalysisBean kaoqMonthanalysisBean;
-    private RecyclerView recylerviewdatedayanalysisView;
-    private CalendarDayanalysisAdapter calendarDayanalysisAdapter;
+    private KaoqMonthworkBean kaoqMonthworkBean;
+    private RecyclerView recylerviewdateworkView;
+    private CalendarDayWorkdailyAdapter calendarDayaworkAdapter;
     private Context context;
     private int year;
     private int month;
     private int today;
     private String userId;
-    private int lastModthCount = 0;
-    private ViewHolder lastholder;
+    private CalendarMonthWorkdailyAdapter.ViewHolder lastholder;
     private int lastholderBg = 0;
-    private TextView selectDate;
 
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         View view;
         TextView name_yl;
         TextView name_nl;
+        Calendar date;
+        int taskNum = 0;
 
         public ViewHolder(View view) {
             super(view);
@@ -63,15 +66,15 @@ public class CalendarMonthWorkdailyAdapter extends RecyclerView.Adapter<Calendar
     }
 
     public CalendarMonthWorkdailyAdapter(Context context, int[][] days, int year, int month, int today,
-                                         KaoqMonthanalysisBean kaoqMonthanalysisBean,
-                                         RecyclerView recylerviewdatedayanalysisView, String userId, TextView selectDate) {
+                                         KaoqMonthworkBean kaoqMonthworkBean,
+                                         RecyclerView recylerviewdatedayworkView, String userId) {
         this.context = context;
         this.today = today;
         this.odays.clear();
         this.days.clear();
-        this.recylerviewdatedayanalysisView = recylerviewdatedayanalysisView;
+        this.recylerviewdateworkView = recylerviewdatedayworkView;
         this.userId = userId;
-        this.selectDate = selectDate;
+
 
         //将二维数组转化为一维数组，方便使用
 
@@ -89,18 +92,18 @@ public class CalendarMonthWorkdailyAdapter extends RecyclerView.Adapter<Calendar
 
         this.year = year;
         this.month = month;
-        this.kaoqMonthanalysisBean = kaoqMonthanalysisBean;
+        this.kaoqMonthworkBean = kaoqMonthworkBean;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
+    public CalendarMonthWorkdailyAdapter.ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
 
         if (context == null) {
             context = parent.getContext();
         }
 
         View view = LayoutInflater.from(context).inflate(R.layout.date_item, parent, false);
-        final ViewHolder holder = new ViewHolder(view);
+        final CalendarMonthWorkdailyAdapter.ViewHolder holder = new CalendarMonthWorkdailyAdapter.ViewHolder(view);
 
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,66 +116,31 @@ public class CalendarMonthWorkdailyAdapter extends RecyclerView.Adapter<Calendar
                     //下月
                 } else {
                     //本月
-                    if (kaoqMonthanalysisBean != null) {
-                        List<KaoqMonthanalysisBean.SuccessInfoBean> successInfoBeans = kaoqMonthanalysisBean.getSuccessInfo();
+                    if (kaoqMonthworkBean != null && kaoqMonthworkBean.getSuccessInfo() != null && kaoqMonthworkBean.getSuccessInfo().size() > 0) {
 
-                        if (successInfoBeans.size() > 0) {
+                        if (holder.taskNum > 0) {
+                            if (holder.date != null) {
+                                String dateStr = DateUtils.getSimpleDateFormat(holder.date.getTime(), "yyyy-MM-dd");
 
-                            int count = position - lastModthCount;
-                            if (count < 0 || count > successInfoBeans.size())
-                                return;
+                                for (KaoqMonthworkBean.SuccessInfoBean item : kaoqMonthworkBean.getSuccessInfo()) {
+                                    if (item.getTime() != null && item.getTime().trim().equals(dateStr)) {
+                                        if (lastholder != null && lastholderBg != 0) {
+                                            lastholder.view.setBackgroundResource(lastholderBg);
+                                        }
+                                        lastholder = holder;
+                                        holder.view.setBackgroundResource(R.drawable.view_circle_ring_daka_today_zc);
+                                        lastholderBg = R.drawable.view_circle_zcqd;
 
-                            KaoqMonthanalysisBean.SuccessInfoBean successInfoBean = successInfoBeans.get(count);
-                            if (successInfoBean != null) {
-
-                                //处理背景色
-
-                                if (successInfoBean.getStatus() == 3) {//缺勤
-
-                                    if (lastholder != null && lastholderBg != 0) {
-                                        lastholder.view.setBackgroundResource(lastholderBg);
+                                        initDaywork(dateStr);
+                                        return;
                                     }
-                                    lastholder = holder;
-                                    holder.view.setBackgroundResource(R.drawable.view_circle_ring_daka_today_fqq);
-                                    lastholderBg = R.drawable.view_circle_fqq;
-
-                                } else if (successInfoBean.getStatus() == 0) {//请假
-                                    if (lastholder != null && lastholderBg != 0) {
-                                        lastholder.view.setBackgroundResource(lastholderBg);
-                                    }
-                                    lastholder = holder;
-                                    holder.view.setBackgroundResource(R.drawable.view_circle_ring_daka_today_qj);
-                                    lastholderBg = R.drawable.view_circle_qj;
-
-                                } else if (successInfoBean.getStatus() == 2) {//外勤
-                                    if (lastholder != null && lastholderBg != 0) {
-                                        lastholder.view.setBackgroundResource(lastholderBg);
-                                    }
-                                    lastholder = holder;
-                                    holder.view.setBackgroundResource(R.drawable.view_circle_ring_daka_today_wq);
-                                    lastholderBg = R.drawable.view_circle_wqqd;
-
-                                } else if (successInfoBean.getStatus() == 1) {//正常签到
-                                    if (lastholder != null && lastholderBg != 0) {
-                                        lastholder.view.setBackgroundResource(lastholderBg);
-                                    }
-                                    lastholder = holder;
-                                    holder.view.setBackgroundResource(R.drawable.view_circle_ring_daka_today_zc);
-                                    lastholderBg = R.drawable.view_circle_zcqd;
                                 }
 
-
-                                if (successInfoBean.getStatus() == 1 || successInfoBean.getStatus() == 2) {
-
-                                    if (successInfoBean.getDate() != null && successInfoBean.getDate().length() > 0) {
-                                        selectDate.setText(getSelectDateTitle(successInfoBean.getDate()));
-                                        initDayanalysis(successInfoBean.getDate());
-                                    }
-                                } else {
-                                    Toast.makeText(context, "没有任何考勤信息", Toast.LENGTH_SHORT).show();
-                                }
                             }
                         }
+
+                        MyToast.getInstance().show("没有任何考勤信息", context);
+
                     }
                 }
             }
@@ -180,35 +148,32 @@ public class CalendarMonthWorkdailyAdapter extends RecyclerView.Adapter<Calendar
         return holder;
     }
 
-    //拉取个人考勤情况
-    public void initDayanalysis(String dateStr) {
+    //拉取列表
+    public void initDaywork(String dateStr) {
 
         //提交信息
-        OkHttpManager.getInstance().getRequest(getRootApiUrl() + "/api/attendence/dayanalysis/" + userId + "/" + dateStr,
-                new LoadCallBack<KaoqDayanalysisBean>(context) {
+        String key="\"\"";
+        String url = getRootApiUrl() + "/api/workdaily/list/" + userId + "/" + dateStr + "/" + dateStr + "/" + key + "/1/10";
+        OkHttpManager.getInstance().getRequest(url, new LoadCallBack<KaoqDayworkBean>(context) {
 
-                    @Override
-                    public void onSuccess(Call call, Response response, KaoqDayanalysisBean kaoqDayanalysisBean) {
+            @Override
+            public void onSuccess(Call call, Response response, KaoqDayworkBean kaoqDayworkBean) {
 
-                        if (kaoqDayanalysisBean.getRequestCode() == 200) {
-                            List<KaoqDayanalysisBean.SuccessInfoBean> successInfoBeans = kaoqDayanalysisBean.getSuccessInfo();
-                            if (successInfoBeans != null && successInfoBeans.size() > 0) {
-                                calendarDayanalysisAdapter = new CalendarDayanalysisAdapter(context, successInfoBeans);
-                                recylerviewdatedayanalysisView.setAdapter(calendarDayanalysisAdapter);
-                                calendarDayanalysisAdapter.notifyDataSetChanged();
-                            }
-                        }
+                if (kaoqDayworkBean.getRequestCode() == 200) {
+                    KaoqDayworkBean.SuccessInfoBean successInfoBean = kaoqDayworkBean.getSuccessInfo();
+                    if (kaoqDayworkBean != null && kaoqDayworkBean.getSuccessInfo() != null && kaoqDayworkBean.getSuccessInfo().getRows() != null && kaoqDayworkBean.getSuccessInfo().getRows().size() > 0) {
+                        calendarDayaworkAdapter = new CalendarDayWorkdailyAdapter(context, successInfoBean);
+                        recylerviewdateworkView.setAdapter(calendarDayaworkAdapter);
+                        calendarDayaworkAdapter.notifyDataSetChanged();
                     }
+                }
+            }
 
-                    @Override
-                    public void onEror(Call call, int statusCode, Exception e) {
-
-                    }
-                });
+        });
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(CalendarMonthWorkdailyAdapter.ViewHolder holder, int position) {
 
         holder.name_yl.setText(String.valueOf(days.get(position)));
 
@@ -221,7 +186,6 @@ public class CalendarMonthWorkdailyAdapter extends RecyclerView.Adapter<Calendar
 
         if (position >= 0 && position < 7 && days.get(position) > 20) {
 
-            lastModthCount++;
             calendar.set(year, month - 1, days.get(position));
             LunarDateUtils lunarDateUtils = new LunarDateUtils(calendar);
             String currentDate = lunarDateUtils.toString();
@@ -232,6 +196,7 @@ public class CalendarMonthWorkdailyAdapter extends RecyclerView.Adapter<Calendar
             holder.name_yl.setTextColor(r);
             holder.name_nl.setTextColor(r);
             holder.name_nl.setText(showDay);
+
 
         } else if (position > 20 && days.get(position) < 15) {
 
@@ -245,6 +210,7 @@ public class CalendarMonthWorkdailyAdapter extends RecyclerView.Adapter<Calendar
             holder.name_yl.setTextColor(r);
             holder.name_nl.setTextColor(r);
             holder.name_nl.setText(showDay);
+
         } else {
             calendar.set(year, month, days.get(position));
             LunarDateUtils lunarDateUtils = new LunarDateUtils(calendar);
@@ -254,66 +220,49 @@ public class CalendarMonthWorkdailyAdapter extends RecyclerView.Adapter<Calendar
             String showDay = currentDate.substring(startIndex);
             holder.name_nl.setText(showDay);
 
+
             if (position == 0 || position == 7 || position == 14 || position == 21 || position == 28 ||
                     position == 6 || position == 13 || position == 20 || position == 27 || position == 34) {
                 holder.name_yl.setTextColor(r1);
             }
 
-            if (kaoqMonthanalysisBean != null) {
-                List<KaoqMonthanalysisBean.SuccessInfoBean> successInfoBeans = kaoqMonthanalysisBean.getSuccessInfo();
+            if (kaoqMonthworkBean != null) {
+                List<KaoqMonthworkBean.SuccessInfoBean> successInfoBeans = kaoqMonthworkBean.getSuccessInfo();
 
                 if (successInfoBeans.size() > 0) {
-                    for (KaoqMonthanalysisBean.SuccessInfoBean successInfoBean : successInfoBeans) {
+                    for (KaoqMonthworkBean.SuccessInfoBean successInfoBean : successInfoBeans) {
 
                         Calendar calendar1 = Calendar.getInstance();
                         calendar1.set(year, month - 1, days.get(position));
                         String date = DateUtils.getSimpleDateFormat(calendar1.getTime(), null);
 
-                        if (successInfoBean.getDate().trim().equals(date.trim())) {
+                        if (successInfoBean.getTime().trim().equals(date.trim())) {
 
-                            if (successInfoBean.getStatus() == 3) {//缺勤
-                                if (days.get(position) == today && year == toadyCalendar.get(Calendar.YEAR) && month == toadyCalendar.get(Calendar.MONTH) + 1) {
-                                    holder.view.setBackgroundResource(R.drawable.view_circle_ring_daka_today_fqq);
-                                    lastholder = holder;
-                                } else {
-                                    holder.view.setBackgroundResource(R.drawable.view_circle_fqq);
-                                }
-                                lastholderBg = R.drawable.view_circle_fqq;
-                            } else if (successInfoBean.getStatus() == 0) {//请假
-                                if (days.get(position) == today && year == toadyCalendar.get(Calendar.YEAR) && month == toadyCalendar.get(Calendar.MONTH) + 1) {
-                                    holder.view.setBackgroundResource(R.drawable.view_circle_ring_daka_today_qj);
-                                    lastholder = holder;
-                                } else {
-                                    holder.view.setBackgroundResource(R.drawable.view_circle_qj);
-                                }
-                                lastholderBg = R.drawable.view_circle_qj;
-                            } else if (successInfoBean.getStatus() == 2) {//外勤
-                                if (days.get(position) == today && year == toadyCalendar.get(Calendar.YEAR) && month == toadyCalendar.get(Calendar.MONTH) + 1) {
-                                    holder.view.setBackgroundResource(R.drawable.view_circle_ring_daka_today_wq);
-                                    lastholder = holder;
-                                } else {
-                                    holder.view.setBackgroundResource(R.drawable.view_circle_wqqd);
-                                }
-                                lastholderBg = R.drawable.view_circle_wqqd;
-                            } else if (successInfoBean.getStatus() == 1) {//正常签到
+                            if (successInfoBean.getNum() > 0) {//有任务
                                 if (days.get(position) == today && year == toadyCalendar.get(Calendar.YEAR) && month == toadyCalendar.get(Calendar.MONTH) + 1) {
                                     holder.view.setBackgroundResource(R.drawable.view_circle_ring_daka_today_zc);
                                     lastholder = holder;
                                 } else {
                                     holder.view.setBackgroundResource(R.drawable.view_circle_zcqd);
                                 }
-                                lastholderBg = R.drawable.view_circle_zcqd;
-                            } else if (successInfoBean.getStatus() == -1) {//非工作日又是今天
-                                if (days.get(position) == today && year == toadyCalendar.get(Calendar.YEAR) && month == toadyCalendar.get(Calendar.MONTH) + 1) {
-                                    holder.view.setBackgroundResource(R.drawable.view_circle_ring_daka_today);
-                                    lastholder = holder;
-                                }
+                                lastholderBg = R.drawable.view_circle_fqq;
+                                holder.taskNum = successInfoBean.getNum();
+                                holder.date = calendar1;
                             }
-                            break;
+
+                            return;
                         }
                     }
+
                 }
             }
+            if (days.get(position) == today && year == toadyCalendar.get(Calendar.YEAR) && month == toadyCalendar.get(Calendar.MONTH) + 1){
+                holder.view.setBackgroundResource(R.drawable.view_circle_ring_daka_today);
+                lastholder = holder;
+            }
+            else{
+                    holder.view.setBackgroundResource(R.drawable.view_circle_mxrz);
+                }
 
         }
     }
@@ -327,12 +276,4 @@ public class CalendarMonthWorkdailyAdapter extends RecyclerView.Adapter<Calendar
         return "http://ldyh.webapi.syxsoft.net:8801";
     }
 
-    private String getSelectDateTitle(String dateStr) {
-
-        Date date = DateUtils.strToDate(dateStr, null);
-        String weekStr = DateUtils.dateToWeek(dateStr);
-        dateStr = DateUtils.getSimpleDateFormat(date, "yyyy年MM月dd日");
-
-        return dateStr + "（" + weekStr + "）";
-    }
 }

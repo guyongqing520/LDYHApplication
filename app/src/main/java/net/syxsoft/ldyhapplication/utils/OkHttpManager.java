@@ -1,8 +1,11 @@
 package net.syxsoft.ldyhapplication.utils;
 
+import android.app.Dialog;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.dou361.dialogui.DialogUIUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 
@@ -47,11 +50,13 @@ public class OkHttpManager {
     private Handler handler;
 
     private OkHttpManager() {
+        File sdcache = new File(Environment.getExternalStorageDirectory(), "cache");
+        int cacheSize = 10 * 1024 * 1024;
         mOkHttpClient = new OkHttpClient.Builder().connectTimeout(1500, TimeUnit.SECONDS)
                 //添加OkHttp3的拦截器
                 .addNetworkInterceptor(new CacheInterceptor())
                 .writeTimeout(2000, TimeUnit.SECONDS).readTimeout(2000, TimeUnit.SECONDS)
-                //.cache(new Cache(sdcache.getAbsoluteFile(), cacheSize))
+                .cache(new Cache(sdcache.getAbsoluteFile(), cacheSize))
                 .build();
         mGson = new Gson();
         handler = new Handler(Looper.getMainLooper());
@@ -70,13 +75,48 @@ public class OkHttpManager {
      ************************/
 
     public void getRequest(String url, final BaseCallBack callBack) {
-        Request request = buildRequest(url, null, HttpMethodType.GET);
-        doRequest(request, callBack);
+
+        if (!NetWorkUtils.isNetWorkAvailable(MyApp.getInstance())) {
+
+            final Dialog dialog = DialogUIUtils.showLoading(MyApp.getInstance(), "没有网络连接", true, true, true, false).show();
+            dialog.getWindow().setDimAmount(0);
+            dialog.show();
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    dialog.hide();
+                }
+            }, 1000);
+
+        } else {
+
+            Request request = buildRequest(url, null, HttpMethodType.GET);
+            doRequest(request, callBack);
+        }
     }
 
     public void postRequest(String url, final BaseCallBack callBack, Map<String, String> params) {
-        Request request = buildRequest(url, params, HttpMethodType.POST);
-        doRequest(request, callBack);
+        if (!NetWorkUtils.isNetWorkAvailable(MyApp.getInstance())) {
+
+            final Dialog dialog = DialogUIUtils.showLoading(MyApp.getInstance(), "没有网络连接", true, true, true, false).show();
+            dialog.getWindow().setDimAmount(0);
+            dialog.show();
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    dialog.hide();
+                }
+            }, 1000);
+
+
+        } else {
+            Request request = buildRequest(url, params, HttpMethodType.POST);
+            doRequest(request, callBack);
+        }
     }
 
     public void postUploadSingleImage(String url, final BaseCallBack callback, File file, String fileKey, Map<String, String> params) {
@@ -129,12 +169,11 @@ public class OkHttpManager {
         mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                callBack.onFailure(call, e);
+                callBackFailure(callBack, call, e);
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-//                callBack.onResponse(response);
 
                 InputStream is = null;
                 byte[] buf = new byte[1024 * 2];
@@ -172,7 +211,6 @@ public class OkHttpManager {
                 }
             }
         });
-
 
     }
 
@@ -251,7 +289,7 @@ public class OkHttpManager {
         mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                callBack.onFailure(call, e);
+                callBackFailure(callBack, call, e);
             }
 
             @Override
@@ -261,21 +299,20 @@ public class OkHttpManager {
                 if (response.isSuccessful()) {
 
                     if (callBack.mType == String.class) {
-//                        callBack.onSuccess(call, response, result);
+
                         callBackSuccess(callBack, call, response, result);
                     } else {
                         try {
                             Object object = mGson.fromJson(result, callBack.mType);//自动转化为 泛型对象
-//                            callBack.onSuccess(call, response, object);
                             callBackSuccess(callBack, call, response, object);
                         } catch (JsonParseException e) {
                             //json解析错误时调用
-                            callBack.onEror(call, response.code(), e);
+                            callBackError(callBack, call, response.code());
                         }
 
                     }
                 } else {
-                    callBack.onEror(call, response.code(), null);
+                    callBackError(callBack, call, response.code());
                 }
 
             }
@@ -320,7 +357,15 @@ public class OkHttpManager {
                 callBack.onSuccess(call, response, object);
             }
         });
+    }
 
+    private void callBackFailure(final BaseCallBack callBack, final Call call, final IOException e) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                callBack.onFailure(call, e);
+            }
+        });
     }
 
     private void callBackError(final BaseCallBack callBack, final Call call, final int code) {
@@ -363,16 +408,17 @@ public class OkHttpManager {
     private static class CacheInterceptor implements Interceptor {
         @Override
         public Response intercept(Chain chain) throws IOException {
-            // 有网络时 设置缓存超时时间1个小时
-            int maxAge = 60 * 60;
-            // 无网络时，设置超时为1天
-            int maxStale = 60 * 60 * 24;
+            // 有网络时 设置缓存超时时间1分钟
+            int maxAge = 60;
+            // 无网络时，设置超时为1个小时
+            int maxStale = 60 * 60;
             Request request = chain.request();
             if (NetWorkUtils.isNetWorkAvailable(MyApp.getInstance())) {
                 //有网络时只从网络获取
                 request = request.newBuilder().cacheControl(CacheControl.FORCE_NETWORK).build();
             } else {
                 //无网络时只从缓存中读取
+                //MyToast.getInstance().show("没有网络连接",MyApp.getInstance());
                 request = request.newBuilder().cacheControl(CacheControl.FORCE_CACHE).build();
                /* Looper.prepare();
                 Toast.makeText(MyApp.getInstance(), "走拦截器缓存", Toast.LENGTH_SHORT).show();
@@ -393,11 +439,10 @@ public class OkHttpManager {
             return response;
         }
     }
-    
+
     public static String getRootApiUrl() {
         return "http://ldyh.webapi.syxsoft.net:8801";
     }
-
 
 }
 
