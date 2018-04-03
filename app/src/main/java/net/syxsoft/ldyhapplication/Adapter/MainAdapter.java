@@ -10,12 +10,9 @@ import android.widget.TextView;
 
 import net.syxsoft.ldyhapplication.R;
 import net.syxsoft.ldyhapplication.bean.MainPanel;
-import net.syxsoft.ldyhapplication.ui.AppActivity;
-import net.syxsoft.ldyhapplication.ui.KaoqiRZSBFragment;
-import net.syxsoft.ldyhapplication.ui.KaoqiguanliFragment;
-import net.syxsoft.ldyhapplication.ui.KaoqinDuchadubanFragment;
-import net.syxsoft.ldyhapplication.ui.KaoqinRenwuFragment;
-import net.syxsoft.ldyhapplication.ui.KaoqinTousuFragment;
+import net.syxsoft.ldyhapplication.ui.AppBase.AppActivity;
+import net.syxsoft.ldyhapplication.ui.complaint.NavigationListFragment;
+import net.syxsoft.ldyhapplication.ui.superhandle.ListFragment;
 
 import java.util.List;
 
@@ -66,23 +63,23 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
                 if (mainPanelText != null && mainPanelText.equals("考勤管理")) {
                     AppActivity appActivity=  (AppActivity)parent.getContext();
-                    appActivity.pushFragment(new KaoqiguanliFragment());
+                    appActivity.pushFragment(new net.syxsoft.ldyhapplication.ui.attendance.NavigationListFragment());
                 }
                 else if (mainPanelText != null && mainPanelText.equals("日志上报")) {
                     AppActivity appActivity=  (AppActivity)parent.getContext();
-                    appActivity.pushFragment(new KaoqiRZSBFragment());
+                    appActivity.pushFragment(new net.syxsoft.ldyhapplication.ui.logReport.NavigationListFragment());
                 }
                 else if (mainPanelText != null && mainPanelText.equals("任务管理")) {
                     AppActivity appActivity=  (AppActivity)parent.getContext();
-                    appActivity.pushFragment(new KaoqinRenwuFragment());
+                    appActivity.pushFragment(new net.syxsoft.ldyhapplication.ui.mytask.NavigationListFragment());
                 }
                 else if (mainPanelText != null && mainPanelText.equals("督查督办")) {
                     AppActivity appActivity=  (AppActivity)parent.getContext();
-                    appActivity.pushFragment(new KaoqinDuchadubanFragment());
+                    appActivity.pushFragment(new ListFragment());
                 }
                 else if (mainPanelText != null && mainPanelText.equals("投诉举报")) {
                     AppActivity appActivity=  (AppActivity)parent.getContext();
-                    appActivity.pushFragment(new KaoqinTousuFragment());
+                    appActivity.pushFragment(new NavigationListFragment());
                 }
             }
         });

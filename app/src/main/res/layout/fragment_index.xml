@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="net.syxsoft.ldyhapplication.ui.IndexActivity">
+    tools:context="net.syxsoft.ldyhapplication.ui.Home.IndexActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -1,14 +1,12 @@
 package net.syxsoft.ldyhapplication.Adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.syxsoft.ldyhapplication.R;
 import net.syxsoft.ldyhapplication.bean.KaoqDayanalysisBean;
@@ -320,7 +318,7 @@ public class CalendarMonthanalysisAdapter extends RecyclerView.Adapter<CalendarM
         return days.size();
     }
 
-    protected String getRootApiUrl() {
+    public String getRootApiUrl() {
         return "http://ldyh.webapi.syxsoft.net:8801";
     }
 

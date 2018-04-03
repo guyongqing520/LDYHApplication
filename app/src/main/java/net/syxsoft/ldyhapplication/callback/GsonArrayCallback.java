@@ -9,7 +9,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
-import net.syxsoft.ldyhapplication.ui.AppActivity;
 import net.syxsoft.ldyhapplication.utils.OkHttp3Utils;
 
 import java.io.IOException;
@@ -20,7 +19,6 @@ import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.Request;
 import okhttp3.Response;
 
 /**

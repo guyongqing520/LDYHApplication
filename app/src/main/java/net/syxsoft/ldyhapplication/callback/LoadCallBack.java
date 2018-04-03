@@ -1,13 +1,11 @@
 package net.syxsoft.ldyhapplication.callback;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Handler;
 
 import com.dou361.dialogui.DialogUIUtils;
 
-import net.syxsoft.ldyhapplication.ui.AppActivity;
 import net.syxsoft.ldyhapplication.utils.MyApp;
 
 import java.io.IOException;

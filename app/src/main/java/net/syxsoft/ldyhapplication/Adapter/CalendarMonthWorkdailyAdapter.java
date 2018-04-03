@@ -9,21 +9,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.syxsoft.ldyhapplication.R;
-import net.syxsoft.ldyhapplication.bean.KaoqDayanalysisBean;
 import net.syxsoft.ldyhapplication.bean.KaoqDayworkBean;
-import net.syxsoft.ldyhapplication.bean.KaoqMonthanalysisBean;
 import net.syxsoft.ldyhapplication.bean.KaoqMonthworkBean;
 import net.syxsoft.ldyhapplication.callback.LoadCallBack;
 import net.syxsoft.ldyhapplication.utils.DateUtils;
 import net.syxsoft.ldyhapplication.utils.LunarDateUtils;
-import net.syxsoft.ldyhapplication.utils.MyAlert;
 import net.syxsoft.ldyhapplication.utils.MyToast;
 import net.syxsoft.ldyhapplication.utils.OkHttpManager;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import okhttp3.Call;
@@ -272,7 +268,7 @@ public class CalendarMonthWorkdailyAdapter extends RecyclerView.Adapter<Calendar
         return days.size();
     }
 
-    protected String getRootApiUrl() {
+    public String getRootApiUrl() {
         return "http://ldyh.webapi.syxsoft.net:8801";
     }
 

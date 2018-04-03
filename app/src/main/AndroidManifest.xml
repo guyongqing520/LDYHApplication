@@ -36,9 +36,9 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="ZbkQeU5Mc5m7v9kPWYOlkkZcGW4Hm4Yo" />
 
-        <activity android:name=".ui.KaoqiDakaActivity"/>
-        <activity android:name=".ui.LoginActivity"/>
-        <activity android:name=".ui.IndexActivity" android:windowSoftInputMode="adjustPan">
+        <activity android:name=".ui.attendance.signCard.SignCardActivity"/>
+        <activity android:name=".ui.Login.LoginActivity"/>
+        <activity android:name=".ui.Home.IndexActivity" android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

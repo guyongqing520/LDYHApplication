@@ -9,11 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.syxsoft.ldyhapplication.R;
-import net.syxsoft.ldyhapplication.bean.AttendenceListBean;
 import net.syxsoft.ldyhapplication.bean.LeavelistBean;
-import net.syxsoft.ldyhapplication.utils.DateUtils;
 
-import java.util.Date;
 import java.util.List;
 
 /**
