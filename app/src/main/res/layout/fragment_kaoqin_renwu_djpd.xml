@@ -33,7 +33,6 @@
                 android:layout_height="match_parent">
 
                 <TextView android:id="@+id/xihao5"
-
                     android:text="*"
                     android:textColor="@color/colorAccent"
                     android:layout_width="wrap_content"
@@ -49,13 +48,17 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/djpd_content"
                     android:layout_below="@+id/bkbs_text1"
                     android:layout_alignLeft="@id/bkbs_text1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lines="6"
-                    android:hint="请输入您评定内容"
-
+                    android:hint="请输入您描述内容"
+                    android:background="@null"
+                    android:gravity="top"
+                    android:textSize="16sp"
+                    android:maxLength="200"
                     />
 
             </RelativeLayout>
@@ -94,39 +97,40 @@
                     android:textSize="16sp" />
 
                 <CheckBox
-                    android:id="@+id/checkBox"
+                    android:id="@+id/djpd_good"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_below="@+id/bkbs_text2"
                     android:layout_alignLeft="@id/bkbs_text2"
+                    android:checked="true"
                     android:text="很好" />
                 <CheckBox
-                    android:id="@+id/checkBox2"
+                    android:id="@+id/djpd_preferably"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_below="@+id/bkbs_text2"
-                    android:layout_toRightOf="@+id/checkBox"
+                    android:layout_toRightOf="@+id/djpd_good"
                     android:text="较好" />
                 <CheckBox
-                    android:id="@+id/checkBox3"
+                    android:id="@+id/djpd_commonly"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_below="@+id/bkbs_text2"
-                    android:layout_toRightOf="@+id/checkBox2"
+                    android:layout_toRightOf="@+id/djpd_preferably"
                     android:text="一般" />
                 <CheckBox
-                    android:id="@+id/checkBox4"
+                    android:id="@+id/djpd_bad"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_below="@+id/bkbs_text2"
-                    android:layout_toRightOf="@+id/checkBox3"
+                    android:layout_toRightOf="@+id/djpd_commonly"
                     android:text="差" />
             </RelativeLayout>
 

@@ -48,12 +48,17 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/addtask_mbrw"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/bkbs_text"
                     android:layout_marginLeft="30sp"
                     android:lines="1"
                     android:hint="请输入"
+                    android:background="@null"
+                    android:textSize="16sp"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
                     />
             </RelativeLayout>
 
@@ -89,11 +94,15 @@
                     android:text="任务分类"
                     android:textColor="@color/colornavblack"
                     android:textSize="16sp" />
+                <TextView
+                    android:text="请选择"
+                    android:id="@+id/addtask_rwfl"
+                    android:drawableRight="@mipmap/kqglz_ar02"
+                    android:layout_alignBottom="@+id/bkbs_text2"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-                <Spinner android:id="@+id/renwu_spinner_zycd"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
-                </Spinner>
 
             </RelativeLayout>
 
@@ -130,11 +139,16 @@
                     android:textColor="@color/colornavblack"
                     android:textSize="16sp" />
                 <EditText
+                    android:id="@+id/addtask_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/bkbs_text3"
                     android:layout_marginLeft="30sp"
                     android:lines="1"
+                    android:background="@null"
+                    android:textSize="16sp"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
                     android:hint="请输入"
                     />
 
@@ -174,6 +188,7 @@
                     android:textSize="16sp" />
                 <TextView
                     android:text="请选择"
+                    android:id="@+id/addtask_jjcd"
                     android:drawableRight="@mipmap/kqglz_ar02"
                     android:layout_alignBottom="@+id/bkbs_text4"
                     android:layout_alignParentRight="true"
@@ -216,8 +231,52 @@
                     android:textSize="16sp" />
                 <TextView
                     android:text="请选择"
+                    android:id="@+id/addtask_zycd"
                     android:drawableRight="@mipmap/kqglz_ar02"
                     android:layout_alignBottom="@+id/bkbs_text66"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            xmlns:android="http://schemas.android.com/apk/res/android" >
+
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView android:id="@+id/xihao77"
+                    android:layout_centerVertical="true"
+                    android:text="*"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/bkbs_text77"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/xihao77"
+                    android:text="工种"
+                    android:textColor="@color/colornavblack"
+                    android:textSize="16sp" />
+                <TextView
+                    android:text="请选择"
+                    android:id="@+id/addtask_gz"
+                    android:drawableRight="@mipmap/kqglz_ar02"
+                    android:layout_alignBottom="@+id/bkbs_text77"
                     android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -257,13 +316,17 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/addtask_content"
                     android:layout_below="@+id/bkbs_text5"
                     android:layout_alignLeft="@id/bkbs_text5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lines="3"
                     android:hint="请输入任务描述内容"
-
+                    android:background="@null"
+                    android:lines="4"
+                    android:gravity="top"
+                    android:textSize="16sp"
+                    android:maxLength="200"
                     />
 
             </RelativeLayout>
@@ -311,6 +374,7 @@
                     android:textSize="16sp" />
                 <TextView
                     android:text="请选择"
+                    android:id="@+id/addtask_rwly"
                     android:drawableRight="@mipmap/kqglz_ar02"
                     android:layout_alignBottom="@+id/task_source_text"
                     android:layout_alignParentRight="true"
@@ -352,6 +416,7 @@
                     android:textSize="16sp" />
                 <TextView
                     android:text="请选择"
+                    android:id="@+id/addtask_starttime"
                     android:drawableRight="@mipmap/kqglz_ar02"
                     android:layout_alignBottom="@+id/task_source_starttime"
                     android:layout_alignParentRight="true"
@@ -394,6 +459,7 @@
                     android:textSize="16sp" />
                 <TextView
                     android:text="请选择"
+                    android:id="@+id/addtask_endtime"
                     android:drawableRight="@mipmap/kqglz_ar02"
                     android:layout_alignBottom="@+id/task_source_endtime"
                     android:layout_alignParentRight="true"
@@ -436,6 +502,7 @@
                     android:textSize="16sp" />
                 <TextView
                     android:text="请选择"
+                    android:id="@+id/addtask_create_user"
                     android:drawableRight="@mipmap/kqglz_ar02"
                     android:layout_alignBottom="@+id/task_source_cjz"
                     android:layout_alignParentRight="true"
@@ -478,6 +545,7 @@
                     android:textSize="16sp" />
                 <TextView
                     android:text="请选择"
+                    android:id="@+id/addtask_execute_user"
                     android:drawableRight="@mipmap/kqglz_ar02"
                     android:layout_alignBottom="@+id/task_source_zxz"
                     android:layout_alignParentRight="true"
@@ -520,6 +588,7 @@
                     android:textSize="16sp" />
                 <TextView
                     android:text="请选择"
+                    android:id="@+id/addtask_partake_user"
                     android:drawableRight="@mipmap/kqglz_ar02"
                     android:layout_alignBottom="@+id/task_source_cyz"
                     android:layout_alignParentRight="true"
@@ -562,6 +631,7 @@
                     android:textSize="16sp" />
                 <TextView
                     android:text="请选择"
+                    android:id="@+id/addtask_CC"
                     android:drawableRight="@mipmap/kqglz_ar02"
                     android:layout_alignBottom="@+id/task_source_sfcs"
                     android:layout_alignParentRight="true"

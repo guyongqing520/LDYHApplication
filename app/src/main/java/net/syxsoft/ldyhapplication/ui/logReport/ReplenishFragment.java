@@ -171,7 +171,7 @@ public class ReplenishFragment extends BaseFragment {
         TimePickerView pvTime = new TimePickerView.Builder(getContext(), new TimePickerView.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {//选中事件回调
-                rzsb_bl_xzrq.setText(getSimpleDateFormat(date, "yyyy-MM-dd HH:mm"));
+                rzsb_bl_xzrq.setText(getSimpleDateFormat(date, "yyyy-MM-dd HH:mm:ss"));
             }
         })
                 .setSubmitText("确定")

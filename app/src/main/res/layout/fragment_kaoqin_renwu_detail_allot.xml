@@ -76,14 +76,101 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/xihao"
-                android:text="请假类型："
+                android:text="领导审核："
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/task_detail_lx"
+                android:id="@+id/task_detail_ldsh"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/bkbs_text"
                 android:layout_alignBottom="@+id/bkbs_text"
+                android:layout_width="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colornavblack"
+                android:text="否" />
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView android:id="@+id/xihao11"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:text="*"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/bkbs_text_cbr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/xihao11"
+                android:text="承办人："
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/task_detail_cbr"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/bkbs_text_cbr"
+                android:layout_alignBottom="@+id/bkbs_text_cbr"
+                android:layout_width="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colornavblack"
+                android:text="否" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView android:id="@+id/xihao12"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:text="*"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/bkbs_text_shr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/xihao12"
+                android:text="审核人："
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/task_detail_shr"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/bkbs_text_shr"
+                android:layout_alignBottom="@+id/bkbs_text_shr"
                 android:layout_width="wrap_content"
                 android:textSize="16sp"
                 android:layout_marginLeft="10dp"
@@ -179,56 +266,7 @@
                 android:layout_marginLeft="10dp"
                 android:textColor="@color/colornavblack"
                 android:text="2018-10-23" />
-
         </RelativeLayout>
-
-
-    </LinearLayout>
-    <LinearLayout android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:layout_width="match_parent"
-        android:background="@color/white"
-        android:padding="15dp"
-        android:orientation="horizontal"
-        xmlns:android="http://schemas.android.com/apk/res/android" >
-
-        <RelativeLayout
-            android:gravity="center_vertical"
-            android:layout_gravity="center_vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView android:id="@+id/xihao3"
-                android:layout_centerVertical="true"
-                android:visibility="gone"
-                android:text="*"
-                android:textColor="@color/colorAccent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/bkbs_text3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/xihao3"
-                android:text="时长（h）："
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/task_detail_sc"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/bkbs_text3"
-                android:layout_alignBottom="@+id/bkbs_text3"
-                android:layout_width="wrap_content"
-                android:textSize="16sp"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/colornavblack"
-                android:text="12" />
-
-        </RelativeLayout>
-
-
     </LinearLayout>
 
     <LinearLayout android:layout_height="wrap_content"
@@ -400,8 +438,8 @@
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView android:text="进度报告"
-            android:id="@+id/task_detail_btn_jdbg"
+        <TextView android:text="任务催办"
+            android:id="@+id/task_detail_btn_rwcb"
             android:layout_weight="1"
             android:gravity="center"
             android:padding="10dp"
@@ -422,8 +460,8 @@
             android:background="@color/grey"
             android:layout_height="30dp" />
 
-        <TextView android:text="任务完成"
-            android:id="@+id/task_detail_btn_over"
+        <TextView android:text="任务移交"
+            android:id="@+id/task_detail_btn_rwyj"
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/colornavblue"

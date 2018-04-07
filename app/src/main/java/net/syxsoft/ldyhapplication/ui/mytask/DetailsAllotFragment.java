@@ -19,14 +19,14 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 
-public class DetailsFragment extends BaseFragment {
+public class DetailsAllotFragment extends BaseFragment {
 
     //任務內容
     @BindView(R.id.task_detail_content)
     TextView task_detail_content;
-    //請假類型
-    @BindView(R.id.task_detail_lx)
-    TextView task_detail_lx;
+    //领导审核
+    @BindView(R.id.task_detail_ldsh)
+    TextView task_detail_ldsh;
 
     //开始时间
     @BindView(R.id.task_detail_startTime)
@@ -35,15 +35,15 @@ public class DetailsFragment extends BaseFragment {
     @BindView(R.id.task_detail_endTime)
     TextView task_detail_endTime;
 
-    //时长
-    @BindView(R.id.task_detail_sc)
-    TextView task_detail_sc;
+    //承办人
+    @BindView(R.id.task_detail_cbr)
+    TextView task_detail_cbr;
     //紧急程度
     @BindView(R.id.task_detail_jjcd)
     TextView task_detail_jjcd;
 
-    //进度报告
-    @OnClick(R.id.task_detail_btn_jdbg)
+    //进度催办
+    @OnClick(R.id.task_detail_btn_rwcb)
     public void OnJdbgBtnClicked() {
         getHoldingActivity().pushFragment(new MyChargeFragment());
     }
@@ -52,14 +52,14 @@ public class DetailsFragment extends BaseFragment {
     public void OnStopBtnClicked() {
         getHoldingActivity().pushFragment(new MyChargeFragment());
     }
-    //任务完成
-    @OnClick(R.id.task_detail_btn_over)
-    public void OnOverBtnClicked() {
+    //任务移交
+    @OnClick(R.id.task_detail_btn_rwyj)
+    public void OnRwyjBtnClicked() {
         getHoldingActivity().pushFragment(new MyChargeFragment());
     }
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_kaoqin_renwu_detail;
+        return R.layout.fragment_kaoqin_renwu_detail_allot;
     }
 
     @Override
@@ -94,14 +94,11 @@ public class DetailsFragment extends BaseFragment {
         //return super.onOptionsItemSelected(item);
 
         if (item.getItemId() == R.id.action_settings) {
-            //请示
+            //启用
         }else if(item.getItemId() ==R.id.action_add){
-            //移交
+            //关联
         }else if(item.getItemId() ==R.id.action_add){
-            //任务分解
-        }
-        else if(item.getItemId() ==R.id.action_add) {
-            //关联日志
+            //登记评定
         }
         return super.onOptionsItemSelected(item);
     }

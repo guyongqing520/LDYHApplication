@@ -49,13 +49,17 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/qs_content"
                     android:layout_below="@+id/bkbs_text1"
                     android:layout_alignLeft="@id/bkbs_text1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lines="6"
                     android:hint="请输入您请示内容"
-
+                    android:background="@null"
+                    android:gravity="top"
+                    android:textSize="16sp"
+                    android:maxLength="200"
                     />
 
             </RelativeLayout>
